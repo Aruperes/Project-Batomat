@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     paddingLeft: 24,
     paddingVertical: 38,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
     fontFamily: 'Poppins-Medium',

@@ -7,8 +7,10 @@ import {Logo1} from '../../assets/icon';
 const SignUp = () => {
   return (
     <View style={styles.container}>
-      <Logo1 />
-      <Header text=" Sign Up" />
+      <View style={styles.head}>
+        <Logo1 style={styles.logo} />
+        <Header text=" Sign Up" />
+      </View>
       <Gap height={10} />
       <View style={styles.contentWrapper}>
         <View style={styles.profilContainer}>
@@ -73,6 +75,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     width: 40,
     textAlign: 'center',
+  },
+  head: {
+    flexDirection: 'row',
+  },
+  logo: {
+    marginVertical: 43,
+    marginLeft: 20,
   },
 });
 export default SignUp;
