@@ -1,12 +1,19 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import {Logo} from '../../assets/icon';
+import {StyleSheet, View, Image, ImageBackground} from 'react-native';
+import React, {useEffect} from 'react';
 
-const SplashScreen = () => {
+const SplashScreen = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.replace('SignIn');
+    }, 2000);
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Logo />
-      <Text style={styles.title}>Money Tracker</Text>
+      <Image
+        source={require('../../assets/images/splash.png')}
+        style={styles.image}
+      />
     </View>
   );
 };
@@ -15,14 +22,13 @@ export default SplashScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#02CF8E',
+    backgroundColor: '#72AF87',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    fontSize: 32,
-    fontFamily: 'Poppins-Medium',
-    color: 'black',
+  image: {
+    width: 410,
+    height: 900,
   },
 });

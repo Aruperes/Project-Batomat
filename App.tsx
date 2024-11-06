@@ -1,10 +1,13 @@
 import React from 'react';
-import SplashScreen from './src/pages/SplashScreen';
-import SignIn from './src/pages/SignIn';
-import SignUp from './src/pages/SignUp';
+import {NavigationContainer} from '@react-navigation/native';
+import Router from './src/router';
 
 const App = () => {
-  return <SignUp />;
+  return (
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
+  );
 };
 
 export default App;

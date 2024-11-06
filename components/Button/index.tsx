@@ -3,7 +3,7 @@ import React from 'react';
 
 const Button = ({label, color = 'orange', onPress}) => {
   return (
-    <TouchableOpacity
+    <TouchableOpacity 
       style={styles.button(color)}
       activeOpacity={0.5}
       onPress={onPress}>
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   button: color => ({
     backgroundColor: color,
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 20,
     marginTop: 20,
     alignItems: 'center',
   }),
