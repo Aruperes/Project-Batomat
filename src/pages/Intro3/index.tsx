@@ -6,16 +6,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useRef} from 'react';
-import {Pl, Titik} from '../../assets/icon';
+import {Pt, Titik3} from '../../assets/icon';
 import {Gap} from '../../components/atoms';
 
-const Intro1 = ({navigation}) => {
+const Intro3 = ({navigation}) => {
   const timeoutRef = useRef(null);
 
   useEffect(() => {
     timeoutRef.current = setTimeout(() => {
-      navigation.replace('Intro2');
+      navigation.replace('Intro1');
     }, 4000);
+
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -37,14 +38,13 @@ const Intro1 = ({navigation}) => {
       <View style={styles.overlay}>
         <View style={styles.contentWrapper}>
           <Gap height={20} />
-          <Pl />
+          <Pt />
           <Gap height={20} />
-          <Titik />
+          <Titik3 />
           <Gap height={20} />
-          <Text style={styles.title}>Layanan Terlengkap</Text>
+          <Text style={styles.title}>Simpan Catatan</Text>
           <Text style={styles.subtitle}>
-            hasil panen bisa menjadi lebih sehat dan segar dengan fitur yang
-            tersedia
+            Semua catatan tentang gejala penyakit bisa disimpan di fitur notes
           </Text>
           <Gap height={50} />
           <View style={styles.buttonContainer}>
@@ -126,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Intro1;
+export default Intro3;

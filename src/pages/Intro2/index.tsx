@@ -6,16 +6,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useRef} from 'react';
-import {Pl, Titik} from '../../assets/icon';
+import {Ps, Titik2} from '../../assets/icon';
 import {Gap} from '../../components/atoms';
 
-const Intro1 = ({navigation}) => {
+const Intro2 = ({navigation}) => {
   const timeoutRef = useRef(null);
 
   useEffect(() => {
     timeoutRef.current = setTimeout(() => {
-      navigation.replace('Intro2');
+      navigation.replace('Intro3');
     }, 4000);
+
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -37,14 +38,14 @@ const Intro1 = ({navigation}) => {
       <View style={styles.overlay}>
         <View style={styles.contentWrapper}>
           <Gap height={20} />
-          <Pl />
+          <Ps />
           <Gap height={20} />
-          <Titik />
+          <Titik2 />
           <Gap height={20} />
-          <Text style={styles.title}>Layanan Terlengkap</Text>
+          <Text style={styles.title}>Penanganan Cepat</Text>
           <Text style={styles.subtitle}>
-            hasil panen bisa menjadi lebih sehat dan segar dengan fitur yang
-            tersedia
+            Hama dan penyakit pada tumbuhan tomat cepat diatasi dengan informasi
+            yang lengkap tersedia
           </Text>
           <Gap height={50} />
           <View style={styles.buttonContainer}>
@@ -126,4 +127,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Intro1;
+export default Intro2;
