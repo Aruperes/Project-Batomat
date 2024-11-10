@@ -4,6 +4,8 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
+  Animated,
+  Easing,
 } from 'react-native';
 import React, {useEffect, useRef} from 'react';
 import {Ps, Titik2} from '../../assets/icon';
@@ -12,17 +14,36 @@ import {Gap} from '../../components/atoms';
 const Intro2 = ({navigation}) => {
   const timeoutRef = useRef(null);
 
+  const floatAnim = useRef(new Animated.Value(0)).current;
+
   useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(floatAnim, {
+          toValue: -10,
+          duration: 1000,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+        Animated.timing(floatAnim, {
+          toValue: 10,
+          duration: 1000,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+      ]),
+    ).start();
+
     timeoutRef.current = setTimeout(() => {
       navigation.replace('Intro3');
-    }, 4000);
+    }, 6000);
 
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, []);
+  }, [floatAnim, navigation]);
 
   const handleNavigation = screen => {
     if (timeoutRef.current) {
@@ -38,7 +59,9 @@ const Intro2 = ({navigation}) => {
       <View style={styles.overlay}>
         <View style={styles.contentWrapper}>
           <Gap height={20} />
-          <Ps />
+          <Animated.View style={{transform: [{translateY: floatAnim}]}}>
+            <Ps />
+          </Animated.View>
           <Gap height={20} />
           <Titik2 />
           <Gap height={20} />

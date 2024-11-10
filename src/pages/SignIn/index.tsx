@@ -18,7 +18,7 @@ const SignIn = ({navigation}) => {
         <Gap height={16} />
         <TextInput label="Password" placeholder="Type your password" />
         <Gap height={24} />
-        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+        <TouchableOpacity onPress={() => navigation.navigate('WelcomePage')}>
           <Text style={styles.clickableText1}>Sign In</Text>
         </TouchableOpacity>
         <Gap height={12} />
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginTop: 5,
-    paddingHorizontal: 95,
+    paddingHorizontal: 87,
   },
   clickableText1: {
     fontSize: 14,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginTop: 5,
-    paddingHorizontal: 135,
+    paddingHorizontal: 130,
   },
   overlay: {
     flex: 1,
