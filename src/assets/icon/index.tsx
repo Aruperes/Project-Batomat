@@ -11,6 +11,7 @@ import Ps from './ps.svg';
 import Titik2 from './titik2.svg';
 import Pt from './pt.svg';
 import Titik3 from './titik3.svg';
+import LogoT from './LogoT.svg';
 export {
   Logo,
   Logo1,
@@ -25,4 +26,5 @@ export {
   Titik2,
   Pt,
   Titik3,
+  LogoT,
 };
