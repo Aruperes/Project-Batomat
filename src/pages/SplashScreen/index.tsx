@@ -1,4 +1,4 @@
-import {StyleSheet, View, Image, ImageBackground} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 import React, {useEffect} from 'react';
 
 const SplashScreen = ({navigation}) => {
@@ -22,7 +22,7 @@ export default SplashScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#72AF87',
+    backgroundColor: '#6D6D6D',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
