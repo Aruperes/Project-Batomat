@@ -35,17 +35,17 @@ const App = () => {
         <Stack.Screen
           name="Intro1"
           component={Intro1}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="Intro2"
           component={Intro2}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="Intro3"
           component={Intro3}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="WelcomePage"
