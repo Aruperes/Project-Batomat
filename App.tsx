@@ -6,6 +6,7 @@ import {
   Intro1,
   Intro2,
   Intro3,
+  Diseases,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -46,6 +47,12 @@ const App = () => {
           component={Intro3}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="Diseases"
+          component={Diseases}
+          options={{headerShown: false}}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

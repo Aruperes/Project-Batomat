@@ -18,7 +18,7 @@ const SignIn = ({navigation}) => {
         <Gap height={16} />
         <TextInput label="Password" placeholder="Type your password" />
         <Gap height={24} />
-        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Diseases')}>
           <Text style={styles.clickableText1}>Sign In</Text>
         </TouchableOpacity>
         <Gap height={12} />
