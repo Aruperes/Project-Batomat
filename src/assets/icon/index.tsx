@@ -12,6 +12,9 @@ import Titik2 from './titik2.svg';
 import Pt from './pt.svg';
 import Titik3 from './titik3.svg';
 import LogoT from './LogoT.svg';
+import Account from './Account.png';
+import Home from './Home.png';
+import Note from './Note.png';
 export {
   Logo,
   Logo1,
@@ -27,4 +30,7 @@ export {
   Pt,
   Titik3,
   LogoT,
+  Account,
+  Home,
+  Note,
 };
