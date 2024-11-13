@@ -6,6 +6,8 @@ import {
   Intro1,
   Intro2,
   Intro3,
+  Home,
+  Note,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -44,6 +46,16 @@ const App = () => {
         <Stack.Screen
           name="Intro3"
           component={Intro3}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Note"
+          component={Note}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

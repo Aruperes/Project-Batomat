@@ -24,7 +24,7 @@ const SignUp = ({navigation}) => {
           text="Create"
           color="#2F2A36"
           textColor="#F0DFBD"
-          onPress={() => navigation.navigate('SignUp')}
+          onPress={() => navigation.navigate('SignIn')}
         />
       </View>
     </View>
