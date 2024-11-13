@@ -1,9 +1,12 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const Button = ({color = '#02CF8E', text, textColor = '#020202'}) => {
+const Button = ({color = '#F0DFBD', text, textColor = '#2F2A36', onPress}) => {
   return (
-    <TouchableOpacity style={styles.button(color)} activeOpacity={0.5}>
+    <TouchableOpacity
+      style={styles.button(color)}
+      activeOpacity={0.5}
+      onPress={onPress}>
       <Text style={styles.text(textColor)}>{text}</Text>
     </TouchableOpacity>
   );
@@ -14,13 +17,16 @@ export default Button;
 const styles = StyleSheet.create({
   button: color => ({
     backgroundColor: color,
-    borderRadius: 8,
+    borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingLeft: 39,
+    paddingRight: 39,
+    height: 45,
+    elevation: 5, // Elevation for Android shadow
   }),
   text: textColor => ({
-    fontFamily: 'Poppins-Medium',
+    fontFamily: 'Poppins-Bold',
     fontSize: 14,
     color: textColor,
   }),

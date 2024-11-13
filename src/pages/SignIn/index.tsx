@@ -18,39 +18,24 @@ const SignIn = ({navigation}) => {
         <Gap height={16} />
         <TextInput label="Password" placeholder="Type your password" />
         <Gap height={24} />
-        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-          <Text style={styles.clickableText1}>Sign In</Text>
-        </TouchableOpacity>
+        <Button
+          text="Sign In"
+          color="#2F2A36"
+          textColor="#F0DFBD"
+          onPress={() => navigation.navigate('SignUp')}
+        />
         <Gap height={12} />
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <Text style={styles.clickableText}>Create New Account</Text>
-        </TouchableOpacity>
+        <Button
+          text="Create New Account"
+          onPress={() => navigation.navigate('SignUp')}
+        />
+        <Gap height={12} />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  clickableText: {
-    fontSize: 14,
-    fontFamily: 'Poppins-Bold',
-    color: '#2F2A36',
-    backgroundColor: '#F0DFBD',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 5,
-    paddingHorizontal: 95,
-  },
-  clickableText1: {
-    fontSize: 14,
-    fontFamily: 'Poppins-Bold',
-    color: '#F0DFBD',
-    backgroundColor: '#2F2A36',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 5,
-    paddingHorizontal: 135,
-  },
   overlay: {
     flex: 1,
     backgroundColor: '#F9F7E4',

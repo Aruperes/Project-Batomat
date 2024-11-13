@@ -20,9 +20,12 @@ const SignUp = ({navigation}) => {
         <Gap height={16} />
         <TextInput label="Password" placeholder="Type your password" />
         <Gap height={24} />
-        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-          <Text style={styles.clickableText1}>Create</Text>
-        </TouchableOpacity>
+        <Button
+          text="Create"
+          color="#2F2A36"
+          textColor="#F0DFBD"
+          onPress={() => navigation.navigate('SignUp')}
+        />
       </View>
     </View>
   );
@@ -49,16 +52,6 @@ const styles = StyleSheet.create({
   },
   headBold: {
     fontFamily: 'Poppins-Bold',
-  },
-  clickableText1: {
-    fontSize: 14,
-    fontFamily: 'Poppins-Bold',
-    color: '#F0DFBD',
-    backgroundColor: '#2F2A36',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 5,
-    paddingHorizontal: 135,
   },
 });
 
