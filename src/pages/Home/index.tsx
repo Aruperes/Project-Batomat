@@ -1,33 +1,66 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import React from 'react';
-import {MenuButton} from '../../components/molecules';
+import {Logo1} from '../../assets/icon';
 
-const Home = ({navigation}) => {
+const SignIn = ({navigation}) => {
   return (
-    <>
-      <View style={styles.container}>
-        <Text>Home</Text>
+    <View style={styles.overlay}>
+      {/* Container untuk kedua logo agar sejajar */}
+      <View style={styles.header}>
+        <Image
+          style={styles.logo}
+          source={require('../../assets/images/LogoIm.png')}
+        />
+        <Image
+          style={styles.logo1}
+          source={require('../../assets/images/profile.png')}
+        />
       </View>
-      <View style={styles.container2}>
-        <Text>Home</Text>
+      <View style={styles.contentWrapper}>
+        <Text style={styles.head}>
+          Sign <Text style={styles.headBold}>In</Text>
+        </Text>
       </View>
-      <View style={styles.container3}>
-        <MenuButton navigation={navigation} />
-      </View>
-    </>
+    </View>
   );
 };
 
-export default Home;
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 3,
+  overlay: {
+    backgroundColor: '#F9F7E4',
+    flex: 1, // Agar overlay memenuhi layar
+    alignItems: 'center', // Mengatur konten di tengah horizontal
   },
-  container2: {
-    flex: 4,
+  header: {
+    flexDirection: 'row', // Mengatur elemen di header menjadi baris
   },
-  container3: {
-    flex: 1,
+  logo: {
+    width: 115, // Atur ukuran logo sesuai kebutuhan
+    height: 35,
+    marginHorizontal: 100, // Memberi jarak antara kedua logo
+    marginTop: 21,
+  },
+  logo1: {
+    width: 40, // Atur ukuran logo sesuai kebutuhan
+    height: 40,
+    marginHorizontal: 85, // Memberi jarak antara kedua logo
+    marginTop: 21,
+  },
+  contentWrapper: {
+    width: '90%',
+    padding: 24,
+    borderRadius: 20,
+  },
+  head: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: 32,
+    textAlign: 'center',
+    color: 'black',
+    marginBottom: 24,
+  },
+  headBold: {
+    fontFamily: 'Poppins-Bold',
   },
 });
+
+export default SignIn;
