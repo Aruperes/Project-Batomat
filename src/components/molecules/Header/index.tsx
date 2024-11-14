@@ -13,7 +13,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F9F7E4',
     paddingLeft: 24,
     paddingVertical: 38,
     flexDirection: 'row',
@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'Poppins-Medium',
-    fontSize: 22,
+    fontSize: 24,
     color: '#020202',
+    marginLeft: 38,
   },
 });
