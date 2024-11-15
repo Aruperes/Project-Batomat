@@ -15,6 +15,12 @@ const hama = [
     description:
       'Ciri-ciri kutu daun thrips adalah panjangnya 1 mm dan berwarna hitam. Kutu daun thrips ini meny.....',
   },
+
+  {
+    title: 'Ulat Buah Tomat',
+    description:
+      'Umumnya ulat buah tomat ini menyerang daun, bunga dan buah tanaman tomat. Ciri-ciri hama ulat.....',
+  },
 ];
 
 const Hama = ({navigation}) => {
@@ -83,8 +89,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#4e4a41',
     marginBottom: 4,
-    textAlign: 'center',
-    marginLeft: 40,
+    textAlign: 'left',
+    marginLeft: 98,
   },
   diseaseDescription: {
     fontSize: 12,
