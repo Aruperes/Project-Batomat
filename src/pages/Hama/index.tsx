@@ -9,20 +9,11 @@ import React from 'react';
 import {MenuButton, Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 
-const diseases = [
-  {
-    title: 'Layu Fusarium',
-    description:
-      'Gejala layu fusarium pada awal serangan dapat ditandai dengan adanya tanaman...',
-  },
-];
-
 const Hama = ({navigation}) => {
   return (
     <>
       <View style={styles.container}>
-        <MenuButton navigation={navigation} />
-        <Header text="Penyakit" />
+        <Header text="Hama" />
 
         <TouchableOpacity
           style={styles.backButton}
@@ -30,16 +21,9 @@ const Hama = ({navigation}) => {
           <BackButton width={24} height={24} />
         </TouchableOpacity>
 
-        <ScrollView style={styles.contentWrapper}>
-          {diseases.map((disease, index) => (
-            <View key={index} style={styles.diseaseCard}>
-              <Text style={styles.diseaseTitle}>{disease.title}</Text>
-              <Text style={styles.diseaseDescription}>
-                {disease.description}
-              </Text>
-            </View>
-          ))}
-        </ScrollView>
+        <View style={styles.menuButtonWrapper}>
+          <MenuButton navigation={navigation} />
+        </View>
       </View>
     </>
   );
@@ -87,5 +71,19 @@ const styles = StyleSheet.create({
     color: '#4e4a41',
     marginRight: 25,
     marginLeft: 100,
+  },
+  menuButtonWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#292D32',
+    paddingVertical: 10,
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderColor: '#ccc',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: 90,
   },
 });

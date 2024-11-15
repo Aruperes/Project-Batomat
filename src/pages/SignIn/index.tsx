@@ -22,7 +22,7 @@ const SignIn = ({navigation}) => {
           text="Sign In"
           color="#2F2A36"
           textColor="#F0DFBD"
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('Hama')}
         />
         <Gap height={12} />
         <Button
