@@ -7,13 +7,12 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import {Logo1} from '../../assets/icon';
 import Swiper from 'react-native-swiper';
 
 const SignIn = ({navigation}) => {
   return (
     <View style={styles.overlay}>
-      {/* Container untuk kedua logo agar sejajar */}
+      {/* Header dengan kedua logo */}
       <View style={styles.header}>
         <Image
           style={styles.logo}
@@ -25,6 +24,8 @@ const SignIn = ({navigation}) => {
         />
       </View>
       <View style={styles.line} />
+
+      {/* Search Bar */}
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -33,13 +34,15 @@ const SignIn = ({navigation}) => {
         />
         <Image
           style={styles.searchIcon}
-          source={require('../../assets/icon/search.svg')} // Ganti dengan path ikon pencarian Anda
+          source={require('../../assets/icon/search.svg')}
         />
       </View>
+
       <ScrollView>
+        {/* Swiper untuk gambar utama */}
         <View style={styles.box1}>
           <Swiper style={styles.wrapper}>
-            <View testID="Hello" style={styles.slide1}>
+            <View style={styles.slide}>
               <Text style={styles.text}>Tomat pasti segar!</Text>
               <Text style={styles.text2}>
                 inilah obat yang membuat buah tomat lebih segar dan sehat
@@ -49,7 +52,7 @@ const SignIn = ({navigation}) => {
                 source={require('../../assets/images/solanum.png')}
               />
             </View>
-            <View testID="Beautiful" style={styles.slide2}>
+            <View style={styles.slide}>
               <Text style={styles.text}>Perawatan yang baik</Text>
               <Text style={styles.text2}>
                 Dengan perawatan yang baik membuat pertumbuhan lebih subur
@@ -59,7 +62,7 @@ const SignIn = ({navigation}) => {
                 source={require('../../assets/images/nutrition.png')}
               />
             </View>
-            <View testID="Simple" style={styles.slide3}>
+            <View style={styles.slide}>
               <Text style={styles.text}>Peran penting obat</Text>
               <Text style={styles.text2}>
                 obat mencegah penyakit yang ada pada tumbuhan
@@ -71,6 +74,58 @@ const SignIn = ({navigation}) => {
             </View>
           </Swiper>
         </View>
+
+        {/* Container untuk latar belakang dan ScrollView horizontal */}
+        <View style={styles.horizontalScrollBackground}>
+          <Text style={styles.sectionTitle}>Lagi musim</Text>
+          <ScrollView
+            horizontal={true}
+            style={styles.scrollContainer}
+            showsHorizontalScrollIndicator={false}>
+            <View style={styles.imageBox}>
+              <Image
+                style={styles.image2}
+                source={require('../../assets/images/image.png')}
+              />
+            </View>
+            <View style={styles.imageBox}>
+              <Image
+                style={styles.image2}
+                source={require('../../assets/images/image11.png')}
+              />
+            </View>
+            <View style={styles.imageBox}>
+              <Image
+                style={styles.image2}
+                source={require('../../assets/images/image6.png')}
+              />
+            </View>
+            <View style={styles.imageBox}>
+              <Image
+                style={styles.image2}
+                source={require('../../assets/images/image4.png')}
+              />
+            </View>
+            <View style={styles.imageBox}>
+              <Image
+                style={styles.image2}
+                source={require('../../assets/images/image2.png')}
+              />
+            </View>
+            <View style={styles.imageBox}>
+              <Image
+                style={styles.image2}
+                source={require('../../assets/images/image1.png')}
+              />
+            </View>
+          </ScrollView>
+          <Text style={styles.descriptionTitle}>Lalat Buah</Text>
+          <Text style={styles.descriptionText}>
+            Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan dan
+            sayap transparan
+          </Text>
+          <Text style={styles.detailLink}>Detail ➔</Text>
+        </View>
       </ScrollView>
     </View>
   );
@@ -79,23 +134,22 @@ const SignIn = ({navigation}) => {
 const styles = StyleSheet.create({
   overlay: {
     backgroundColor: '#F9F7E4',
-    flex: 1, // Agar overlay memenuhi layar
-    alignItems: 'center', // Mengatur konten di tengah horizontal
+    flex: 1,
+    alignItems: 'center',
   },
   header: {
-    flexDirection: 'row', // Mengatur elemen di header menjadi baris
+    flexDirection: 'row',
+    marginTop: 20,
   },
   logo: {
-    width: 115, // Atur ukuran logo sesuai kebutuhan
+    width: 115,
     height: 35,
-    marginHorizontal: 110, // Memberi jarak antara kedua logo
-    marginTop: 21,
+    marginHorizontal: 100,
   },
   logo1: {
-    width: 40, // Atur ukuran logo sesuai kebutuhan
+    width: 40,
     height: 40,
-    marginHorizontal: 110, // Memberi jarak antara kedua logo
-    marginTop: 21,
+    marginHorizontal: 110,
   },
   line: {
     borderBottomColor: '#C5C5C5',
@@ -106,27 +160,21 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F2F2F2', // Warna background search bar
+    backgroundColor: '#F2F2F2',
     borderRadius: 8,
     padding: 10,
-    shadowColor: '#000', // Shadow untuk efek
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2, // Untuk shadow di Android
+    elevation: 2,
     width: 370,
     height: 50,
   },
   searchInput: {
     flex: 1,
-    marginTop: -10,
     fontSize: 16,
     color: '#333',
   },
   searchIcon: {
     width: 20,
     height: 20,
-    marginTop: 10,
     tintColor: '#292D32',
   },
   box1: {
@@ -135,17 +183,7 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
   },
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#F9F7E4',
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#F9F7E4',
-  },
-  slide3: {
+  slide: {
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#F9F7E4',
@@ -166,6 +204,42 @@ const styles = StyleSheet.create({
   image: {
     marginLeft: 80,
     marginTop: 10,
+  },
+  horizontalScrollBackground: {
+    backgroundColor: '#EFEAD8',
+    padding: 15,
+    marginHorizontal: 10,
+    marginTop: -10,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#292D32',
+    marginBottom: 10,
+  },
+
+  image2: {
+    marginLeft: 10,
+    width: 70,
+    height: 70,
+    borderRadius: 5,
+  },
+  descriptionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#292D32',
+    marginTop: 10,
+  },
+  descriptionText: {
+    fontSize: 12,
+    color: '#76756C',
+    marginTop: 5,
+  },
+  detailLink: {
+    fontSize: 12,
+    color: '#292D32',
+    marginTop: 10,
+    textAlign: 'right',
   },
 });
 
