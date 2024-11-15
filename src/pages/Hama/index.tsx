@@ -27,6 +27,24 @@ const hama = [
     description:
       'Aphis hijau lebih sering di sebut kutu daun hijau. Ciri-ciri aphis hijau ada.....',
   },
+
+  {
+    title: 'Cacing Tanah',
+    description:
+      'Serangan hama ini pada tanaman tomat di tandai dengan terpotongnya tanaman pada pang.....',
+  },
+
+  {
+    title: 'Lalat Buah',
+    description:
+      'Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan dan sayap transparan.....',
+  },
+
+  {
+    title: 'Kutu Kebul',
+    description:
+      'Hama kutu daun bersayap putih ini merupakan salah satu hama paling berbahaya dalam budidaya tanam.....',
+  },
 ];
 
 const Hama = ({navigation}) => {
