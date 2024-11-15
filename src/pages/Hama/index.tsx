@@ -21,6 +21,12 @@ const hama = [
     description:
       'Umumnya ulat buah tomat ini menyerang daun, bunga dan buah tanaman tomat. Ciri-ciri hama ulat.....',
   },
+
+  {
+    title: 'Kutu Daun Aphis Hijau Pada Tomat',
+    description:
+      'Aphis hijau lebih sering di sebut kutu daun hijau. Ciri-ciri aphis hijau ada.....',
+  },
 ];
 
 const Hama = ({navigation}) => {
@@ -90,13 +96,13 @@ const styles = StyleSheet.create({
     color: '#4e4a41',
     marginBottom: 4,
     textAlign: 'left',
-    marginLeft: 98,
+    marginLeft: 96,
   },
   diseaseDescription: {
     fontSize: 12,
     color: '#4e4a41',
     marginRight: 25,
-    marginLeft: 100,
+    marginLeft: 97,
   },
   menuButtonWrapper: {
     position: 'absolute',
