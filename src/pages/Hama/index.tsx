@@ -9,6 +9,14 @@ import React from 'react';
 import {MenuButton, Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 
+const hama = [
+  {
+    title: 'Kutu Daun Thrips Tomat',
+    description:
+      'Ciri-ciri kutu daun thrips adalah panjangnya 1 mm dan berwarna hitam. Kutu daun thrips ini meny.....',
+  },
+];
+
 const Hama = ({navigation}) => {
   return (
     <>
@@ -20,6 +28,17 @@ const Hama = ({navigation}) => {
           onPress={() => navigation.goBack()}>
           <BackButton width={24} height={24} />
         </TouchableOpacity>
+
+        <ScrollView style={styles.contentWrapper}>
+          {hama.map((disease, index) => (
+            <View key={index} style={styles.diseaseCard}>
+              <Text style={styles.diseaseTitle}>{disease.title}</Text>
+              <Text style={styles.diseaseDescription}>
+                {disease.description}
+              </Text>
+            </View>
+          ))}
+        </ScrollView>
 
         <View style={styles.menuButtonWrapper}>
           <MenuButton navigation={navigation} />
@@ -60,14 +79,15 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   diseaseTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     color: '#4e4a41',
-    marginBottom: 8,
+    marginBottom: 4,
     textAlign: 'center',
+    marginLeft: 40,
   },
   diseaseDescription: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#4e4a41',
     marginRight: 25,
     marginLeft: 100,
