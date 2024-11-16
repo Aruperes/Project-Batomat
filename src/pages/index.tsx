@@ -8,6 +8,7 @@ import WelcomePage from './WelcomePage';
 import Home from './Home';
 import Note from './Note';
 import Profile from './Profile';
+import Option from './Option';
 export {
   SplashScreen,
   SignIn,
@@ -19,4 +20,5 @@ export {
   Note,
   WelcomePage,
   Profile,
+  Option,
 };
