@@ -22,7 +22,9 @@ const MenuButton = ({navigation}) => {
         </View>
       </TouchableOpacity>
       <GapRow width={74} />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Profile')}>
         <View>
           <Image source={Account} style={styles.photo} />
         </View>

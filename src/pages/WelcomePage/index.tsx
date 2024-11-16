@@ -52,7 +52,7 @@ const WelcomePage = ({navigation}) => {
           <Gap height={20} />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('HomeScreen')}>
+            onPress={() => navigation.navigate('Home')}>
             <Text style={styles.buttonText}>Lanjut</Text>
           </TouchableOpacity>
         </Animated.View>
