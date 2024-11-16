@@ -9,6 +9,7 @@ import {
 import {MenuButton, Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import Images from '../../assets/icon/image.svg';
+import Bercak from '../../assets/icon/bercakdaun.svg';
 
 const diseases = [
   {
@@ -21,6 +22,7 @@ const diseases = [
     title: 'Bercak Daun',
     description:
       'Bercak Daun disebabkan oleh cendawan Cercospora capsici, pada daun yang ter...',
+    icon: Bercak,
   },
   {
     title: 'Layu Bakteri',
@@ -139,6 +141,6 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: 90,
+    height: 80,
   },
 });
