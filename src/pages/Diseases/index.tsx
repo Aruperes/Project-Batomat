@@ -14,6 +14,7 @@ import Bercak from '../../assets/icon/bercakdaun.svg';
 import Layu from '../../assets/icon/layubakteri.svg';
 import Mosaik from '../../assets/icon/mosaiktomat.svg';
 import Buah from '../../assets/icon/buahbusuk.svg';
+import Daun from '../../assets/icon/busukdaun.svg';
 
 const diseases = [
   {
@@ -50,6 +51,7 @@ const diseases = [
     title: 'Busuk Daun',
     description:
       'Penyebab penyakit busuk daun adalah cendawan Phytophthora infestans. Gejala...',
+    icon: Daun,
   },
 ];
 
