@@ -5,23 +5,51 @@ import {
   Image,
   TextInput,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import Swiper from 'react-native-swiper';
+import {Src} from '../../assets/icon';
+import {MenuButton} from '../../components/molecules';
 
-const SignIn = ({navigation}) => {
+const Home = ({navigation}) => {
+  const [selectedImage, setSelectedImage] = useState(0); // State untuk memilih gambar
+
+  // Data gambar dan teks yang sesuai
+  const images = [
+    {source: require('../../assets/images/image.png'), text: 'Tomat Segar'},
+    {
+      source: require('../../assets/images/image11.png'),
+      text: 'Perawatan Tomat',
+    },
+    {
+      source: require('../../assets/images/image6.png'),
+      text: 'Penyakit pada Tomat',
+    },
+    {source: require('../../assets/images/image4.png'), text: 'Hama Tomat'},
+    {
+      source: require('../../assets/images/image2.png'),
+      text: 'Pertumbuhan Tomat',
+    },
+    {
+      source: require('../../assets/images/image1.png'),
+      text: 'Penyakit Lainnya',
+    },
+  ];
+
   return (
     <View style={styles.overlay}>
-      {/* Header dengan kedua logo */}
       <View style={styles.header}>
         <Image
           style={styles.logo}
           source={require('../../assets/images/LogoIm.png')}
         />
-        <Image
-          style={styles.logo1}
-          source={require('../../assets/images/profile.png')}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+          <Image
+            style={styles.logo1}
+            source={require('../../assets/images/profile.png')}
+          />
+        </TouchableOpacity>
       </View>
       <View style={styles.line} />
 
@@ -32,20 +60,17 @@ const SignIn = ({navigation}) => {
           placeholder="Search"
           placeholderTextColor="#a0a0a0"
         />
-        <Image
-          style={styles.searchIcon}
-          source={require('../../assets/icon/search.svg')}
-        />
+        <Src style={styles.searchIcon} />
       </View>
 
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Swiper untuk gambar utama */}
         <View style={styles.box1}>
-          <Swiper style={styles.wrapper}>
+          <Swiper style={styles.wrapper} autoplay={true} autoplayTimeout={3}>
             <View style={styles.slide}>
               <Text style={styles.text}>Tomat pasti segar!</Text>
               <Text style={styles.text2}>
-                inilah obat yang membuat buah tomat lebih segar dan sehat
+                Inilah obat yang membuat buah tomat lebih segar dan sehat
               </Text>
               <Image
                 style={styles.image}
@@ -65,7 +90,7 @@ const SignIn = ({navigation}) => {
             <View style={styles.slide}>
               <Text style={styles.text}>Peran penting obat</Text>
               <Text style={styles.text2}>
-                obat mencegah penyakit yang ada pada tumbuhan
+                Obat mencegah penyakit yang ada pada tumbuhan
               </Text>
               <Image
                 style={styles.image}
@@ -82,51 +107,71 @@ const SignIn = ({navigation}) => {
             horizontal={true}
             style={styles.scrollContainer}
             showsHorizontalScrollIndicator={false}>
-            <View style={styles.imageBox}>
-              <Image
-                style={styles.image2}
-                source={require('../../assets/images/image.png')}
-              />
-            </View>
-            <View style={styles.imageBox}>
-              <Image
-                style={styles.image2}
-                source={require('../../assets/images/image11.png')}
-              />
-            </View>
-            <View style={styles.imageBox}>
-              <Image
-                style={styles.image2}
-                source={require('../../assets/images/image6.png')}
-              />
-            </View>
-            <View style={styles.imageBox}>
-              <Image
-                style={styles.image2}
-                source={require('../../assets/images/image4.png')}
-              />
-            </View>
-            <View style={styles.imageBox}>
-              <Image
-                style={styles.image2}
-                source={require('../../assets/images/image2.png')}
-              />
-            </View>
-            <View style={styles.imageBox}>
-              <Image
-                style={styles.image2}
-                source={require('../../assets/images/image1.png')}
-              />
-            </View>
+            {images.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => setSelectedImage(index)}
+                style={[
+                  styles.imageBox,
+                  selectedImage === index && styles.selectedImageBox,
+                ]}>
+                <Image
+                  style={[
+                    styles.image2,
+                    selectedImage === index && styles.selectedImage,
+                  ]}
+                  source={item.source}
+                />
+              </TouchableOpacity>
+            ))}
           </ScrollView>
-          <Text style={styles.descriptionTitle}>Lalat Buah</Text>
+
+          <Text style={styles.descriptionTitle}>
+            {images[selectedImage].text}
+          </Text>
           <Text style={styles.descriptionText}>
             Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan dan
             sayap transparan
           </Text>
           <Text style={styles.detailLink}>Detail ➔</Text>
         </View>
+
+        {/* Cards Section */}
+        <View style={styles.card}>
+          <Image
+            style={styles.icon}
+            source={require('../../assets/icon/kecoa.svg')}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>PENYAKIT</Text>
+            <Text style={styles.description}>
+              lihat disini untuk mengetahui penyakit yang menyerang tomatmu
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.card}>
+          <Image
+            style={styles.icon}
+            source={require('../../assets/icon/kuman.svg')}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>HAMA</Text>
+            <Text style={styles.description}>
+              lihat disini untuk mengetahui hama yang menyerang tomatmu
+            </Text>
+          </View>
+        </View>
       </ScrollView>
+      <View style={styles.container}>
+        <Text>Home</Text>
+      </View>
+      <View style={styles.container2}>
+        <Text>Home</Text>
+      </View>
+      <View style={styles.container3}>
+        <MenuButton navigation={navigation} />
+      </View>
     </View>
   );
 };
@@ -162,7 +207,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F2F2F2',
     borderRadius: 8,
-    padding: 10,
+    padding: 5,
     elevation: 2,
     width: 370,
     height: 50,
@@ -178,7 +223,8 @@ const styles = StyleSheet.create({
     tintColor: '#292D32',
   },
   box1: {
-    height: 285,
+    height: 300,
+    marginTop: 20,
   },
   wrapper: {
     alignItems: 'center',
@@ -202,8 +248,10 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   image: {
-    marginLeft: 80,
+    marginHorizontal: 30,
     marginTop: 10,
+    width: 350,
+    height: 170,
   },
   horizontalScrollBackground: {
     backgroundColor: '#EFEAD8',
@@ -217,11 +265,20 @@ const styles = StyleSheet.create({
     color: '#292D32',
     marginBottom: 10,
   },
-
-  image2: {
+  imageBox: {
     marginLeft: 10,
+  },
+  image2: {
     width: 70,
     height: 70,
+    borderRadius: 5,
+  },
+  selectedImageBox: {
+    marginLeft: 0,
+  },
+  selectedImage: {
+    width: 85,
+    height: 85,
     borderRadius: 5,
   },
   descriptionTitle: {
@@ -241,6 +298,49 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'right',
   },
+  card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#D4D0A6',
+    borderRadius: 15,
+    padding: 15,
+    marginVertical: 10,
+    width: 350,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
+    marginLeft: 29,
+  },
+  icon: {
+    width: 60,
+    height: 60,
+    resizeMode: 'contain',
+    marginRight: 20,
+  },
+  textContainer: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#292D32',
+    marginBottom: 5,
+  },
+  description: {
+    fontSize: 14,
+    color: '#4E4E4E',
+  },
+  container: {
+    flex: 3,
+  },
+  container2: {
+    flex: 4,
+  },
+  container3: {
+    flex: 1,
+  },
 });
 
-export default SignIn;
+export default Home;

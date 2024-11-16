@@ -15,6 +15,7 @@ import LogoT from './LogoT.svg';
 import Account from './Account.png';
 import Home from './Home.png';
 import Note from './Note.png';
+import Src from './search.svg';
 export {
   Logo,
   Logo1,
@@ -33,4 +34,5 @@ export {
   Account,
   Home,
   Note,
+  Src,
 };
