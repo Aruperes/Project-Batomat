@@ -2,14 +2,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {MenuButton} from '../../components/molecules';
 
-const Note = ({navigation}) => {
+const Profile = ({navigation}) => {
   return (
     <>
       <View style={styles.container}>
-        <Text>Note</Text>
+        <Text>Profile</Text>
       </View>
       <View style={styles.container2}>
-        <Text>Note</Text>
+        <Text>Profile</Text>
       </View>
       <View style={styles.container3}>
         <MenuButton navigation={navigation} />
@@ -18,7 +18,7 @@ const Note = ({navigation}) => {
   );
 };
 
-export default Note;
+export default Profile;
 
 const styles = StyleSheet.create({
   container: {
