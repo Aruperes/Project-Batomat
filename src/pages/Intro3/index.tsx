@@ -1,13 +1,8 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import React, {useEffect, useRef} from 'react';
 import {Pt, Titik3} from '../../assets/icon';
-import {Gap} from '../../components/atoms';
+import {Gap, Btn} from '../../components/atoms';
+import Floating from '../../components/molecules/Floating';
 
 const Intro3 = ({navigation}) => {
   const timeoutRef = useRef(null);
@@ -15,14 +10,14 @@ const Intro3 = ({navigation}) => {
   useEffect(() => {
     timeoutRef.current = setTimeout(() => {
       navigation.replace('Intro1');
-    }, 4000);
+    }, 6000);
 
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, []);
+  }, [navigation]);
 
   const handleNavigation = screen => {
     if (timeoutRef.current) {
@@ -38,7 +33,9 @@ const Intro3 = ({navigation}) => {
       <View style={styles.overlay}>
         <View style={styles.contentWrapper}>
           <Gap height={20} />
-          <Pt />
+          <Floating>
+            <Pt />
+          </Floating>
           <Gap height={20} />
           <Titik3 />
           <Gap height={20} />
@@ -48,16 +45,18 @@ const Intro3 = ({navigation}) => {
           </Text>
           <Gap height={50} />
           <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonDaftar]}
-              onPress={() => handleNavigation('SignUp')}>
-              <Text style={styles.buttonTextDaftar}>Daftar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonMasuk]}
-              onPress={() => handleNavigation('SignIn')}>
-              <Text style={styles.buttonTextMasuk}>Masuk</Text>
-            </TouchableOpacity>
+            <Btn
+              text="Daftar"
+              color="#F0DFBD"
+              textColor="#2F2A36"
+              onPress={() => navigation.navigate('SignUp')}
+            />
+            <Btn
+              text="Masuk"
+              color="#2F2A36"
+              textColor="#F0DFBD"
+              onPress={() => navigation.navigate('SignIn')}
+            />
           </View>
         </View>
       </View>
@@ -100,29 +99,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  button: {
-    flex: 1,
-    paddingVertical: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-  buttonDaftar: {
-    backgroundColor: '#F0DFBD',
-  },
-  buttonMasuk: {
-    backgroundColor: '#2F2A36',
-  },
-  buttonTextDaftar: {
-    fontSize: 14,
-    fontFamily: 'Poppins-Bold',
-    color: '#2F2A36',
-  },
-  buttonTextMasuk: {
-    fontSize: 14,
-    fontFamily: 'Poppins-Bold',
-    color: '#F0DFBD',
   },
 });
 
