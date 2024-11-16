@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {MenuButton, Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
+import Down from '../../assets/icon/Arrow Down Contained 10.svg';
 import Images from '../../assets/icon/image.svg';
 import Bercak from '../../assets/icon/bercakdaun.svg';
 
@@ -67,6 +68,9 @@ const Diseases = ({navigation}) => {
                 {disease.description}
               </Text>
             </View>
+            <TouchableOpacity style={styles.arrowButton}>
+              <Down width={24} height={24} />
+            </TouchableOpacity>
           </View>
         ))}
       </ScrollView>
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Vertikal tengah
   },
   diseaseIcon: {
-    width: 40,
+    width: 50,
     height: 60,
     marginRight: 16, // Memberikan jarak antara icon dan teks
   },
@@ -143,4 +147,13 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     height: 80,
   },
+
+  arrowButton: {
+    position: 'absolute',
+    bottom: 1, // Adjusts the arrow's vertical position
+    right: 16,  // Adjusts the arrow's horizontal position
+    width: 24,
+    height: 24,
+  },
+
 });

@@ -2,8 +2,6 @@ import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {GapRow} from '../../atoms';
 import {Account, Home, Note} from '../../../assets/icon';
-
-
 const MenuButton = ({navigation}) => {
   return (
     <View style={styles.container}>
