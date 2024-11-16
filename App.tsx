@@ -52,7 +52,6 @@ const App = () => {
           component={Diseases}
           options={{headerShown: false}}
         />
-
       </Stack.Navigator>
     </NavigationContainer>
   );
