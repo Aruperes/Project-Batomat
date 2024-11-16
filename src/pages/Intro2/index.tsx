@@ -56,7 +56,7 @@ const Intro2 = ({navigation}) => {
               text="Masuk"
               color="#2F2A36"
               textColor="#F0DFBD"
-              onPress={() => navigation.navigate('SignIn')}
+              onPress={() => navigation.navigate('Option')}
             />
           </View>
         </View>

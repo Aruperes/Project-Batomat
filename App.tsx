@@ -10,6 +10,7 @@ import {
   Home,
   Note,
   Profile,
+  Option,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -58,17 +59,22 @@ const App = () => {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="Note"
           component={Note}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="Profile"
           component={Profile}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="Option"
+          component={Option}
+          options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
