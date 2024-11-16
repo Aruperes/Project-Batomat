@@ -11,7 +11,9 @@ import BackButton from '../../assets/icon/BackButton.svg';
 import Down from '../../assets/icon/Arrow Down Contained 10.svg';
 import Images from '../../assets/icon/image.svg';
 import Bercak from '../../assets/icon/bercakdaun.svg';
-import Layu from '../../assets/icon/layubakteri.svg'
+import Layu from '../../assets/icon/layubakteri.svg';
+import Mosaik from '../../assets/icon/mosaiktomat.svg';
+import Buah from '../../assets/icon/buahbusuk.svg';
 
 const diseases = [
   {
@@ -36,11 +38,13 @@ const diseases = [
     title: 'Mosaik',
     description:
       'Penyakit mosaik ditandai dengan adanya warna seperti mosaik pada daun dan...',
+    icon: Mosaik,
   },
   {
     title: 'Buah Busuk',
     description:
       'Ada dua macam cendawan penyebab busuk buah pada tomat. Yang pertama...',
+    icon: Buah,
   },
   {
     title: 'Busuk Daun',
@@ -153,9 +157,8 @@ const styles = StyleSheet.create({
   arrowButton: {
     position: 'absolute',
     bottom: 1, // Adjusts the arrow's vertical position
-    right: 16,  // Adjusts the arrow's horizontal position
+    right: 16, // Adjusts the arrow's horizontal position
     width: 24,
     height: 24,
   },
-
 });
