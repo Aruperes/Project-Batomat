@@ -11,6 +11,7 @@ import BackButton from '../../assets/icon/BackButton.svg';
 import Down from '../../assets/icon/Arrow Down Contained 10.svg';
 import Images from '../../assets/icon/image.svg';
 import Bercak from '../../assets/icon/bercakdaun.svg';
+import Layu from '../../assets/icon/layubakteri.svg'
 
 const diseases = [
   {
@@ -29,6 +30,7 @@ const diseases = [
     title: 'Layu Bakteri',
     description:
       'Gejalanya terlihat jika pucuk tanaman layu atau daun tua menguning. Jika batang...',
+    icon: Layu,
   },
   {
     title: 'Mosaik',
