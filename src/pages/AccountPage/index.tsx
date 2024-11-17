@@ -10,7 +10,7 @@ const AccountPage = ({navigation}) => {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('AccountPage')}>
+          onPress={() => navigation.navigate('FavoritePage')}>
           <View style={styles.button2}>
             <Image source={FavoritePage} />
             <Text style={styles.text}> Favorite</Text>

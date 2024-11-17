@@ -8,6 +8,7 @@ import Home from './Home';
 import Note from './Note';
 import EditNote from './EditNote';
 import AccountPage from './AccountPage';
+import FavoritePage from './FavoritePage';
 export {
   SplashScreen,
   SignIn,
@@ -19,4 +20,5 @@ export {
   Note,
   EditNote,
   AccountPage,
+  FavoritePage,
 };

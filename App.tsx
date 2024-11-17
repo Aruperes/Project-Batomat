@@ -10,6 +10,7 @@ import {
   Note,
   EditNote,
   AccountPage,
+  FavoritePage,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -68,6 +69,11 @@ const App = () => {
         <Stack.Screen
           name="AccountPage"
           component={AccountPage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="FavoritePage"
+          component={FavoritePage}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
