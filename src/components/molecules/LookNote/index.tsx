@@ -3,10 +3,13 @@ import React from 'react';
 import {Gap, GapRow} from '../../atoms';
 import {Trash, Favorite} from '../../../assets/icon';
 
-const LookNote = ({text}) => {
+const LookNote = ({text, navigation}) => {
   return (
     <>
-      <TouchableOpacity style={styles.contentWrapper} activeOpacity={0.5}>
+      <TouchableOpacity
+        style={styles.contentWrapper}
+        activeOpacity={0.5}
+        onPress={() => navigation.navigate('EditNote')}>
         <Text style={styles.text}>{text}</Text>
         <GapRow width={60} />
         <TouchableOpacity style={styles.button}>

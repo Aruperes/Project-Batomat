@@ -1,20 +1,21 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {DateNote, AddNote} from '../../components/atoms';
-import {LookNote, MenuButton} from '../../components/molecules';
+import {AddNote} from '../../components/atoms';
+import {MenuButton, Header} from '../../components/molecules';
 
 //bikin show error message
-// bikin appearance heartnya
-const Note = ({navigation}) => {
+const EditNote = ({navigation}) => {
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.title}>Notes</Text>
+        <Header
+          text="Notes"
+          backButton={true}
+          onPress={() => navigation.goBack()}
+        />
       </View>
       <View style={styles.container2}>
-        <DateNote date="Previous 30 Days" />
-        <LookNote text="List Obat" navigation={navigation} />
-        <AddNote />
+        <Text style={styles.title}>Notes</Text>
       </View>
       <View style={styles.container3}>
         <MenuButton navigation={navigation} />
@@ -23,7 +24,7 @@ const Note = ({navigation}) => {
   );
 };
 
-export default Note;
+export default EditNote;
 
 const styles = StyleSheet.create({
   title: {
