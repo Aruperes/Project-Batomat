@@ -14,6 +14,8 @@ import {
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import FlashMessage from 'react-native-flash-message';
+import './src/config/Firebase';
 
 const Stack = createNativeStackNavigator();
 
@@ -77,6 +79,7 @@ const App = () => {
           options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>
+      <FlashMessage position="top" />
     </NavigationContainer>
   );
 };
