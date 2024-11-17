@@ -9,14 +9,11 @@ import {
   WelcomePage,
   Home,
   Note,
+  Profile,
   Option,
-  EditNote,
-  AccountPage,
-  FavoritePage,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import './src/config/Firebase';
 
 const Stack = createNativeStackNavigator();
 
@@ -70,24 +67,14 @@ const App = () => {
           options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
-          name="Option"
-          component={Option}
+          name="Profile"
+          component={Profile}
           options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
-          name="EditNote"
-          component={EditNote}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="AccountPage"
-          component={AccountPage}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="FavoritePage"
-          component={FavoritePage}
-          options={{headerShown: false}}
+          name="Option"
+          component={Option}
+          options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
