@@ -10,7 +10,7 @@ const MenuButton = ({navigation}) => {
         style={styles.button}
         onPress={() => navigation.navigate('Note')}>
         <View>
-          <Image source={Note} style={styles.photo} />
+          <Image source={Note} />
         </View>
       </TouchableOpacity>
       <GapRow width={74} />
@@ -18,13 +18,15 @@ const MenuButton = ({navigation}) => {
         style={styles.button}
         onPress={() => navigation.navigate('Home')}>
         <View>
-          <Image source={Home} style={styles.photo} />
+          <Image source={Home} />
         </View>
       </TouchableOpacity>
       <GapRow width={74} />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('AccountPage')}>
         <View>
-          <Image source={Account} style={styles.photo} />
+          <Image source={Account} />
         </View>
       </TouchableOpacity>
     </View>

@@ -7,6 +7,7 @@ import Intro3 from './Intro3';
 import Home from './Home';
 import Note from './Note';
 import EditNote from './EditNote';
+import AccountPage from './AccountPage';
 export {
   SplashScreen,
   SignIn,
@@ -17,4 +18,5 @@ export {
   Home,
   Note,
   EditNote,
+  AccountPage,
 };
