@@ -18,6 +18,7 @@ import Note from './Note.png';
 import Trash from './Trash.png';
 import Favorite from './Favorite.png';
 import BackButton from './BackButton.svg';
+import Heart from './Heart.png';
 export {
   Logo,
   Logo1,
@@ -39,4 +40,5 @@ export {
   Trash,
   Favorite,
   BackButton,
+  Heart,
 };
