@@ -2,19 +2,18 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {DateNote, AddNote} from '../../components/atoms';
 import {LookNote, MenuButton} from '../../components/molecules';
-
 //bikin show error message
 // bikin appearance heartnya
-const Note = ({navigation}) => {
+const FavoritePage = ({navigation}) => {
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.title}>Notes</Text>
+        <Text style={styles.title}>Favorites</Text>
       </View>
       <View style={styles.container2}>
-        <DateNote date="Previous 30 Days" />
         <LookNote text="List Obat" navigation={navigation} />
-        <AddNote />
+        <LookNote text="List Obat" navigation={navigation} />
+        <LookNote text="List Obat" navigation={navigation} />
       </View>
       <View style={styles.container3}>
         <MenuButton navigation={navigation} />
@@ -23,7 +22,7 @@ const Note = ({navigation}) => {
   );
 };
 
-export default Note;
+export default FavoritePage;
 
 const styles = StyleSheet.create({
   title: {
