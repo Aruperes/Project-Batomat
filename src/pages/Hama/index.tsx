@@ -13,6 +13,8 @@ import Ulat from '../../assets/icon/ulatbuah.svg';
 import Aphis from '../../assets/icon/kutuaphis.svg';
 import Cacing from '../../assets/icon/cacingtanah.svg';
 import Lalat from '../../assets/icon/lalatbuah.svg';
+import Kebul from '../../assets/icon/kutukebul.svg';
+import Down from '../../assets/icon/arrowdown.svg';
 
 const hama = [
   {
@@ -54,6 +56,7 @@ const hama = [
     title: 'Kutu Kebul',
     description:
       'Hama kutu daun bersayap putih ini merupakan salah satu hama paling berbahaya dalam budidaya tanam.....',
+    icon: Kebul,
   },
 ];
 
@@ -125,7 +128,7 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Vertikal tengah
   },
   diseaseIcon: {
-    width: 50,
+    width: 60,
     height: 60,
     marginRight: 16, // Memberikan jarak antara icon dan teks
   },
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: 80,
+    height: 65,
   },
 
   arrowButton: {
