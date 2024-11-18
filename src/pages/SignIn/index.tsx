@@ -27,7 +27,7 @@ const SignIn = ({navigation}) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         showMessage({
-          message: error.message,
+          message: 'Invalid Email or Password',
           type: 'danger',
         });
       });
