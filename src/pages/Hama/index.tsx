@@ -11,6 +11,7 @@ import BackButton from '../../assets/icon/BackButton.svg';
 import Kutu from '../../assets/icon/kutudaun.svg';
 import Ulat from '../../assets/icon/ulatbuah.svg';
 import Aphis from '../../assets/icon/kutuaphis.svg';
+import Cacing from '../../assets/icon/cacingtanah.svg';
 
 const hama = [
   {
@@ -38,6 +39,7 @@ const hama = [
     title: 'Cacing Tanah',
     description:
       'Serangan hama ini pada tanaman tomat di tandai dengan terpotongnya tanaman pada pang.....',
+    icon: Cacing,
   },
 
   {
