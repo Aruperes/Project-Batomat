@@ -9,6 +9,7 @@ import React from 'react';
 import {MenuButton, Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import Kutu from '../../assets/icon/kutudaun.svg';
+import Ulat from '../../assets/icon/ulatbuah.svg';
 
 const hama = [
   {
@@ -22,6 +23,7 @@ const hama = [
     title: 'Ulat Buah Tomat',
     description:
       'Umumnya ulat buah tomat ini menyerang daun, bunga dan buah tanaman tomat. Ciri-ciri hama ulat.....',
+    icon: Ulat,
   },
 
   {
