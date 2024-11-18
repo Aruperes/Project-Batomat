@@ -1,6 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {DateNote, AddNote} from '../../components/atoms';
 import {LookNote, MenuButton} from '../../components/molecules';
 //bikin show error message
 // bikin appearance heartnya

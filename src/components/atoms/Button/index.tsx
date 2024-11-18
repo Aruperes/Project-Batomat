@@ -29,7 +29,6 @@ const Button = ({
     </TouchableOpacity>
   );
 };
-
 export default Button;
 
 const styles = StyleSheet.create({

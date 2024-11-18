@@ -6,14 +6,18 @@ import {
   Intro1,
   Intro2,
   Intro3,
+  WelcomePage,
   Home,
   Note,
   EditNote,
   AccountPage,
   FavoritePage,
+  Option,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import FlashMessage from 'react-native-flash-message';
+import './src/config/Firebase';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,44 +43,55 @@ const App = () => {
         <Stack.Screen
           name="Intro1"
           component={Intro1}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="Intro2"
           component={Intro2}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="Intro3"
           component={Intro3}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="WelcomePage"
+          component={WelcomePage}
           options={{headerShown: false}}
         />
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="Note"
           component={Note}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="EditNote"
           component={EditNote}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="AccountPage"
           component={AccountPage}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="FavoritePage"
           component={FavoritePage}
-          options={{headerShown: false}}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="Option"
+          component={Option}
+          options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>
+      <FlashMessage position="top" />
     </NavigationContainer>
   );
 };

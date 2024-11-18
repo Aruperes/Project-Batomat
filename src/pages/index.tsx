@@ -4,8 +4,11 @@ import SignUp from './SignUp';
 import Intro1 from './Intro1';
 import Intro2 from './Intro2';
 import Intro3 from './Intro3';
+import WelcomePage from './WelcomePage';
 import Home from './Home';
 import Note from './Note';
+import Profile from './Profile';
+import Option from './Option';
 import EditNote from './EditNote';
 import AccountPage from './AccountPage';
 import FavoritePage from './FavoritePage';
@@ -18,6 +21,9 @@ export {
   Intro3,
   Home,
   Note,
+  WelcomePage,
+  Profile,
+  Option,
   EditNote,
   AccountPage,
   FavoritePage,
