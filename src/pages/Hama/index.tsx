@@ -12,6 +12,7 @@ import Kutu from '../../assets/icon/kutudaun.svg';
 import Ulat from '../../assets/icon/ulatbuah.svg';
 import Aphis from '../../assets/icon/kutuaphis.svg';
 import Cacing from '../../assets/icon/cacingtanah.svg';
+import Lalat from '../../assets/icon/lalatbuah.svg';
 
 const hama = [
   {
@@ -46,6 +47,7 @@ const hama = [
     title: 'Lalat Buah',
     description:
       'Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan dan sayap transparan.....',
+    icon: Lalat,
   },
 
   {
