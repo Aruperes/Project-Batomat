@@ -9,7 +9,9 @@ import {
   WelcomePage,
   Home,
   Note,
-  Profile,
+  EditNote,
+  AccountPage,
+  FavoritePage,
   Option,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
@@ -69,8 +71,18 @@ const App = () => {
           options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
-          name="Profile"
-          component={Profile}
+          name="EditNote"
+          component={EditNote}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="AccountPage"
+          component={AccountPage}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="FavoritePage"
+          component={FavoritePage}
           options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen

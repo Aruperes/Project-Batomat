@@ -15,6 +15,11 @@ import LogoT from './LogoT.svg';
 import Account from './Account.png';
 import Home from './Home.png';
 import Note from './Note.png';
+import Trash from './Trash.png';
+import Favorite from './Favorite.png';
+import BackButton from './BackButton.svg';
+import Heart from './Heart.png';
+import FavoritePage from './FavoritePage.png';
 export {
   Logo,
   Logo1,
@@ -33,4 +38,9 @@ export {
   Account,
   Home,
   Note,
+  Trash,
+  Favorite,
+  BackButton,
+  Heart,
+  FavoritePage,
 };
