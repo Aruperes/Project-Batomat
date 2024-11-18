@@ -8,12 +8,14 @@ import {
 import React from 'react';
 import {MenuButton, Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
+import Kutu from '../../assets/icon/kutudaun.svg';
 
 const hama = [
   {
     title: 'Kutu Daun Thrips Tomat',
     description:
       'Ciri-ciri kutu daun thrips adalah panjangnya 1 mm dan berwarna hitam. Kutu daun thrips ini meny.....',
+    icon: Kutu,
   },
 
   {
@@ -62,10 +64,13 @@ const Hama = ({navigation}) => {
         <ScrollView style={styles.contentWrapper}>
           {hama.map((disease, index) => (
             <View key={index} style={styles.diseaseCard}>
-              <Text style={styles.diseaseTitle}>{disease.title}</Text>
-              <Text style={styles.diseaseDescription}>
-                {disease.description}
-              </Text>
+              {disease.icon && <disease.icon style={styles.diseaseIcon} />}
+              <View style={{flex: 1}}>
+                <Text style={styles.diseaseTitle}>{disease.title}</Text>
+                <Text style={styles.diseaseDescription}>
+                  {disease.description}
+                </Text>
+              </View>
             </View>
           ))}
         </ScrollView>
@@ -83,12 +88,13 @@ export default Hama;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: -20,
     backgroundColor: '#F9F7E4',
   },
   contentWrapper: {
     flex: 1,
     paddingHorizontal: 24,
-    marginTop: 10,
+    marginTop: -20,
   },
   backButton: {
     position: 'absolute',
@@ -107,20 +113,26 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    flexDirection: 'row', // Membuat layout horizontal
+    alignItems: 'center', // Vertikal tengah
+  },
+  diseaseIcon: {
+    width: 50,
+    height: 60,
+    marginRight: 16, // Memberikan jarak antara icon dan teks
   },
   diseaseTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#4e4a41',
-    marginBottom: 4,
-    textAlign: 'left',
-    marginLeft: 96,
+    textAlign: 'left', // Tetap rata kiri
+    top: 2,
   },
   diseaseDescription: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#4e4a41',
-    marginRight: 25,
-    marginLeft: 97,
+    textAlign: 'left', // Tetap rata kiri
+    marginTop: 4, // Memberikan sedikit jarak atas
   },
   menuButtonWrapper: {
     position: 'absolute',
@@ -134,6 +146,14 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: 90,
+    height: 80,
+  },
+
+  arrowButton: {
+    position: 'absolute',
+    bottom: 1, // Adjusts the arrow's vertical position
+    right: 16, // Adjusts the arrow's horizontal position
+    width: 24,
+    height: 24,
   },
 });
