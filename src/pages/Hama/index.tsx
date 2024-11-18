@@ -10,6 +10,7 @@ import {MenuButton, Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import Kutu from '../../assets/icon/kutudaun.svg';
 import Ulat from '../../assets/icon/ulatbuah.svg';
+import Aphis from '../../assets/icon/kutuaphis.svg';
 
 const hama = [
   {
@@ -30,6 +31,7 @@ const hama = [
     title: 'Kutu Daun Aphis Hijau Pada Tomat',
     description:
       'Aphis hijau lebih sering di sebut kutu daun hijau. Ciri-ciri aphis hijau ada.....',
+    icon: Aphis,
   },
 
   {
