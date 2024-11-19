@@ -27,14 +27,6 @@ const Home = ({navigation}) => {
       text: 'Penyakit pada Tomat',
     },
     {source: require('../../assets/images/image4.png'), text: 'Hama Tomat'},
-    {
-      source: require('../../assets/images/image2.png'),
-      text: 'Pertumbuhan Tomat',
-    },
-    {
-      source: require('../../assets/images/image1.png'),
-      text: 'Penyakit Lainnya',
-    },
   ];
 
   return (
@@ -44,7 +36,7 @@ const Home = ({navigation}) => {
           style={styles.logo}
           source={require('../../assets/images/LogoIm.png')}
         />
-        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+        <TouchableOpacity onPress={() => navigation.navigate('AccountPage')}>
           <Image
             style={styles.logo1}
             source={require('../../assets/images/profile.png')}
@@ -139,8 +131,8 @@ const Home = ({navigation}) => {
         {/* Cards Section */}
         <View style={styles.card}>
           <Image
-            style={styles.icon}
-            source={require('../../assets/icon/kecoa.svg')}
+            style={styles.logo2}
+            source={require('../../assets/images/penyakit.png')}
           />
           <View style={styles.textContainer}>
             <Text style={styles.title}>PENYAKIT</Text>
@@ -152,13 +144,26 @@ const Home = ({navigation}) => {
 
         <View style={styles.card}>
           <Image
-            style={styles.icon}
-            source={require('../../assets/icon/kuman.svg')}
+            style={styles.logo2}
+            source={require('../../assets/images/hama.png')}
           />
           <View style={styles.textContainer}>
             <Text style={styles.title}>HAMA</Text>
             <Text style={styles.description}>
               lihat disini untuk mengetahui hama yang menyerang tomatmu
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.card}>
+          <Image
+            style={styles.logo2}
+            source={require('../../assets/images/obat.png')}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>OBAT</Text>
+            <Text style={styles.description}>
+              lihat disini untuk mengetahui obat untuk mengobati tomatmu
             </Text>
           </View>
         </View>
@@ -274,7 +279,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   selectedImageBox: {
-    marginLeft: 0,
+    marginLeft: 17,
   },
   selectedImage: {
     width: 85,
@@ -313,14 +318,15 @@ const styles = StyleSheet.create({
     elevation: 5,
     marginLeft: 29,
   },
-  icon: {
-    width: 60,
+  logo2: {
+    width: 60, // ukuran logo lebih besar
     height: 60,
-    resizeMode: 'contain',
-    marginRight: 20,
+    marginHorizontal: 20, // beri jarak horizontal
   },
   textContainer: {
     flex: 1,
+    paddingLeft: 10, // tambahkan padding untuk jarak
+    justifyContent: 'center', // sejajarkan teks vertikal
   },
   title: {
     fontSize: 18,
