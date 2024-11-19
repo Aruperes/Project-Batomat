@@ -7,7 +7,6 @@ import Intro3 from './Intro3';
 import WelcomePage from './WelcomePage';
 import Home from './Home';
 import Note from './Note';
-import Profile from './Profile';
 import Option from './Option';
 import EditNote from './EditNote';
 import AccountPage from './AccountPage';
@@ -22,7 +21,6 @@ export {
   Home,
   Note,
   WelcomePage,
-  Profile,
   Option,
   EditNote,
   AccountPage,
