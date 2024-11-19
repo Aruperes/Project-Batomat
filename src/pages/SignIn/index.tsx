@@ -1,20 +1,42 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import React, {useState} from 'react';
-import {TextInput} from '../../components/molecules';
+import {TextInput, Loading} from '../../components/molecules';
 import {Button, Gap} from '../../components/atoms';
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import {showMessage} from 'react-native-flash-message';
 
 const SignIn = ({navigation}) => {
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const auth = getAuth();
+  const onSubmit = () => {
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        const user = userCredential.user;
+        setLoading(false);
+        showMessage({
+          message: 'Login Succesfully',
+          type: 'success',
+        });
+        navigation.navigate('Home', {uid: user.uid});
+      })
+      .catch(error => {
+        setLoading(false);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        showMessage({
+          message: 'Invalid Email or Password',
+          type: 'danger',
+        });
+      });
+  };
+
   return (
-    <ImageBackground
-      source={require('../../assets/images/bgImage.png')}
-      style={styles.background}>
+    <>
       <View style={styles.overlay}>
+        <Image source={require('../../assets/images/LogoIm.png')} />
         <View style={styles.contentWrapper}>
           <Text style={styles.head}>
             Sign <Text style={styles.headBold}>In</Text>
@@ -22,58 +44,44 @@ const SignIn = ({navigation}) => {
           <TextInput
             label="Email Address"
             placeholder="Type your email address"
+            onChangeText={value => setEmail(value)}
           />
           <Gap height={16} />
-          <TextInput label="Password" placeholder="Type your password" />
+          <TextInput
+            label="Password"
+            placeholder="Type your password"
+            onChangeText={value => setPassword(value)}
+            secureTextEntry={true}
+          />
           <Gap height={24} />
-          <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-            <Text style={styles.clickableText1}>Sign In</Text>
-          </TouchableOpacity>
+          <Button
+            text="Sign In"
+            color="#2F2A36"
+            textColor="#F0DFBD"
+            onPress={onSubmit}
+          />
           <Gap height={12} />
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.clickableText}>Create New Account</Text>
-          </TouchableOpacity>
+          <Button
+            text="Create New Account"
+            onPress={() => navigation.navigate('SignUp')}
+          />
+          <Gap height={12} />
         </View>
       </View>
-    </ImageBackground>
+      {loading && <Loading />}
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  clickableText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#2F2A36',
-    backgroundColor: '#F0DFBD',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 5,
-    paddingHorizontal: 85,
-  },
-  clickableText1: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#F0DFBD',
-    backgroundColor: '#2F2A36',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 5,
-    paddingHorizontal: 125,
-  },
-  background: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backgroundColor: '#F9F7E4',
     justifyContent: 'center',
     alignItems: 'center',
   },
   contentWrapper: {
-    width: '85%',
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    width: '90%',
     padding: 24,
     borderRadius: 20,
   },
