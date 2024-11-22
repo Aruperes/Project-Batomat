@@ -13,9 +13,8 @@ import {Src} from '../../assets/icon';
 import {MenuButton} from '../../components/molecules';
 
 const Home = ({navigation}) => {
-  const [selectedImage, setSelectedImage] = useState(0); // State untuk memilih gambar
+  const [selectedImage, setSelectedImage] = useState(0);
 
-  // Data gambar dan teks yang sesuai
   const images = [
     {source: require('../../assets/images/image.png'), text: 'Tomat Segar'},
     {
@@ -53,7 +52,6 @@ const Home = ({navigation}) => {
       </View>
       <View style={styles.line} />
 
-      {/* Search Bar */}
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -64,7 +62,6 @@ const Home = ({navigation}) => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Swiper untuk gambar utama */}
         <View style={styles.box1}>
           <Swiper style={styles.wrapper} autoplay={true} autoplayTimeout={3}>
             <View style={styles.slide}>
@@ -99,8 +96,6 @@ const Home = ({navigation}) => {
             </View>
           </Swiper>
         </View>
-
-        {/* Container untuk latar belakang dan ScrollView horizontal */}
         <View style={styles.horizontalScrollBackground}>
           <Text style={styles.sectionTitle}>Lagi musim</Text>
           <ScrollView
@@ -135,19 +130,19 @@ const Home = ({navigation}) => {
           </Text>
           <Text style={styles.detailLink}>Detail ➔</Text>
         </View>
-
-        {/* Cards Section */}
         <View style={styles.card}>
           <Image
             style={styles.icon}
             source={require('../../assets/icon/kecoa.svg')}
           />
-          <View style={styles.textContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Diseases')}
+            style={styles.textContainer}>
             <Text style={styles.title}>PENYAKIT</Text>
             <Text style={styles.description}>
               lihat disini untuk mengetahui penyakit yang menyerang tomatmu
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.card}>
@@ -163,12 +158,6 @@ const Home = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
-      <View style={styles.container}>
-        <Text>Home</Text>
-      </View>
-      <View style={styles.container2}>
-        <Text>Home</Text>
-      </View>
       <View style={styles.container3}>
         <MenuButton navigation={navigation} />
       </View>
@@ -332,14 +321,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#4E4E4E',
   },
-  container: {
-    flex: 3,
-  },
-  container2: {
-    flex: 4,
-  },
   container3: {
     flex: 1,
+    backgroundColor: '#F9F7E4',
   },
 });
 

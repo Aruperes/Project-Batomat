@@ -13,6 +13,7 @@ import {
   AccountPage,
   FavoritePage,
   Option,
+  Diseases,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -89,6 +90,11 @@ const App = () => {
           name="Option"
           component={Option}
           options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="Diseases"
+          component={Diseases}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
       <FlashMessage position="top" />
