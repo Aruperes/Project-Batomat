@@ -10,6 +10,11 @@ import {
 import {MenuButton} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import LayuFusa from '../../assets/images/layufusarium.png';
+import NoteNav from '../../assets/icon/Note.svg';
+import HomeNav from '../../assets/icon/Home.svg';
+import User from '../../assets/icon/UserProfile.svg';
+import Like from '../../assets/icon/like.svg';
+import Share from '../../assets/icon/share.svg';
 
 const Layu = ({navigation}) => {
   return (
@@ -49,11 +54,37 @@ const Layu = ({navigation}) => {
           2. Perbaiki drainase dan lakukan sanitasi lahan secara rutin. {'\n'}
           3. Introduksi predator alami seperti lady beetle.
         </Text>
+
+        {/* Like and Share Section */}
+        <View style={styles.iconWrapper}>
+          <TouchableOpacity style={styles.likeButton}>
+            <Like width={65} height={65} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.shareButton}>
+            <Share width={65} height={65} />
+          </TouchableOpacity>
+        </View>
       </ScrollView>
 
       {/* Menu Button */}
       <View style={styles.menuButtonWrapper}>
-        <MenuButton navigation={navigation} />
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => navigation.navigate('Notes')}>
+          <NoteNav width={35} height={35} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => navigation.navigate('Home')}>
+          <HomeNav width={35} height={35} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => navigation.navigate('Profile')}>
+          <User width={35} height={35} />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -136,7 +167,7 @@ const styles = StyleSheet.create({
 
   descriptionsub: {
     fontFamily: 'Poppins',
-    fontSize: 14,
+    fontSize: 16,
     color: '#020202',
     marginLeft: 35,
     lineHeight: 30, // Adjust line-height for spacing between text lines
@@ -174,5 +205,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'flex-end', // Align to the right
     marginRight: 0, // Moved more right
+  },
+  menuButtonWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#292D32',
+    paddingVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderColor: '#ccc',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: 80,
   },
 });
