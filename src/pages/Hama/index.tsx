@@ -82,6 +82,9 @@ const Hama = ({navigation}) => {
                   {disease.description}
                 </Text>
               </View>
+              <TouchableOpacity style={styles.arrowButton}>
+                <Down width={24} height={24} />
+              </TouchableOpacity>
             </View>
           ))}
         </ScrollView>
@@ -124,9 +127,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
-    flexDirection: 'row', // Membuat layout horizontal
-    alignItems: 'center', // Vertikal tengah
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative', // Tambahkan ini untuk mendukung positioning anak
   },
+
   diseaseIcon: {
     width: 60,
     height: 60,
@@ -164,7 +169,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 1, // Adjusts the arrow's vertical position
     right: 16, // Adjusts the arrow's horizontal position
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
   },
 });
