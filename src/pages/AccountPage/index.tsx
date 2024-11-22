@@ -50,15 +50,15 @@ const AccountPage = ({navigation}) => {
         </TouchableOpacity>
       </View>
 
-      {/* Menu Navigasi */}
-      <View style={styles.container3}>
+      {/* Menu Button */}
+      <View style={styles.menuButtonWrapper}>
         <MenuButton navigation={navigation} />
       </View>
     </View>
   );
 };
 
-// Komponen MenuItem untuk menampilkan setiap menu
+// Komponen MenuItem
 const MenuItem = ({icon, text, onPress}) => {
   return (
     <TouchableOpacity style={styles.menuItem} onPress={onPress}>
@@ -146,7 +146,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#000',
   },
-  container3: {
-    flex: 1,
+  menuButtonWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#292D32',
+    paddingVertical: 10,
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderColor: '#ccc',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: 95,
   },
 });

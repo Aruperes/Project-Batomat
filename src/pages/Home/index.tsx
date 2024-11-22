@@ -168,12 +168,7 @@ const Home = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
-      <View style={styles.container}>
-        <Text>Home</Text>
-      </View>
-      <View style={styles.container2}>
-        <Text>Home</Text>
-      </View>
+
       <View style={styles.container3}>
         <MenuButton navigation={navigation} />
       </View>
@@ -338,14 +333,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#4E4E4E',
   },
-  container: {
-    flex: 3,
-  },
-  container2: {
-    flex: 4,
+  ScrollView: {
+    flex: 1,
   },
   container3: {
-    flex: 1,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#292D32',
+    paddingVertical: 10,
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderColor: '#ccc',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: 95,
   },
 });
 
