@@ -7,7 +7,6 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
-import {MenuButton} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import LayuFusa from '../../assets/images/layufusarium.png';
 import NoteNav from '../../assets/icon/Note.svg';
@@ -15,8 +14,21 @@ import HomeNav from '../../assets/icon/Home.svg';
 import User from '../../assets/icon/UserProfile.svg';
 import Like from '../../assets/icon/like.svg';
 import Share from '../../assets/icon/share.svg';
+import Star from '../../assets/icon/Star.svg';
 
 const Layu = ({navigation}) => {
+  // State to track if the star is selected (filled or not)
+  const [isStarSelected, setIsStarSelected] = useState(false);
+  const [starCount, setStarCount] = useState(0); // Track the number of times the star is pressed
+
+  // Toggle the star selection state when pressed and increment count
+  const handleStarPress = () => {
+    setIsStarSelected(!isStarSelected);
+    if (!isStarSelected) {
+      setStarCount(starCount + 1); // Increment the count when pressed
+    }
+  };
+
   return (
     <View style={styles.container}>
       {/* Header Section */}
@@ -42,6 +54,20 @@ const Layu = ({navigation}) => {
         <View style={styles.titleWrapper}>
           <Text style={styles.title}>Layu Fusarium</Text>
         </View>
+
+        <TouchableOpacity onPress={handleStarPress} style={styles.starWrapper}>
+          <Star
+            width={25}
+            height={25}
+            style={[
+              styles.starIcon,
+              {fill: isStarSelected ? 'yellow' : 'gray'}, // Change color based on selection
+            ]}
+          />
+          {/* Number Below the Star */}
+          <Text style={styles.starCount}>{starCount}</Text>
+        </TouchableOpacity>
+
         <Text style={styles.descriptiontitle}>
           Gejala layu fusarium pada awal serangan dapat ditandai dengan adanya
           tanaman yang menunjukkan daun menguning secara tidak merata, layu
@@ -133,7 +159,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     color: '#292D32',
-    marginTop: 15,
+    marginTop: 20,
   },
   starWrapper: {
     alignItems: 'center', // Center the star and count
@@ -141,14 +167,15 @@ const styles = StyleSheet.create({
   },
   starIcon: {
     marginBottom: 4, // Add margin to separate star from count
-    marginLeft: 80,
-    marginTop: 20,
+    marginLeft: 280,
+    marginTop: -30,
   },
   starCount: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#B79F00', // Yellow color for the number
-    marginLeft: 80,
+    marginLeft: 280,
+    marginTop: -2,
   },
   subTitle: {
     fontSize: 18,
@@ -162,7 +189,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#020202',
     lineHeight: 25,
-    marginTop: 10,
+    marginTop: -10,
   },
 
   descriptionsub: {
