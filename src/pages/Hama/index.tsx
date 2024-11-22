@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -5,7 +6,6 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import React from 'react';
 import {MenuButton, Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import Kutu from '../../assets/icon/kutudaun.svg';
@@ -20,80 +20,86 @@ const hama = [
   {
     title: 'Kutu Daun Thrips Tomat',
     description:
-      'Ciri-ciri kutu daun thrips adalah panjangnya 1 mm dan berwarna hitam. Kutu daun thrips ini meny.....',
+      'Ciri-ciri kutu daun thrips adalah panjangnya 1 mm dan berwarna hitam...',
     icon: Kutu,
+    route: 'KutuDaun', // Halaman detail yang akan dinavigasi
   },
 
   {
     title: 'Ulat Buah Tomat',
     description:
-      'Umumnya ulat buah tomat ini menyerang daun, bunga dan buah tanaman tomat. Ciri-ciri hama ulat.....',
+      'Umumnya ulat buah tomat ini menyerang daun, bunga dan buah tanaman tomat...',
     icon: Ulat,
+    route: 'UlatBuah', // Halaman detail yang akan dinavigasi
   },
 
   {
     title: 'Kutu Daun Aphis Hijau Pada Tomat',
-    description:
-      'Aphis hijau lebih sering di sebut kutu daun hijau. Ciri-ciri aphis hijau ada.....',
+    description: 'Aphis hijau lebih sering di sebut kutu daun hijau...',
     icon: Aphis,
+    route: 'KutuAphis', // Halaman detail yang akan dinavigasi
   },
 
   {
     title: 'Cacing Tanah',
     description:
-      'Serangan hama ini pada tanaman tomat di tandai dengan terpotongnya tanaman pada pang.....',
+      'Serangan hama ini pada tanaman tomat di tandai dengan terpotongnya tanaman...',
     icon: Cacing,
+    route: 'CacingTanah', // Halaman detail yang akan dinavigasi
   },
 
   {
     title: 'Lalat Buah',
     description:
-      'Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan dan sayap transparan.....',
+      'Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan...',
     icon: Lalat,
+    route: 'LalatBuah', // Halaman detail yang akan dinavigasi
   },
 
   {
     title: 'Kutu Kebul',
     description:
-      'Hama kutu daun bersayap putih ini merupakan salah satu hama paling berbahaya dalam budidaya tanam.....',
+      'Hama kutu daun bersayap putih ini merupakan salah satu hama paling berbahaya...',
     icon: Kebul,
+    route: 'KutuKebul', // Halaman detail yang akan dinavigasi
   },
 ];
 
 const Hama = ({navigation}) => {
   return (
-    <>
-      <View style={styles.container}>
-        <Header text="Hama" />
+    <View style={styles.container}>
+      <Header text="Hama" />
 
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <BackButton width={24} height={24} />
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}>
+        <BackButton width={24} height={24} />
+      </TouchableOpacity>
 
-        <ScrollView style={styles.contentWrapper}>
-          {hama.map((disease, index) => (
-            <View key={index} style={styles.diseaseCard}>
-              {disease.icon && <disease.icon style={styles.diseaseIcon} />}
-              <View style={{flex: 1}}>
-                <Text style={styles.diseaseTitle}>{disease.title}</Text>
-                <Text style={styles.diseaseDescription}>
-                  {disease.description}
-                </Text>
-              </View>
-              <TouchableOpacity style={styles.arrowButton}>
-                <Down width={24} height={24} />
-              </TouchableOpacity>
+      <ScrollView style={styles.contentWrapper}>
+        {hama.map((disease, index) => (
+          <View key={index} style={styles.diseaseCard}>
+            {disease.icon && <disease.icon style={styles.diseaseIcon} />}
+            <View style={{flex: 1}}>
+              <Text style={styles.diseaseTitle}>{disease.title}</Text>
+              <Text style={styles.diseaseDescription}>
+                {disease.description}
+              </Text>
             </View>
-          ))}
-        </ScrollView>
+            <TouchableOpacity
+              style={styles.arrowButton}
+              onPress={() => navigation.navigate(disease.route)} // Navigasi ke halaman detail
+            >
+              <Down width={24} height={24} />
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
 
-        <View style={styles.menuButtonWrapper}>
-          <MenuButton navigation={navigation} />
-        </View>
+      <View style={styles.menuButtonWrapper}>
+        <MenuButton navigation={navigation} />
       </View>
-    </>
+    </View>
   );
 };
 
@@ -129,26 +135,26 @@ const styles = StyleSheet.create({
     elevation: 3,
     flexDirection: 'row',
     alignItems: 'center',
-    position: 'relative', // Tambahkan ini untuk mendukung positioning anak
+    position: 'relative',
   },
 
   diseaseIcon: {
     width: 60,
     height: 60,
-    marginRight: 16, // Memberikan jarak antara icon dan teks
+    marginRight: 16,
   },
   diseaseTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#4e4a41',
-    textAlign: 'left', // Tetap rata kiri
+    textAlign: 'left',
     top: 2,
   },
   diseaseDescription: {
     fontSize: 14,
     color: '#4e4a41',
-    textAlign: 'left', // Tetap rata kiri
-    marginTop: 4, // Memberikan sedikit jarak atas
+    textAlign: 'left',
+    marginTop: 4,
   },
   menuButtonWrapper: {
     position: 'absolute',
@@ -167,8 +173,8 @@ const styles = StyleSheet.create({
 
   arrowButton: {
     position: 'absolute',
-    bottom: 1, // Adjusts the arrow's vertical position
-    right: 16, // Adjusts the arrow's horizontal position
+    bottom: 1,
+    right: 16,
     width: 20,
     height: 20,
   },

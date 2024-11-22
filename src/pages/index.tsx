@@ -7,4 +7,16 @@ import Intro3 from './Intro3';
 import Home from './Home';
 import Note from './Note';
 import Hama from './Hama';
-export {SplashScreen, SignIn, SignUp, Intro1, Intro2, Intro3, Home, Note, Hama};
+import KutuDaun from './KutuDaun';
+export {
+  SplashScreen,
+  SignIn,
+  SignUp,
+  Intro1,
+  Intro2,
+  Intro3,
+  Home,
+  Note,
+  Hama,
+  KutuDaun,
+};

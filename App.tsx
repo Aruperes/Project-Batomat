@@ -9,6 +9,7 @@ import {
   Home,
   Note,
   Hama,
+  KutuDaun,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -62,6 +63,11 @@ const App = () => {
         <Stack.Screen
           name="Hama"
           component={Hama}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="KutuDaun"
+          component={KutuDaun}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
