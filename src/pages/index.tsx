@@ -8,7 +8,8 @@ import Home from './Home';
 import Note from './Note';
 import Hama from './Hama';
 import KutuDaun from './KutuDaun';
-import UlatTomat from './UlatTomat';
+import UlatBuah from './UlatBuah';
+import KutuAphis from './KutuAphis';
 export {
   SplashScreen,
   SignIn,
@@ -20,5 +21,6 @@ export {
   Note,
   Hama,
   KutuDaun,
-  UlatTomat,
+  UlatBuah,
+  KutuAphis,
 };
