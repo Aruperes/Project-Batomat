@@ -8,6 +8,7 @@ import Diseases from './Diseases';
 import Layu from './Layu';
 import BercakDaun from './BercakDaun';
 import LayuBakteri from './LayuBakteri';
+import Mosaik from './Mosaik';
 export {
   SplashScreen,
   SignIn,
@@ -19,4 +20,5 @@ export {
   Layu,
   BercakDaun,
   LayuBakteri,
+  Mosaik,
 };

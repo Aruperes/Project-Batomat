@@ -46,6 +46,7 @@ const diseases = [
     description:
       'Penyakit mosaik ditandai dengan adanya warna seperti mosaik pada daun dan...',
     icon: Mosaik,
+    route: 'Mosaik',
   },
   {
     title: 'Buah Busuk',
