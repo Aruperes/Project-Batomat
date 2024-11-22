@@ -12,8 +12,22 @@ import Bakteri from '../../assets/images/layubakteri.png';
 import NoteNav from '../../assets/icon/Note.svg';
 import HomeNav from '../../assets/icon/Home.svg';
 import User from '../../assets/icon/UserProfile.svg';
+import Like from '../../assets/icon/like.svg';
+import Share from '../../assets/icon/share.svg';
+import Star from '../../assets/icon/Star.svg';
 
 const LayuBakteri = ({navigation}) => {
+  // State to track if the star is selected (filled or not)
+  const [isStarSelected, setIsStarSelected] = useState(false);
+  const [starCount, setStarCount] = useState(0); // Track the number of times the star is pressed
+
+  // Toggle the star selection state when pressed and increment count
+  const handleStarPress = () => {
+    setIsStarSelected(!isStarSelected);
+    if (!isStarSelected) {
+      setStarCount(starCount + 1); // Increment the count when pressed
+    }
+  };
   return (
     <View style={styles.container}>
       {/* Header Section */}
@@ -36,6 +50,19 @@ const LayuBakteri = ({navigation}) => {
           <Text style={styles.title}>Layu Bakteri</Text>
         </View>
 
+        <TouchableOpacity onPress={handleStarPress} style={styles.starWrapper}>
+          <Star
+            width={25}
+            height={25}
+            style={[
+              styles.starIcon,
+              {fill: isStarSelected ? 'yellow' : 'gray'}, // Change color based on selection
+            ]}
+          />
+          {/* Number Below the Star */}
+          <Text style={styles.starCount}>{starCount}</Text>
+        </TouchableOpacity>
+
         <Text style={styles.descriptiontitle}>
           Gejalanya terlihat jika pucuk tanaman layu atau daun tua menguning.
           Jika batang mulai membusuk dan akar tanaman mengalami pembusukan, maka
@@ -49,6 +76,14 @@ const LayuBakteri = ({navigation}) => {
         </Text>
 
         {/* Like and Share Section */}
+        <View style={styles.iconWrapper}>
+          <TouchableOpacity style={styles.likeButton}>
+            <Like width={65} height={65} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.shareButton}>
+            <Share width={65} height={65} />
+          </TouchableOpacity>
+        </View>
       </ScrollView>
 
       {/* Menu Button */}
@@ -148,7 +183,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#020202',
     lineHeight: 25,
-    marginTop: 15,
+    marginTop: 3,
   },
 
   descriptionsub: {
