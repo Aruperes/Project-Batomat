@@ -32,6 +32,7 @@ const diseases = [
     description:
       'Bercak Daun disebabkan oleh cendawan Cercospora capsici, pada daun yang ter...',
     icon: Bercak,
+    route: 'BercakDaun',
   },
   {
     title: 'Layu Bakteri',
