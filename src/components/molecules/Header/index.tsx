@@ -1,9 +1,13 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {Button} from '../../atoms';
 
-const Header = ({text}) => {
+const Header = ({text, backButton, onPress}) => {
   return (
     <View style={styles.container}>
+      {backButton && (
+        <Button type="icon-only" icon="back-button" onPress={onPress} />
+      )}
       <Text style={styles.text}> {text}</Text>
     </View>
   );
@@ -15,14 +19,18 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F9F7E4',
     paddingLeft: 24,
-    paddingVertical: 38,
+    paddingTop: 38,
     flexDirection: 'row',
     alignItems: 'center',
   },
   text: {
-    fontFamily: 'Poppins-Medium',
+    fontFamily: 'Poppins-Regular',
     fontSize: 24,
     color: '#020202',
-    marginLeft: 35,
+    textShadowColor: '#000000', 
+    textShadowOffset: {width: 0, height: 2}, 
+    textShadowRadius: 2, r
+    marginLeft: 38,
+
   },
 });

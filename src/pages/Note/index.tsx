@@ -3,6 +3,8 @@ import React from 'react';
 import {DateNote, AddNote} from '../../components/atoms';
 import {LookNote, MenuButton} from '../../components/molecules';
 
+//bikin show error message
+// bikin appearance heartnya
 const Note = ({navigation}) => {
   return (
     <>
@@ -11,7 +13,7 @@ const Note = ({navigation}) => {
       </View>
       <View style={styles.container2}>
         <DateNote date="Previous 30 Days" />
-        <LookNote text="List Obat" />
+        <LookNote text="List Obat" navigation={navigation} />
         <AddNote />
       </View>
       <View style={styles.container3}>

@@ -17,6 +17,17 @@ import Home from './Home.png';
 import Note from './Note.png';
 import Trash from './Trash.png';
 import Favorite from './Favorite.png';
+import Src from './search.svg';
+import Trash from './Trash.png';
+import Favorite from './Favorite.png';
+import BackButton from './BackButton.svg';
+import Heart from './Heart.png';
+import FavoritePage from './FavoritePage.png';
+import UserProfile from './UserProfile.png';
+import Info from './Info.png';
+import Share from './Share.png';
+import Setting from './Setting.png';
+import Logout from './Logout.png';
 export {
   Logo,
   Logo1,
@@ -37,4 +48,16 @@ export {
   Note,
   Trash,
   Favorite,
+  Src,
+  Trash,
+  Favorite,
+  BackButton,
+  Heart,
+  FavoritePage,
+  UserProfile,
+  Info,
+  Share,
+  Setting,
+  Logout,
+
 };
