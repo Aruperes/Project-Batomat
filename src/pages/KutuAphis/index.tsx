@@ -12,7 +12,7 @@ import BackButton from '../../assets/icon/BackButton.svg';
 import Aphis from '../../assets/images/KutuAphis.png';
 import Like from '../../assets/icon/like.svg';
 import Share from '../../assets/icon/share.svg';
-import Star from '../../assets/icon/Star.svg'; // Import Star icon
+import Star from '../../assets/icon/Star.svg'; 
 
 const KutuAphis = ({navigation}) => {
   // State to track if the star is selected (filled or not)
