@@ -11,6 +11,7 @@ import KutuDaun from './KutuDaun';
 import UlatBuah from './UlatBuah';
 import KutuAphis from './KutuAphis';
 import CacingTanah from './CacingTanah';
+import LalatBuah from './LalatBuah';
 export {
   SplashScreen,
   SignIn,
@@ -25,4 +26,5 @@ export {
   UlatBuah,
   KutuAphis,
   CacingTanah,
+  LalatBuah,
 };

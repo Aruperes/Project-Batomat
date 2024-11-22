@@ -13,6 +13,7 @@ import {
   UlatBuah,
   KutuAphis,
   CacingTanah,
+  LalatBuah,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -86,6 +87,11 @@ const App = () => {
         <Stack.Screen
           name="CacingTanah"
           component={CacingTanah}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="LalatBuah"
+          component={LalatBuah}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
