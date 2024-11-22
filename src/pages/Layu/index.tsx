@@ -35,13 +35,20 @@ const Layu = ({navigation}) => {
       <ScrollView contentContainerStyle={styles.contentWrapper}>
         {/* Title and Star Section */}
         <View style={styles.titleWrapper}>
-          <Text style={styles.title} />
+          <Text style={styles.title}>Layu Fusarium</Text>
         </View>
-
-        <Text style={styles.descriptiontitle} />
-
-        <Text style={styles.subTitle} />
-        <Text style={styles.descriptionsub} />
+        <Text style={styles.descriptiontitle}>
+          Gejala layu fusarium pada awal serangan dapat ditandai dengan adanya
+          tanaman yang menunjukkan daun menguning secara tidak merata, layu
+          meski masih mendapatkan cukup air, serta pangkal batang atau akar yang
+          mulai membusuk.
+        </Text>
+        <Text style={styles.subTitle}>Cara Pengobatan</Text>
+        <Text style={styles.descriptionsub}>
+          1. Gunakan varietas tanaman yang tahan fusarium. {'\n'}
+          2. Perbaiki drainase dan lakukan sanitasi lahan secara rutin. {'\n'}
+          3. Introduksi predator alami seperti lady beetle.
+        </Text>
       </ScrollView>
 
       {/* Menu Button */}
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute', // Position the back button on top of the image
-    left: 20,
+    left: 10,
     top: 40, // Adjust spacing from top edge
     zIndex: 1, // Ensure it appears above the image
     width: 50,
@@ -95,6 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     color: '#292D32',
+    marginTop: 15,
   },
   starWrapper: {
     alignItems: 'center', // Center the star and count
@@ -123,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#020202',
     lineHeight: 25,
-    marginTop: -15,
+    marginTop: 10,
   },
 
   descriptionsub: {
