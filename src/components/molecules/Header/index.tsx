@@ -17,6 +17,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#F9F7E4',
     paddingLeft: 24,
     paddingTop: 38,
     flexDirection: 'row',
@@ -30,5 +31,6 @@ const styles = StyleSheet.create({
     textShadowColor: '#000000', // Shadow color (black)
     textShadowOffset: {width: 0, height: 2}, // Shadow offset (horizontal, vertical)
     textShadowRadius: 2, // How much the shadow should blur
+    marginLeft: 38,
   },
 });
