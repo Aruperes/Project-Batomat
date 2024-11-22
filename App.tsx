@@ -7,6 +7,7 @@ import {
   Intro2,
   Intro3,
   Diseases,
+  Layu,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -50,6 +51,11 @@ const App = () => {
         <Stack.Screen
           name="Diseases"
           component={Diseases}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Layu"
+          component={Layu}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

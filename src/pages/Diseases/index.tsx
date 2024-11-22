@@ -25,6 +25,7 @@ const diseases = [
     description:
       'Gejala layu fusarium pada awal serangan dapat ditandai dengan adanya tanaman...',
     icon: Images,
+    route: 'Layu',
   },
   {
     title: 'Bercak Daun',
