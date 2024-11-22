@@ -8,6 +8,7 @@ import {
   Intro3,
   Diseases,
   Layu,
+  BercakDaun,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -56,6 +57,11 @@ const App = () => {
         <Stack.Screen
           name="Layu"
           component={Layu}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="BercakDaun"
+          component={BercakDaun}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

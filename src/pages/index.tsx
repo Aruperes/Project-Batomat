@@ -6,4 +6,15 @@ import Intro2 from './Intro2';
 import Intro3 from './Intro3';
 import Diseases from './Diseases';
 import Layu from './Layu';
-export {SplashScreen, SignIn, SignUp, Intro1, Intro2, Intro3, Diseases, Layu};
+import BercakDaun from './BercakDaun';
+export {
+  SplashScreen,
+  SignIn,
+  SignUp,
+  Intro1,
+  Intro2,
+  Intro3,
+  Diseases,
+  Layu,
+  BercakDaun,
+};
