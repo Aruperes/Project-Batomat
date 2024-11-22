@@ -11,6 +11,7 @@ import {
   BercakDaun,
   LayuBakteri,
   Mosaik,
+  BuahBusuk,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -74,6 +75,11 @@ const App = () => {
         <Stack.Screen
           name="Mosaik"
           component={Mosaik}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="BuahBusuk"
+          component={BuahBusuk}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

@@ -9,6 +9,7 @@ import Layu from './Layu';
 import BercakDaun from './BercakDaun';
 import LayuBakteri from './LayuBakteri';
 import Mosaik from './Mosaik';
+import BuahBusuk from './BuahBusuk';
 export {
   SplashScreen,
   SignIn,
@@ -21,4 +22,5 @@ export {
   BercakDaun,
   LayuBakteri,
   Mosaik,
+  BuahBusuk
 };

@@ -53,6 +53,7 @@ const diseases = [
     description:
       'Ada dua macam cendawan penyebab busuk buah pada tomat. Yang pertama...',
     icon: Buah,
+    route: 'BuahBusuk',
   },
   {
     title: 'Busuk Daun',
