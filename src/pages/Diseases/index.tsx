@@ -120,26 +120,26 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
-    flexDirection: 'row', // Membuat layout horizontal
-    alignItems: 'center', // Vertikal tengah
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   diseaseIcon: {
     width: 50,
     height: 60,
-    marginRight: 16, // Memberikan jarak antara icon dan teks
+    marginRight: 16,
   },
   diseaseTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#4e4a41',
-    textAlign: 'left', // Tetap rata kiri
+    textAlign: 'left',
     top: 2,
   },
   diseaseDescription: {
     fontSize: 14,
     color: '#4e4a41',
-    textAlign: 'left', // Tetap rata kiri
-    marginTop: 4, // Memberikan sedikit jarak atas
+    textAlign: 'left',
+    marginTop: 4,
   },
   menuButtonWrapper: {
     position: 'absolute',
@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
 
   arrowButton: {
     position: 'absolute',
-    bottom: 1, // Adjusts the arrow's vertical position
-    right: 16, // Adjusts the arrow's horizontal position
+    bottom: 1,
+    right: 16,
     width: 24,
     height: 24,
   },
