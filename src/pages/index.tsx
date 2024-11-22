@@ -10,6 +10,7 @@ import Hama from './Hama';
 import KutuDaun from './KutuDaun';
 import UlatBuah from './UlatBuah';
 import KutuAphis from './KutuAphis';
+import CacingTanah from './CacingTanah';
 export {
   SplashScreen,
   SignIn,
@@ -23,4 +24,5 @@ export {
   KutuDaun,
   UlatBuah,
   KutuAphis,
+  CacingTanah,
 };

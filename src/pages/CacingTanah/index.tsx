@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 import {MenuButton} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
-import Aphis from '../../assets/images/KutuAphis.png';
+import Cacing from '../../assets/images/cacingtanah.png';
 import Like from '../../assets/icon/like.svg';
 import Share from '../../assets/icon/share.svg';
 import Star from '../../assets/icon/Star.svg'; // Import Star icon
 
-const KutuAphis = ({navigation}) => {
+const CacingTanah = ({navigation}) => {
   // State to track if the star is selected (filled or not)
   const [isStarSelected, setIsStarSelected] = useState(false);
   const [starCount, setStarCount] = useState(0); // Track the number of times the star is pressed
@@ -32,7 +32,7 @@ const KutuAphis = ({navigation}) => {
       {/* Header Section */}
       <View style={styles.headerWrapper}>
         {/* Full-size Kutu image */}
-        <Image source={Aphis} style={styles.headerImage} resizeMode="cover" />
+        <Image source={Cacing} style={styles.headerImage} resizeMode="cover" />
 
         {/* Back Button on top of the image */}
         <TouchableOpacity
@@ -46,7 +46,7 @@ const KutuAphis = ({navigation}) => {
       <ScrollView contentContainerStyle={styles.contentWrapper}>
         {/* Title and Star Section */}
         <View style={styles.titleWrapper}>
-          <Text style={styles.title}>Kutu Daun Aphis Hijau Pada Tomat</Text>
+          <Text style={styles.title}>Cacing Tanah</Text>
           <TouchableOpacity
             onPress={handleStarPress}
             style={styles.starWrapper}>
@@ -64,20 +64,20 @@ const KutuAphis = ({navigation}) => {
         </View>
 
         <Text style={styles.descriptiontitle}>
-          Aphis hijau, yang lebih sering disebut kutu daun hijau, adalah hama
-          kecil berwarna hijau yang menyerang tanaman dengan cara menghisap
-          cairan dari daun, batang, dan pucuk muda. Serangga ini dapat
-          menyebabkan daun menggulung, menguning, dan mengkerut.
+          Serangan hama ini pada tanaman tomat ditandai dengan terpotongnya
+          tanaman muda di dekat permukaan tanah.Hama ini aktif pada malam hari,
+          memotong batang tanaman saat mereka mencari makan, dan sering
+          mengakibatkan tanaman layu atau mati.
         </Text>
 
         <Text style={styles.subTitle}>Cara Pengobatan</Text>
         <Text style={styles.descriptionsub}>
-          1. Gunakan larutan sabun cair ringan untuk membasmi kutu daun tanpa
-          merusak tanaman. {'\n'}
-          2. Introduksi predator seperti kepik atau lacewing yang memakan kutu
-          daun secara alami. {'\n'}
-          3. Semprotkan minyak neem secara rutin untuk mengusir kutu daun dan
-          mengurangi infestasi.
+          1. Singkirkan gulma dan sisa-sisa tanaman di sekitar lahan untuk
+          mengurangi tempat persembunyian ulat tanah. {'\n'}
+          2. Gunakan umpan beracun di sekitar area tanaman untuk membasmi ulat
+          sebelum menyerang. {'\n'}
+          3. Taburkan insektisida berbahan aktif sesuai rekomendasi di sekitar
+          pangkal tanaman untuk melindungi batang dari serangan ulat.
         </Text>
 
         {/* Like and Share Section */}
@@ -99,7 +99,7 @@ const KutuAphis = ({navigation}) => {
   );
 };
 
-export default KutuAphis;
+export default CacingTanah;
 
 const styles = StyleSheet.create({
   container: {
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#292D32',
+    marginTop: 20,
   },
   starWrapper: {
     alignItems: 'center', // Center the star and count
@@ -149,14 +150,14 @@ const styles = StyleSheet.create({
   },
   starIcon: {
     marginBottom: 4, // Add margin to separate star from count
-    marginLeft: 50,
+    marginLeft: 180,
     marginTop: 20,
   },
   starCount: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#B79F00', // Yellow color for the number
-    marginLeft: 50,
+    marginLeft: 180,
   },
   subTitle: {
     fontSize: 20,
@@ -169,8 +170,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppin-medium',
     fontSize: 18,
     color: '#020202',
-    lineHeight: 25,
-    marginTop: -15,
+    lineHeight: 30,
+    marginTop: -10,
   },
 
   descriptionsub: {
