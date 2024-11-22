@@ -7,6 +7,7 @@ import Intro3 from './Intro3';
 import Diseases from './Diseases';
 import Layu from './Layu';
 import BercakDaun from './BercakDaun';
+import LayuBakteri from './LayuBakteri';
 export {
   SplashScreen,
   SignIn,
@@ -17,4 +18,5 @@ export {
   Diseases,
   Layu,
   BercakDaun,
+  LayuBakteri,
 };

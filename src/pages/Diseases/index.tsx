@@ -39,6 +39,7 @@ const diseases = [
     description:
       'Gejalanya terlihat jika pucuk tanaman layu atau daun tua menguning. Jika batang...',
     icon: Layu,
+    route: 'LayuBakteri',
   },
   {
     title: 'Mosaik',
