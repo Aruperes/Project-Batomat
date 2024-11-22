@@ -6,7 +6,7 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import {MenuButton, Header} from '../../components/molecules';
+import {Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import Down from '../../assets/icon/Arrow Down Contained 10.svg';
 import Images from '../../assets/icon/image.svg';
@@ -15,6 +15,9 @@ import Layu from '../../assets/icon/layubakteri.svg';
 import Mosaik from '../../assets/icon/mosaiktomat.svg';
 import Buah from '../../assets/icon/buahbusuk.svg';
 import Daun from '../../assets/icon/busukdaun.svg';
+import NoteNav from '../../assets/icon/Note.svg';
+import HomeNav from '../../assets/icon/Home.svg';
+import User from '../../assets/icon/UserProfile.svg';
 
 const diseases = [
   {
@@ -76,7 +79,10 @@ const Diseases = ({navigation}) => {
                 {disease.description}
               </Text>
             </View>
-            <TouchableOpacity style={styles.arrowButton}>
+            <TouchableOpacity
+              style={styles.arrowButton}
+              onPress={() => navigation.navigate(disease.route)} // Navigasi ke halaman detail
+            >
               <Down width={24} height={24} />
             </TouchableOpacity>
           </View>
@@ -84,7 +90,23 @@ const Diseases = ({navigation}) => {
       </ScrollView>
 
       <View style={styles.menuButtonWrapper}>
-        <MenuButton navigation={navigation} />
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => navigation.navigate('Notes')}>
+          <NoteNav width={35} height={35} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => navigation.navigate('Home')}>
+          <HomeNav width={35} height={35} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => navigation.navigate('Profile')}>
+          <User width={35} height={35} />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -148,6 +170,8 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: '#292D32',
     paddingVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
     borderTopWidth: 1,
     borderColor: '#ccc',
@@ -155,7 +179,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     height: 80,
   },
-
+  menuButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   arrowButton: {
     position: 'absolute',
     bottom: 1, // Adjusts the arrow's vertical position
