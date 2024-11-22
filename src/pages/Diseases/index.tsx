@@ -60,6 +60,7 @@ const diseases = [
     description:
       'Penyebab penyakit busuk daun adalah cendawan Phytophthora infestans. Gejala...',
     icon: Daun,
+    route: 'BusukDaun',
   },
 ];
 
