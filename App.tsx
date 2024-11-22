@@ -10,6 +10,7 @@ import {
   Note,
   Hama,
   KutuDaun,
+  UlatTomat,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -68,6 +69,12 @@ const App = () => {
         <Stack.Screen
           name="KutuDaun"
           component={KutuDaun}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="UlatTomat"
+          component={UlatTomat}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

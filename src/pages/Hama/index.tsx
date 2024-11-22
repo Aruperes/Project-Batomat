@@ -88,7 +88,7 @@ const Hama = ({navigation}) => {
             </View>
             <TouchableOpacity
               style={styles.arrowButton}
-              onPress={() => navigation.navigate(disease.route)} // Navigasi ke halaman detail
+              onPress={() => navigation.navigate('UlatTomat')} // Navigasi ke halaman detail
             >
               <Down width={24} height={24} />
             </TouchableOpacity>
