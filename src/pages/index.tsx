@@ -11,6 +11,7 @@ import Option from './Option';
 import EditNote from './EditNote';
 import AccountPage from './AccountPage';
 import FavoritePage from './FavoritePage';
+import InfoPage from './InfoPage';
 export {
   SplashScreen,
   SignIn,
@@ -25,4 +26,5 @@ export {
   EditNote,
   AccountPage,
   FavoritePage,
+  InfoPage,
 };

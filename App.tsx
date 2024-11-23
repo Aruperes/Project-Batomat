@@ -13,6 +13,7 @@ import {
   AccountPage,
   FavoritePage,
   Option,
+  InfoPage,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -88,6 +89,11 @@ const App = () => {
         <Stack.Screen
           name="Option"
           component={Option}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="InfoPage"
+          component={InfoPage}
           options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>
