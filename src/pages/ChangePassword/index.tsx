@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  Image,
-  TouchableOpacity,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import BackButton from '../../assets/icon/BackButton.svg';
-
+import {Eyeoff, Eyeon} from '../../assets/icon';
 const ChangePassword = ({navigation}) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordNewVisible, setPasswordNewVisible] = useState(false);
+  const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -21,26 +24,62 @@ const ChangePassword = ({navigation}) => {
         </TouchableOpacity>
         <Text style={styles.title}>Ubah kata sandi</Text>
       </View>
+
       <Text style={styles.infoText}>
         Kata sandi anda harus minimal 6 karakter dan harus kombinasi huruf dan
         angka
       </Text>
-      <TextInput
-        placeholder="Kata sandi saat ini"
-        style={styles.input}
-        secureTextEntry
-      />
-      <TextInput
-        placeholder="Kata sandi baru"
-        style={styles.input}
-        secureTextEntry
-      />
-      <TextInput
-        placeholder="Ketik ulang kata sandi baru"
-        style={styles.input}
-        secureTextEntry
-      />
-      <Text style={styles.forgotPasswordText}>Lupa kata sandi?</Text>
+
+      {/* Kata Sandi Saat Ini */}
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Kata sandi saat ini"
+          style={styles.input}
+          secureTextEntry={!passwordVisible}
+        />
+        <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
+          {passwordVisible ? (
+            <Eyeon width={20} height={20} />
+          ) : (
+            <Eyeoff width={20} height={20} />
+          )}
+        </TouchableOpacity>
+      </View>
+
+      {/* Kata Sandi Baru */}
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Kata sandi baru"
+          style={styles.input}
+          secureTextEntry={!passwordNewVisible}
+        />
+        <TouchableOpacity
+          onPress={() => setPasswordNewVisible(!passwordNewVisible)}>
+          {passwordNewVisible ? (
+            <Eyeon width={20} height={20} />
+          ) : (
+            <Eyeoff width={20} height={20} />
+          )}
+        </TouchableOpacity>
+      </View>
+
+      {/* Konfirmasi Kata Sandi Baru */}
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Ketik ulang kata sandi baru"
+          style={styles.input}
+          secureTextEntry={!passwordConfirmVisible}
+        />
+        <TouchableOpacity
+          onPress={() => setPasswordConfirmVisible(!passwordConfirmVisible)}>
+          {passwordConfirmVisible ? (
+            <Eyeon width={20} height={20} />
+          ) : (
+            <Eyeoff width={20} height={20} />
+          )}
+        </TouchableOpacity>
+      </View>
+
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>UBAH KATA SANDI</Text>
       </TouchableOpacity>
@@ -53,7 +92,7 @@ export default ChangePassword;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9F7E4', // Warna latar belakang
+    backgroundColor: '#F9F7E4',
     padding: 20,
   },
   header: {
@@ -85,17 +124,19 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginLeft: 10,
   },
-  input: {
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#CFCCB3',
     borderRadius: 10,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    fontSize: 14,
     marginTop: 35,
+  },
+  input: {
+    flex: 1,
+    fontSize: 14,
     color: '#333',
-    height: 55,
-    width: 340,
-    marginLeft: 15,
   },
   forgotPasswordText: {
     alignSelf: 'flex-end',
