@@ -40,12 +40,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#292D32',
     borderTopStartRadius: 10,
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 16,
   },
   button: {
     width: 44,
     height: 44,
-    marginBottom: 50,
   },
 });
