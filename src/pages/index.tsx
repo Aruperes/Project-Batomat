@@ -12,6 +12,7 @@ import EditNote from './EditNote';
 import AccountPage from './AccountPage';
 import FavoritePage from './FavoritePage';
 import InfoPage from './InfoPage';
+import ChangePassword from './ChangePassword';
 export {
   SplashScreen,
   SignIn,
@@ -27,4 +28,5 @@ export {
   AccountPage,
   FavoritePage,
   InfoPage,
+  ChangePassword,
 };

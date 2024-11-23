@@ -14,6 +14,7 @@ import {
   FavoritePage,
   Option,
   InfoPage,
+  ChangePassword,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -94,6 +95,11 @@ const App = () => {
         <Stack.Screen
           name="InfoPage"
           component={InfoPage}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="ChangePassword"
+          component={ChangePassword}
           options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>

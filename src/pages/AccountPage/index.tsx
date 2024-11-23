@@ -39,7 +39,7 @@ const AccountPage = ({navigation}) => {
           />
           <MenuItem
             icon={Setting}
-            text="Ganti password"
+            text="Ubah kata sandi"
             onPress={() => navigation.navigate('ChangePassword')}
           />
           <MenuItem
