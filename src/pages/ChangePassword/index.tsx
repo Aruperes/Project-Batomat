@@ -5,13 +5,33 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import BackButton from '../../assets/icon/BackButton.svg';
 import {Eyeoff, Eyeon} from '../../assets/icon';
+import {MenuButton} from '../../components/molecules';
+
 const ChangePassword = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordNewVisible, setPasswordNewVisible] = useState(false);
   const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
+
+  const handleChangePassword = () => {
+    Alert.alert('Konfirmasi', 'Apakah Anda yakin ingin mengubah kata sandi?', [
+      {
+        text: 'Batal',
+        onPress: () => console.log('Batal'),
+        style: 'cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => {
+          // Pindahkan ke halaman login atau lakukan proses lain yang sesuai
+          navigation.navigate('SignIn');
+        },
+      },
+    ]);
+  };
 
   return (
     <View style={styles.container}>
@@ -80,7 +100,7 @@ const ChangePassword = ({navigation}) => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
         <Text style={styles.buttonText}>UBAH KATA SANDI</Text>
       </TouchableOpacity>
     </View>

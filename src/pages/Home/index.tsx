@@ -17,16 +17,16 @@ const Home = ({navigation}) => {
 
   // Data gambar dan teks yang sesuai
   const images = [
-    {source: require('../../assets/images/image.png'), text: 'Tomat Segar'},
+    {source: require('../../assets/images/image.png'), text: 'Lalat Buah'},
     {
-      source: require('../../assets/images/image11.png'),
-      text: 'Perawatan Tomat',
+      source: require('../../assets/images/image1.png'),
+      text: 'Cacing Tanah',
     },
     {
       source: require('../../assets/images/image6.png'),
-      text: 'Penyakit pada Tomat',
+      text: 'Ulat buah',
     },
-    {source: require('../../assets/images/image4.png'), text: 'Hama Tomat'},
+    {source: require('../../assets/images/image4.png'), text: 'Kutu Daun'},
   ];
 
   return (
