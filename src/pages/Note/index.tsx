@@ -52,7 +52,7 @@ const Note = ({navigation}) => {
           />
         </View>
 
-        <AddNote />
+        <AddNote navigation={navigation} />
       </View>
 
       {error && (

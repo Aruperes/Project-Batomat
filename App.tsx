@@ -14,6 +14,7 @@ import {
   FavoritePage,
   Option,
   Diseases,
+  AddingNote,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -95,6 +96,11 @@ const App = () => {
           name="Diseases"
           component={Diseases}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddingNote"
+          component={AddingNote}
+          options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>
       <FlashMessage position="top" />

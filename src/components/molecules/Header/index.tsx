@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
     textShadowColor: '#000000', // Shadow color (black)
     textShadowOffset: {width: 0, height: 2}, // Shadow offset (horizontal, vertical)
     textShadowRadius: 2, // How much the shadow should blur
-    marginLeft: 38,
+    paddingLeft: 19,
   },
 });
