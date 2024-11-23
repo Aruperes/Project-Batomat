@@ -2,15 +2,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {DateNote, AddNote} from '../../components/atoms';
 import {LookNote, MenuButton} from '../../components/molecules';
-import {getFirestore, collection, onSnapshot} from 'firebase/firestore'; // Use Firestore modular SDK
+import {getFirestore, collection, onSnapshot} from 'firebase/firestore';
 import {firebase} from '../../config/Firebase';
 import {FlashList} from '@shopify/flash-list';
 
 const Note = ({navigation}) => {
   const [notes, setNotes] = useState([]);
-  const [error, setError] = useState(null); // State for error handling
+  const [error, setError] = useState(null);
 
-  // Fetch the note data from Firestore
   useEffect(() => {
     const db = getFirestore(firebase);
     const notesCollection = collection(db, 'notes');
@@ -20,18 +19,19 @@ const Note = ({navigation}) => {
       querySnapshot => {
         const newNotes = [];
         querySnapshot.forEach(doc => {
-          const {note, title} = doc.data();
+          const data = doc.data();
+          const {note, title} = data;
           newNotes.push({note, title, id: doc.id});
         });
         setNotes(newNotes);
       },
       error => {
-        setError(error.message); // Handle Firestore error
+        setError(error.message);
         console.error('Error fetching notes: ', error.message);
       },
     );
 
-    return () => unsubscribe(); // Cleanup the listener when component unmounts
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -39,26 +39,22 @@ const Note = ({navigation}) => {
       <Text style={styles.title}>Notes</Text>
       <View style={styles.container2}>
         <DateNote date="Previous 30 Days" />
-        <LookNote text="List Obat" navigation={navigation} />
 
-        {/* FlashList for optimized rendering */}
-        <FlashList
-          data={notes}
-          numColumns={2}
-          estimatedItemSize={100} // Set an appropriate estimated item size for optimization
-          keyExtractor={item => item.id} // Ensure each item has a unique key
-          renderItem={({item}) => (
-            <View style={styles.noteItem}>
-              <Text style={styles.noteTitle}>{item.title}</Text>
-              <Text style={styles.noteContent}>{item.note}</Text>
-            </View>
-          )}
-        />
+        {/* FlashList for notes */}
+        <View style={styles.listContainer}>
+          <FlashList
+            data={notes}
+            estimatedItemSize={100}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => (
+              <LookNote item={item} navigation={navigation} />
+            )}
+          />
+        </View>
 
         <AddNote />
       </View>
 
-      {/* Handle errors */}
       {error && (
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>{error}</Text>
@@ -71,8 +67,6 @@ const Note = ({navigation}) => {
     </View>
   );
 };
-
-export default Note;
 
 const styles = StyleSheet.create({
   title: {
@@ -98,6 +92,10 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: '#F9F7E4',
   },
+  listContainer: {
+    flex: 1,
+    marginVertical: 10,
+  },
   errorContainer: {
     padding: 10,
     backgroundColor: '#FFCDD2',
@@ -110,24 +108,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  noteItem: {
-    marginBottom: 20,
-    padding: 15,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-  },
-  noteTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#292D32',
-  },
-  noteContent: {
-    fontSize: 14,
-    color: '#6c757d',
-    marginTop: 5,
-  },
 });
+
+export default Note;
