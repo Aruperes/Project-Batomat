@@ -1,9 +1,31 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
 import {MenuButton} from '../../components/molecules';
 import {FavoritePage, Info, Share, Setting, Logout} from '../../assets/icon';
 
 const AccountPage = ({navigation}) => {
+  // Fungsi untuk menampilkan konfirmasi keluar
+  const handleLogout = () => {
+    Alert.alert('Konfirmasi', 'Apakah Anda yakin ingin keluar?', [
+      {
+        text: 'Tidak',
+        onPress: () => console.log('Batal'),
+        style: 'cancel',
+      },
+      {
+        text: 'Ya',
+        onPress: () => navigation.navigate('SignIn'),
+      },
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       {/* Header Profil */}
@@ -42,11 +64,7 @@ const AccountPage = ({navigation}) => {
             text="Ubah kata sandi"
             onPress={() => navigation.navigate('ChangePassword')}
           />
-          <MenuItem
-            icon={Logout}
-            text="Keluar"
-            onPress={() => navigation.navigate('SignIn')}
-          />
+          <MenuItem icon={Logout} text="Keluar" onPress={handleLogout} />
         </TouchableOpacity>
       </View>
 

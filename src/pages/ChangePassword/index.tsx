@@ -26,7 +26,6 @@ const ChangePassword = ({navigation}) => {
       {
         text: 'OK',
         onPress: () => {
-          // Pindahkan ke halaman login atau lakukan proses lain yang sesuai
           navigation.navigate('SignIn');
         },
       },
