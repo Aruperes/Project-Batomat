@@ -1,15 +1,16 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {DateNote, AddNote} from '../../components/atoms';
 import {LookNote, MenuButton} from '../../components/molecules';
 import {getFirestore, collection, onSnapshot} from 'firebase/firestore'; // Use Firestore modular SDK
 import {firebase} from '../../config/Firebase';
+import {FlashList} from '@shopify/flash-list';
 
 const Note = ({navigation}) => {
   const [notes, setNotes] = useState([]);
   const [error, setError] = useState(null); // State for error handling
 
-  // Fetch the note data
+  // Fetch the note data from Firestore
   useEffect(() => {
     const db = getFirestore(firebase);
     const notesCollection = collection(db, 'notes');
@@ -34,29 +35,40 @@ const Note = ({navigation}) => {
   }, []);
 
   return (
-    <>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.container}>
-          <Text style={styles.title}>Notes</Text>
-        </View>
-        <View style={styles.container2}>
-          <DateNote date="Previous 30 Days" />
-          <LookNote text="List Obat" navigation={navigation} />
-          <AddNote />
-        </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>Notes</Text>
+      <View style={styles.container2}>
+        <DateNote date="Previous 30 Days" />
+        <LookNote text="List Obat" navigation={navigation} />
 
-        {/* Handle errors */}
-        {error && (
-          <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{error}</Text>
-          </View>
-        )}
+        {/* FlashList for optimized rendering */}
+        <FlashList
+          data={notes}
+          numColumns={2}
+          estimatedItemSize={100} // Set an appropriate estimated item size for optimization
+          keyExtractor={item => item.id} // Ensure each item has a unique key
+          renderItem={({item}) => (
+            <View style={styles.noteItem}>
+              <Text style={styles.noteTitle}>{item.title}</Text>
+              <Text style={styles.noteContent}>{item.note}</Text>
+            </View>
+          )}
+        />
 
-        <View style={styles.container3}>
-          <MenuButton navigation={navigation} />
+        <AddNote />
+      </View>
+
+      {/* Handle errors */}
+      {error && (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error}</Text>
         </View>
-      </ScrollView>
-    </>
+      )}
+
+      <View style={styles.container3}>
+        <MenuButton navigation={navigation} />
+      </View>
+    </View>
   );
 };
 
@@ -74,14 +86,13 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
   },
   container: {
-    flex: 2,
+    flex: 1,
     backgroundColor: '#F9F7E4',
   },
   container2: {
     flex: 10,
     backgroundColor: '#F9F7E4',
-    marginLeft: 22,
-    marginRight: 22,
+    marginHorizontal: 22,
   },
   container3: {
     flex: 2,
@@ -99,7 +110,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  scrollContent: {
-    paddingBottom: 100, // Ensure the content doesn't get hidden under the MenuButton
+  noteItem: {
+    marginBottom: 20,
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+  },
+  noteTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#292D32',
+  },
+  noteContent: {
+    fontSize: 14,
+    color: '#6c757d',
+    marginTop: 5,
   },
 });
