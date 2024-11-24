@@ -6,7 +6,7 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import {MenuButton, Header} from '../../components/molecules';
+import {Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import Down from '../../assets/icon/Arrow Down Contained 10.svg';
 import Images from '../../assets/icon/image.svg';
@@ -15,6 +15,9 @@ import Layu from '../../assets/icon/layubakteri.svg';
 import Mosaik from '../../assets/icon/mosaiktomat.svg';
 import Buah from '../../assets/icon/buahbusuk.svg';
 import Daun from '../../assets/icon/busukdaun.svg';
+import NoteNav from '../../assets/icon/Note.svg';
+import HomeNav from '../../assets/icon/Home.svg';
+import User from '../../assets/icon/UserProfile.svg';
 
 const diseases = [
   {
@@ -22,36 +25,42 @@ const diseases = [
     description:
       'Gejala layu fusarium pada awal serangan dapat ditandai dengan adanya tanaman...',
     icon: Images,
+    route: 'Layu',
   },
   {
     title: 'Bercak Daun',
     description:
       'Bercak Daun disebabkan oleh cendawan Cercospora capsici, pada daun yang ter...',
     icon: Bercak,
+    route: 'BercakDaun',
   },
   {
     title: 'Layu Bakteri',
     description:
       'Gejalanya terlihat jika pucuk tanaman layu atau daun tua menguning. Jika batang...',
     icon: Layu,
+    route: 'LayuBakteri',
   },
   {
     title: 'Mosaik',
     description:
       'Penyakit mosaik ditandai dengan adanya warna seperti mosaik pada daun dan...',
     icon: Mosaik,
+    route: 'Mosaik',
   },
   {
     title: 'Buah Busuk',
     description:
       'Ada dua macam cendawan penyebab busuk buah pada tomat. Yang pertama...',
     icon: Buah,
+    route: 'BuahBusuk',
   },
   {
     title: 'Busuk Daun',
     description:
       'Penyebab penyakit busuk daun adalah cendawan Phytophthora infestans. Gejala...',
     icon: Daun,
+    route: 'BusukDaun',
   },
 ];
 
@@ -76,7 +85,10 @@ const Diseases = ({navigation}) => {
                 {disease.description}
               </Text>
             </View>
-            <TouchableOpacity style={styles.arrowButton}>
+            <TouchableOpacity
+              style={styles.arrowButton}
+              onPress={() => navigation.navigate(disease.route)} // Navigasi ke halaman detail
+            >
               <Down width={24} height={24} />
             </TouchableOpacity>
           </View>
@@ -84,7 +96,23 @@ const Diseases = ({navigation}) => {
       </ScrollView>
 
       <View style={styles.menuButtonWrapper}>
-        <MenuButton navigation={navigation} />
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => navigation.navigate('Notes')}>
+          <NoteNav width={35} height={35} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => navigation.navigate('Home')}>
+          <HomeNav width={35} height={35} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => navigation.navigate('Profile')}>
+          <User width={35} height={35} />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -148,6 +176,8 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: '#292D32',
     paddingVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
     borderTopWidth: 1,
     borderColor: '#ccc',
@@ -155,7 +185,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     height: 95,
   },
-
+  menuButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   arrowButton: {
     position: 'absolute',
     bottom: 1,
