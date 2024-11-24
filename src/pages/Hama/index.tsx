@@ -6,65 +6,70 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import {Header, MenuButton} from '../../components/molecules';
+import {MenuButton, Header} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
-import Down from '../../assets/icon/Arrow Down Contained 10.svg';
-import Images from '../../assets/icon/image.svg';
-import Bercak from '../../assets/icon/bercakdaun.svg';
-import Layu from '../../assets/icon/layubakteri.svg';
-import Mosaik from '../../assets/icon/mosaiktomat.svg';
-import Buah from '../../assets/icon/buahbusuk.svg';
-import Daun from '../../assets/icon/busukdaun.svg';
+import Kutu from '../../assets/icon/kutudaun.svg';
+import Ulat from '../../assets/icon/ulatbuah.svg';
+import Aphis from '../../assets/icon/kutuaphis.svg';
+import Cacing from '../../assets/icon/cacingtanah.svg';
+import Lalat from '../../assets/icon/lalatbuah.svg';
+import Kebul from '../../assets/icon/kutukebul.svg';
+import Down from '../../assets/icon/arrowdown.svg';
 
-const diseases = [
+const hama = [
   {
-    title: 'Layu Fusarium',
+    title: 'Kutu Daun Thrips Tomat',
     description:
-      'Gejala layu fusarium pada awal serangan dapat ditandai dengan adanya tanaman...',
-    icon: Images,
-    route: 'Layu',
+      'Ciri-ciri kutu daun thrips adalah panjangnya 1 mm dan berwarna hitam...',
+    icon: Kutu,
+    route: 'KutuDaun',
   },
+
   {
-    title: 'Bercak Daun',
+    title: 'Ulat Buah Tomat',
     description:
-      'Bercak Daun disebabkan oleh cendawan Cercospora capsici, pada daun yang ter...',
-    icon: Bercak,
-    route: 'BercakDaun',
+      'Umumnya ulat buah tomat ini menyerang daun, bunga dan buah tanaman tomat...',
+    icon: Ulat,
+    route: 'UlatBuah',
   },
+
   {
-    title: 'Layu Bakteri',
-    description:
-      'Gejalanya terlihat jika pucuk tanaman layu atau daun tua menguning. Jika batang...',
-    icon: Layu,
-    route: 'LayuBakteri',
+    title: 'Kutu Daun Aphis Hijau Pada Tomat',
+    description: 'Aphis hijau lebih sering di sebut kutu daun hijau...',
+    icon: Aphis,
+    route: 'KutuAphis',
   },
+
   {
-    title: 'Mosaik',
+    title: 'Cacing Tanah',
     description:
-      'Penyakit mosaik ditandai dengan adanya warna seperti mosaik pada daun dan...',
-    icon: Mosaik,
-    route: 'Mosaik',
+      'Serangan hama ini pada tanaman tomat di tandai dengan terpotongnya tanaman...',
+    icon: Cacing,
+    route: 'CacingTanah',
   },
+
   {
-    title: 'Buah Busuk',
+    title: 'Lalat Buah',
     description:
-      'Ada dua macam cendawan penyebab busuk buah pada tomat. Yang pertama...',
-    icon: Buah,
-    route: 'BuahBusuk',
+      'Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan...',
+    icon: Lalat,
+    route: 'LalatBuah',
   },
+
   {
-    title: 'Busuk Daun',
+    title: 'Kutu Kebul',
     description:
-      'Penyebab penyakit busuk daun adalah cendawan Phytophthora infestans. Gejala...',
-    icon: Daun,
-    route: 'BusukDaun',
+      'Hama kutu daun bersayap putih ini merupakan salah satu hama paling berbahaya...',
+    icon: Kebul,
+    route: 'KutuKebul',
   },
 ];
 
-const Diseases = ({navigation}) => {
+const Hama = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Header text="Penyakit" />
+      <Header text="Hama" />
+
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}>
@@ -72,7 +77,7 @@ const Diseases = ({navigation}) => {
       </TouchableOpacity>
 
       <ScrollView style={styles.contentWrapper}>
-        {diseases.map((disease, index) => (
+        {hama.map((disease, index) => (
           <View key={index} style={styles.diseaseCard}>
             {disease.icon && <disease.icon style={styles.diseaseIcon} />}
             <View style={{flex: 1}}>
@@ -83,22 +88,21 @@ const Diseases = ({navigation}) => {
             </View>
             <TouchableOpacity
               style={styles.arrowButton}
-              onPress={() => navigation.navigate(disease.route)} // Navigasi ke halaman detail
-            >
+              onPress={() => navigation.navigate(disease.route)}>
               <Down width={24} height={24} />
             </TouchableOpacity>
           </View>
         ))}
       </ScrollView>
 
-      <View style={styles.container3}>
+      <View style={styles.menuButtonWrapper}>
         <MenuButton navigation={navigation} />
       </View>
     </View>
   );
 };
 
-export default Diseases;
+export default Hama;
 
 const styles = StyleSheet.create({
   container: {
@@ -130,9 +134,11 @@ const styles = StyleSheet.create({
     elevation: 3,
     flexDirection: 'row',
     alignItems: 'center',
+    position: 'relative',
   },
+
   diseaseIcon: {
-    width: 50,
+    width: 60,
     height: 60,
     marginRight: 16,
   },
@@ -149,7 +155,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginTop: 4,
   },
-  container3: {
+  menuButtonWrapper: {
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -163,15 +169,12 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     height: 95,
   },
-  menuButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   arrowButton: {
     position: 'absolute',
     bottom: 1,
     right: 16,
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
   },
 });
