@@ -2,35 +2,51 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {TextInput, Loading} from '../../components/molecules';
 import {Button, Gap} from '../../components/atoms';
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 
 const SignUp = ({navigation}) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const createUser = () => {
     const auth = getAuth();
+    setIsLoading(true);
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
-
         const user = userCredential.user;
-        console.log(user);
 
-        showMessage({
-          message: 'Account created successfully!',
-          type: 'success',
-        });
-        navigation.navigate('SignIn');
+        updateProfile(user, {displayName: fullName})
+          .then(() => {
+            setIsLoading(false);
+
+            showMessage({
+              message: 'Account created successfully!',
+              type: 'success',
+            });
+            navigation.navigate('SignIn');
+          })
+          .catch(error => {
+            setIsLoading(false);
+            showMessage({
+              message: `Failed to update profile: ${error.message}`,
+              type: 'danger',
+            });
+          });
       })
       .catch(error => {
+        setIsLoading(false);
         showMessage({
           message: error.message,
           type: 'danger',
         });
-        // ..
       });
   };
 
@@ -66,6 +82,7 @@ const SignUp = ({navigation}) => {
           onPress={createUser}
         />
       </View>
+      {isLoading && <Loading />}
     </View>
   );
 };
