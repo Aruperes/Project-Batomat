@@ -46,10 +46,6 @@ const LookNote = ({item, navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
   contentWrapper: {
     backgroundColor: '#D9D9D9',
     height: 90,

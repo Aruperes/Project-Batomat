@@ -34,27 +34,31 @@ const Note = ({navigation}) => {
     return () => unsubscribe();
   }, []);
 
+  // Create combined data array with notes and AddNote component
+  const renderData = [...notes, {id: 'add-note', isAddNote: true}];
+
   return (
-    <>
+    <View style={styles.mainContainer}>
       <View style={styles.container}>
         <Text style={styles.title}>Notes</Text>
       </View>
       <View style={styles.container2}>
         <DateNote date="Previous 30 Days" />
 
-        {/* FlashList for notes */}
+        {/* FlashList with combined data */}
         <View style={styles.listContainer}>
           <FlashList
-            data={notes}
+            data={renderData}
             estimatedItemSize={100}
             keyExtractor={item => item.id}
-            renderItem={({item}) => (
-              <LookNote item={item} navigation={navigation} />
-            )}
+            renderItem={({item}) => {
+              if (item.isAddNote) {
+                return <AddNote navigation={navigation} />;
+              }
+              return <LookNote item={item} navigation={navigation} />;
+            }}
           />
         </View>
-
-        <AddNote navigation={navigation} />
 
         {error && (
           <View style={styles.errorContainer}>
@@ -65,11 +69,15 @@ const Note = ({navigation}) => {
       <View style={styles.container3}>
         <MenuButton navigation={navigation} />
       </View>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#F9F7E4',
+  },
   title: {
     paddingLeft: 32,
     paddingTop: 29,
