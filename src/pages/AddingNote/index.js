@@ -12,7 +12,7 @@ import {
 import React, {useState} from 'react';
 import {Gap} from '../../components/atoms';
 import {MenuButton, Header} from '../../components/molecules';
-import {Heart} from '../../assets/icon';
+import {Heart, HeartFilled} from '../../assets/icon';
 import {
   getFirestore,
   collection,
@@ -27,6 +27,11 @@ const AddingNote = ({navigation}) => {
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteToggle = () => {
+    setIsFavorite(!isFavorite);
+  };
 
   const handleCreateNote = async () => {
     if (isLoading) {
@@ -88,12 +93,14 @@ const AddingNote = ({navigation}) => {
         userId: currentUser.uid,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
-        isFavorite: false,
-        favoriteTimestamp: null,
+        isFavorite: isFavorite,
+        favoriteTimestamp: isFavorite ? serverTimestamp() : null,
       });
 
       showMessage({
-        message: 'Note created successfully',
+        message: `Note created successfully${
+          isFavorite ? ' and added to favorites' : ''
+        }`,
         type: 'success',
       });
 
@@ -143,8 +150,14 @@ const AddingNote = ({navigation}) => {
             multiline
             placeholderTextColor="#666"
           />
-          <TouchableOpacity style={styles.photo}>
-            <Image source={Heart} />
+          <TouchableOpacity
+            style={styles.photo}
+            onPress={handleFavoriteToggle}
+            activeOpacity={0.7}>
+            <Image
+              source={isFavorite ? HeartFilled : Heart}
+              style={styles.heartIcon}
+            />
           </TouchableOpacity>
         </View>
       </View>

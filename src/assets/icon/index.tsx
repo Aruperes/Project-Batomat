@@ -30,6 +30,7 @@ import Eyeon from './eyeon.svg';
 import Eyeoff from './eyeoff.svg';
 import Trash2 from './Trash2.png';
 import NotFavorite from './NotFavorite.png';
+import HeartFilled from './HeartFilled.png';
 
 export {
   Logo,
@@ -64,4 +65,5 @@ export {
   Eyeoff,
   Trash2,
   NotFavorite,
+  HeartFilled,
 };
