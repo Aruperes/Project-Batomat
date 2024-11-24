@@ -15,6 +15,7 @@ import {
   Option,
   InfoPage,
   ChangePassword,
+  Diseases,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -101,6 +102,10 @@ const App = () => {
           name="ChangePassword"
           component={ChangePassword}
           options={{headerShown: false, animation: 'none'}}
+          
+          name="Diseases"
+          component={Diseases}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
       <FlashMessage position="top" />

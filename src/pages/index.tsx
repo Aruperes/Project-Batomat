@@ -13,6 +13,7 @@ import AccountPage from './AccountPage';
 import FavoritePage from './FavoritePage';
 import InfoPage from './InfoPage';
 import ChangePassword from './ChangePassword';
+import Diseases from './Diseases';
 export {
   SplashScreen,
   SignIn,
@@ -29,4 +30,5 @@ export {
   FavoritePage,
   InfoPage,
   ChangePassword,
+  Diseases,
 };
