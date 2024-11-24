@@ -9,6 +9,13 @@ import {
   WelcomePage,
   Home,
   Note,
+  Hama,
+  KutuDaun,
+  UlatBuah,
+  KutuAphis,
+  CacingTanah,
+  LalatBuah,
+  KutuKebul,
   EditNote,
   AccountPage,
   FavoritePage,
@@ -115,6 +122,38 @@ const App = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name="Hama"
+          component={Hama}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="KutuDaun"
+          component={KutuDaun}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="UlatBuah"
+          component={UlatBuah}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="KutuAphis"
+          component={KutuAphis}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="CacingTanah"
+          component={CacingTanah}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="LalatBuah"
+          component={LalatBuah}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="KutuKebul"
+          component={KutuKebul}
           name="Layu"
           component={Layu}
           options={{headerShown: false}}

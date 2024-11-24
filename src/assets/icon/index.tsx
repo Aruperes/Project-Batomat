@@ -15,6 +15,8 @@ import LogoT from './LogoT.svg';
 import Account from './Account.png';
 import Home from './Home.png';
 import Note from './Note.png';
+import Trash from './Trash.png';
+import Favorite from './Favorite.png';
 import Src from './search.svg';
 import Trash from './Trash.png';
 import Favorite from './Favorite.png';
@@ -47,6 +49,8 @@ export {
   Account,
   Home,
   Note,
+  Trash,
+  Favorite,
   Src,
   Trash,
   Favorite,
