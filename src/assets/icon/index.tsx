@@ -12,7 +12,22 @@ import Titik2 from './titik2.svg';
 import Pt from './pt.svg';
 import Titik3 from './titik3.svg';
 import LogoT from './LogoT.svg';
-import Image from './image.svg';
+import Account from './Account.png';
+import Home from './Home.png';
+import Note from './Note.png';
+import Src from './search.svg';
+import Trash from './Trash.png';
+import Favorite from './Favorite.png';
+import BackButton from './BackButton.svg';
+import Heart from './Heart.png';
+import FavoritePage from './FavoritePage.png';
+import UserProfile from './UserProfile.png';
+import Info from './Info.png';
+import Share from './Share.png';
+import Setting from './Setting.png';
+import Logout from './Logout.png';
+import Eyeon from './eyeon.svg';
+import Eyeoff from './eyeoff.svg';
 
 export {
   Logo,
@@ -29,5 +44,20 @@ export {
   Pt,
   Titik3,
   LogoT,
-  Image,
+  Account,
+  Home,
+  Note,
+  Src,
+  Trash,
+  Favorite,
+  BackButton,
+  Heart,
+  FavoritePage,
+  UserProfile,
+  Info,
+  Share,
+  Setting,
+  Logout,
+  Eyeon,
+  Eyeoff,
 };
