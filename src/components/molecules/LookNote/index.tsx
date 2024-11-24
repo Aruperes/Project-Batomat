@@ -1,15 +1,98 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+// In LookNote.js component
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
+import React, {useState, useEffect} from 'react';
 import {Gap, GapRow} from '../../atoms';
-import {Trash, Favorite} from '../../../assets/icon';
+import {Trash, Favorite, NotFavorite} from '../../../assets/icon';
+import {doc, deleteDoc, getFirestore, updateDoc} from 'firebase/firestore';
+import {firebase} from '../../../config/Firebase';
+import {showMessage} from 'react-native-flash-message';
 
-const LookNote = ({item, onPress}) => {
-  // Changed to accept onPress instead of navigation
+const LookNote = ({item, onPress, navigation}) => {
+  const [isFavorited, setIsFavorited] = useState(item?.isFavorite || false);
+
+  // Update local state when item prop changes
+  useEffect(() => {
+    setIsFavorited(item?.isFavorite || false);
+  }, [item?.isFavorite]);
+
+  const handleFavorite = async () => {
+    try {
+      const db = getFirestore(firebase);
+      const noteRef = doc(db, 'notes', item.id);
+
+      // Update local state immediately for responsive UI
+      setIsFavorited(!isFavorited);
+
+      // Update Firestore
+      await updateDoc(noteRef, {
+        isFavorite: !isFavorited,
+        favoriteTimestamp: !isFavorited ? new Date() : null,
+        updatedAt: new Date(), // Update the timestamp to trigger re-sort
+      });
+
+      showMessage({
+        message: !isFavorited ? 'Added to favorites' : 'Removed from favorites',
+        type: 'success',
+      });
+    } catch (error) {
+      // Revert local state if the update fails
+      setIsFavorited(isFavorited);
+      showMessage({
+        message: 'Failed to update favorite status',
+        type: 'danger',
+      });
+      console.error('Error updating favorite status:', error);
+    }
+  };
   if (!item || !item.title || !item.note) {
     return null;
   }
 
-  // Function to truncate text
+  const handleDelete = async () => {
+    Alert.alert(
+      'Delete Note',
+      'Are you sure you want to delete this note?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              const db = getFirestore(firebase);
+              const noteRef = doc(db, 'notes', item.id);
+              await deleteDoc(noteRef);
+
+              showMessage({
+                message: 'Note deleted successfully',
+                type: 'success',
+              });
+
+              navigation.navigate('Note');
+            } catch (error) {
+              showMessage({
+                message: 'Failed to delete note. Please try again.',
+                type: 'danger',
+              });
+              console.error('Error deleting note:', error);
+            }
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+
   const truncateText = (text, maxLength) => {
     if (text.length <= maxLength) {
       return text;
@@ -23,7 +106,6 @@ const LookNote = ({item, onPress}) => {
         style={styles.contentWrapper}
         activeOpacity={0.5}
         onPress={onPress}>
-        {/* Use the onPress prop here */}
         <View style={styles.textContainer}>
           <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
             {truncateText(item.title, 20)}
@@ -33,21 +115,14 @@ const LookNote = ({item, onPress}) => {
           </Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              // Add favorite functionality here
-              console.log('Favorite pressed for:', item.id);
-            }}>
-            <Image source={Favorite} style={styles.photo2} />
+          <TouchableOpacity style={styles.button} onPress={handleFavorite}>
+            <Image
+              source={isFavorited ? Favorite : NotFavorite}
+              style={styles.photo2}
+            />
           </TouchableOpacity>
           <GapRow width={8} />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              // Add delete functionality here
-              console.log('Delete pressed for:', item.id);
-            }}>
+          <TouchableOpacity style={styles.button} onPress={handleDelete}>
             <Image source={Trash} style={styles.photo} />
           </TouchableOpacity>
         </View>

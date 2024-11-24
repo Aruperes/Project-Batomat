@@ -29,6 +29,7 @@ import Logout from './Logout.png';
 import Eyeon from './eyeon.svg';
 import Eyeoff from './eyeoff.svg';
 import Trash2 from './Trash2.png';
+import NotFavorite from './NotFavorite.png';
 
 export {
   Logo,
@@ -62,4 +63,5 @@ export {
   Eyeon,
   Eyeoff,
   Trash2,
+  NotFavorite,
 };

@@ -163,7 +163,7 @@ const EditNote = ({navigation, route}) => {
               onPress={handleDelete}>
               <Image source={Trash2} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.actionButton} activeOpacity={0.5}>
+            <TouchableOpacity style={styles.actionButton2} activeOpacity={0.5}>
               <Image source={Heart} />
             </TouchableOpacity>
           </View>
@@ -186,11 +186,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    height: 60,
   },
   doneButton: {
-    padding: 10,
+    padding: 20,
   },
   doneButtonText: {
     fontFamily: 'Poppins-Regular',
@@ -209,7 +207,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.25)',
     borderRadius: 20,
     flex: 1,
-    padding: 20,
+    paddingLeft: 20,
   },
   inputContainer: {
     flex: 1,
@@ -218,13 +216,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Medium',
     fontSize: 24,
     color: '#2F2A36',
-    marginBottom: 20,
   },
   noteInput: {
     fontFamily: 'Poppins-Regular',
     fontSize: 20,
     color: '#000000',
     flex: 1,
+    position: 'absolute',
+    marginTop: 50,
   },
   actionButtons: {
     flexDirection: 'row',
@@ -233,7 +232,10 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   actionButton: {
-    padding: 10,
+    paddingTop: 9,
+  },
+  actionButton2: {
+    paddingTop: 12,
   },
   errorText: {
     color: '#D32F2F',

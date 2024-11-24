@@ -22,6 +22,70 @@ const Note = ({navigation}) => {
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
+  // Helper function to format date
+  const formatDate = timestamp => {
+    if (!timestamp) {
+      return '';
+    }
+    const date = new Date(timestamp.seconds * 1000);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    // Check if date is today
+    if (date.toDateString() === today.toDateString()) {
+      return 'Today';
+    }
+    // Check if date is yesterday
+    if (date.toDateString() === yesterday.toDateString()) {
+      return 'Yesterday';
+    }
+    // Check if date is within last 30 days
+    const thirtyDaysAgo = new Date(today);
+    thirtyDaysAgo.setDate(today.getDate() - 30);
+    if (date >= thirtyDaysAgo) {
+      return new Intl.DateTimeFormat('en-US', {
+        month: 'long',
+        day: 'numeric',
+      }).format(date);
+    }
+    // For older dates
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'long',
+    }).format(date);
+  };
+
+  // Helper function to group notes by date
+  // Modified groupNotesByDate to handle favorites
+  const groupNotesByDate = notes => {
+    // First, sort notes by favorite status and then by date
+    const sortedNotes = [...notes].sort((a, b) => {
+      // First sort by favorite status
+      if (a.isFavorite && !b.isFavorite) {
+        return -1;
+      }
+      if (!a.isFavorite && b.isFavorite) {
+        return 1;
+      }
+
+      // If both have same favorite status, sort by date
+      const dateA = a.updatedAt?.seconds || 0;
+      const dateB = b.updatedAt?.seconds || 0;
+      return dateB - dateA;
+    });
+
+    const groups = {};
+    sortedNotes.forEach(note => {
+      const dateKey = formatDate(note.updatedAt);
+      if (!groups[dateKey]) {
+        groups[dateKey] = [];
+      }
+      groups[dateKey].push(note);
+    });
+    return groups;
+  };
+
   useEffect(() => {
     if (!currentUser) {
       navigation.navigate('SignIn');
@@ -32,6 +96,7 @@ const Note = ({navigation}) => {
     const db = getFirestore(firebase);
     const notesCollection = collection(db, 'notes');
 
+    // Modified query to include isFavorite field
     const userNotesQuery = query(
       notesCollection,
       where('userId', '==', currentUser.uid),
@@ -44,8 +109,23 @@ const Note = ({navigation}) => {
         const newNotes = [];
         querySnapshot.forEach(doc => {
           const data = doc.data();
-          const {note, title, userId, updatedAt} = data;
-          newNotes.push({note, title, id: doc.id, userId, updatedAt});
+          const {
+            note,
+            title,
+            userId,
+            updatedAt,
+            isFavorite,
+            favoriteTimestamp,
+          } = data;
+          newNotes.push({
+            note,
+            title,
+            id: doc.id,
+            userId,
+            updatedAt,
+            isFavorite: isFavorite || false,
+            favoriteTimestamp,
+          });
         });
         setNotes(newNotes);
         setIsLoading(false);
@@ -70,12 +150,41 @@ const Note = ({navigation}) => {
             type: 'danger',
           });
         }
-        console.error('Error fetching notes: ', error.message);
       },
     );
 
     return () => unsubscribe();
   }, [currentUser]);
+
+  // Transform notes into a flat list with date headers
+  const prepareRenderData = () => {
+    const groupedNotes = groupNotesByDate(notes);
+    const renderData = [];
+
+    Object.entries(groupedNotes).forEach(([date, dateNotes]) => {
+      // Add date header
+      renderData.push({
+        id: `date-${date}`,
+        isDateHeader: true,
+        date,
+      });
+      // Add notes for this date
+      dateNotes.forEach(note => {
+        renderData.push({
+          ...note,
+          isNote: true,
+        });
+      });
+    });
+
+    // Add the "Add Note" item at the end
+    renderData.push({
+      isAddNote: true,
+      id: 'add-note',
+    });
+
+    return renderData;
+  };
 
   const handleAddNote = () => {
     if (!currentUser) {
@@ -104,8 +213,6 @@ const Note = ({navigation}) => {
     });
   };
 
-  const renderData = [...notes, {isAddNote: true, id: 'add-note'}];
-
   if (isLoading) {
     return (
       <View style={[styles.mainContainer, styles.centerContent]}>
@@ -121,8 +228,6 @@ const Note = ({navigation}) => {
         <Text style={styles.title}>Notes</Text>
       </View>
       <View style={styles.container2}>
-        <DateNote date="Previous 30 Days" />
-
         <View style={styles.listContainer}>
           {error && error.includes('requires an index') ? (
             <View style={styles.indexingContainer}>
@@ -136,20 +241,26 @@ const Note = ({navigation}) => {
             </View>
           ) : (
             <FlashList
-              data={renderData}
+              data={prepareRenderData()}
               estimatedItemSize={100}
               keyExtractor={item => item.id}
               renderItem={({item}) => {
+                if (item.isDateHeader) {
+                  return <DateNote date={item.date} />;
+                }
                 if (item.isAddNote) {
                   return <AddNote onPress={handleAddNote} />;
                 }
-                return (
-                  <LookNote
-                    item={item}
-                    onPress={() => handleNotePress(item)}
-                    navigation={navigation}
-                  />
-                );
+                if (item.isNote) {
+                  return (
+                    <LookNote
+                      item={item}
+                      onPress={() => handleNotePress(item)}
+                      navigation={navigation}
+                    />
+                  );
+                }
+                return null;
               }}
             />
           )}
