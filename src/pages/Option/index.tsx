@@ -1,8 +1,32 @@
 import {StyleSheet, View, Image} from 'react-native';
 import React from 'react';
 import ButtonOp from '../../components/atoms/ButtonOp';
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const Option = ({navigation}) => {
+  React.useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+    });
+  }, []);
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const {idToken} = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+      const userCredential = await auth().signInWithCredential(
+        googleCredential,
+      );
+
+      console.log('User Info:', userCredential.user);
+      navigation.navigate('Home', {uid: userCredential.user.uid});
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -22,7 +46,7 @@ const Option = ({navigation}) => {
           color="#FFFFFF"
           textColor="#2F2A36"
           icon={require('../../assets/images/gmail.png')}
-          onPress={() => navigation.navigate('SignIn')}
+          onPress={handleGoogleSignIn}
         />
         <ButtonOp
           text="Masuk dengan Email"
