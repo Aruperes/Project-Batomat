@@ -55,7 +55,6 @@ const Note = ({navigation}) => {
         setError(error.message);
         setIsLoading(false);
 
-        // Check if the error is related to missing index
         if (error.message.includes('requires an index')) {
           showMessage({
             message: 'Database index is being built',
@@ -105,10 +104,7 @@ const Note = ({navigation}) => {
     });
   };
 
-  const renderData = [
-    ...notes,
-    {isAddNote: true, id: 'add-note'}, // Add Note button at the bottom
-  ];
+  const renderData = [...notes, {isAddNote: true, id: 'add-note'}];
 
   if (isLoading) {
     return (
@@ -148,7 +144,11 @@ const Note = ({navigation}) => {
                   return <AddNote onPress={handleAddNote} />;
                 }
                 return (
-                  <LookNote item={item} onPress={() => handleNotePress(item)} />
+                  <LookNote
+                    item={item}
+                    onPress={() => handleNotePress(item)}
+                    navigation={navigation}
+                  />
                 );
               }}
             />
