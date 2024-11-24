@@ -7,4 +7,3 @@ import AddNote from './AddNote';
 import ButtonOp from './ButtonOp';
 
 export {Button, Gap, GapRow, Btn, ButtonOp, DateNote, AddNote};
-
