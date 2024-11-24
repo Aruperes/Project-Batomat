@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F9F7E4',
     paddingLeft: 24,
-    paddingTop: 38,
+    paddingTop: 30,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     textShadowColor: '#000000',
     textShadowOffset: {width: 0, height: 2},
     textShadowRadius: 2,
-    marginLeft: 38,
+    paddingLeft: 30,
   },
 });

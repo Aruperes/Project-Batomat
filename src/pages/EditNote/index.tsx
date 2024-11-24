@@ -114,7 +114,7 @@ const EditNote = ({navigation, route}) => {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.container}>
+      <View style={styles.header}>
         <Header
           text="Notes"
           backButton={true}
@@ -125,46 +125,52 @@ const EditNote = ({navigation, route}) => {
           onPress={handleUpdate}
           disabled={isLoading}
           style={styles.doneButton}>
-          <Text style={[styles.text, isLoading && styles.disabledText]}>
+          <Text
+            style={[styles.doneButtonText, isLoading && styles.disabledText]}>
             {isLoading ? 'Saving...' : 'Done'}
           </Text>
         </TouchableOpacity>
       </View>
 
-      <View style={styles.container2}>
-        <Gap height={18} />
+      <View style={styles.content}>
         <View style={styles.contentWrapper}>
-          <TextInput
-            style={styles.title}
-            placeholder="Title"
-            value={noteTitle}
-            onChangeText={setNoteTitle}
-            editable={!isLoading}
-            placeholderTextColor="#666"
-          />
-          <TextInput
-            style={styles.text2}
-            placeholder="Note"
-            value={noteText}
-            onChangeText={setNoteText}
-            multiline={true}
-            editable={!isLoading}
-            placeholderTextColor="#666"
-          />
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.titleInput}
+              placeholder="Title"
+              value={noteTitle}
+              onChangeText={setNoteTitle}
+              editable={!isLoading}
+              placeholderTextColor="#666"
+            />
+            <TextInput
+              style={styles.noteInput}
+              placeholder="Note"
+              value={noteText}
+              onChangeText={setNoteText}
+              multiline={true}
+              editable={!isLoading}
+              placeholderTextColor="#666"
+            />
+          </View>
+
           {error && <Text style={styles.errorText}>{error}</Text>}
-          <TouchableOpacity
-            style={styles.photo2}
-            activeOpacity={0.5}
-            onPress={handleDelete}>
-            <Image source={Trash2} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.photo} activeOpacity={0.5}>
-            <Image source={Heart} />
-          </TouchableOpacity>
+
+          <View style={styles.actionButtons}>
+            <TouchableOpacity
+              style={styles.actionButton}
+              activeOpacity={0.5}
+              onPress={handleDelete}>
+              <Image source={Trash2} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionButton} activeOpacity={0.5}>
+              <Image source={Heart} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
 
-      <View style={styles.container3}>
+      <View style={styles.footer}>
         <MenuButton navigation={navigation} />
       </View>
     </View>
@@ -172,33 +178,71 @@ const EditNote = ({navigation, route}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     flex: 1,
     backgroundColor: '#F9F7E4',
+  },
+  header: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    height: 60,
   },
-  deleteButton: {
-    position: 'absolute',
-    right: 120, // Adjust this value to position the delete button
-    top: 38,
+  doneButton: {
+    padding: 10,
   },
-  deleteText: {
-    color: '#FF0000',
+  doneButtonText: {
     fontFamily: 'Poppins-Regular',
     fontSize: 24,
+    color: '#020202',
+    textShadowColor: '#000000',
+    textShadowOffset: {width: 0, height: 2},
+    textShadowRadius: 2,
   },
-  container2: {
-    flex: 9,
-    backgroundColor: '#F9F7E4',
-    marginLeft: 22,
-    marginRight: 22,
+  content: {
+    flex: 1,
+    paddingHorizontal: 22,
+    paddingTop: 18,
   },
-  container3: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
+  contentWrapper: {
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    borderRadius: 20,
+    flex: 1,
+    padding: 20,
+  },
+  inputContainer: {
+    flex: 1,
+  },
+  titleInput: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 24,
+    color: '#2F2A36',
+    marginBottom: 20,
+  },
+  noteInput: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: 20,
+    color: '#000000',
+    flex: 1,
+  },
+  actionButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+  },
+  actionButton: {
+    padding: 10,
+  },
+  errorText: {
+    color: '#D32F2F',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  footer: {
     backgroundColor: '#292D32',
     paddingVertical: 10,
     alignItems: 'center',
@@ -207,56 +251,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     height: 95,
-  },
-  title: {
-    paddingLeft: 26,
-    paddingTop: 30,
-    width: 296,
-    fontFamily: 'Poppins-Medium',
-    fontSize: 24,
-    color: '#2F2A36',
-  },
-  photo: {
-    marginLeft: 320,
-    paddingTop: 570,
-    position: 'absolute',
-  },
-  photo2: {
-    marginLeft: 5,
-    paddingTop: 410,
-    width: '200%',
-    height: 100,
-  },
-  text2: {
-    paddingLeft: 41,
-    paddingTop: 27,
-    width: 296,
-    fontFamily: 'Poppins-Regular',
-    fontSize: 20,
-    color: '#000000',
-  },
-  text: {
-    paddingLeft: 150,
-    paddingTop: 38,
-    fontFamily: 'Poppins-Regular',
-    fontSize: 24,
-    color: '#020202',
-    textShadowColor: '#000000',
-    textShadowOffset: {width: 0, height: 2},
-    textShadowRadius: 2,
-  },
-  contentWrapper: {
-    backgroundColor: 'rgba(0, 0, 0, 0.25)',
-    width: 376,
-    height: 630,
-    borderRadius: 20,
-  },
-  errorText: {
-    color: '#D32F2F',
-    fontSize: 14,
-    textAlign: 'center',
-    marginTop: 10,
-    paddingHorizontal: 20,
   },
   disabledText: {
     opacity: 0.5,
