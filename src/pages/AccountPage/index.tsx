@@ -37,7 +37,6 @@ const AccountPage = ({navigation}) => {
       setProfileImage(base64);
       setProfileImageBase64(result.assets[0].base64);
 
-      // Save the profile image automatically after selection
       saveProfileImage(result.assets[0].base64);
     }
   };
