@@ -21,12 +21,14 @@ import FavoritePage from './FavoritePage';
 import InfoPage from './InfoPage';
 import ChangePassword from './ChangePassword';
 import Diseases from './Diseases';
+import AddingNote from './AddingNote';
 import Layu from './Layu';
 import BercakDaun from './BercakDaun';
 import LayuBakteri from './LayuBakteri';
 import Mosaik from './Mosaik';
 import BuahBusuk from './BuahBusuk';
 import BusukDaun from './BusukDaun';
+
 export {
   SplashScreen,
   SignIn,
@@ -57,4 +59,5 @@ export {
   FavoritePage,
   InfoPage,
   ChangePassword,
+  AddingNote,
 };

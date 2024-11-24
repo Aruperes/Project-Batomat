@@ -23,6 +23,7 @@ import {
   InfoPage,
   ChangePassword,
   Diseases,
+  AddingNote,
   Layu,
   BercakDaun,
   LayuBakteri,
@@ -120,6 +121,11 @@ const App = () => {
           name="Diseases"
           component={Diseases}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddingNote"
+          component={AddingNote}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name="Hama"
