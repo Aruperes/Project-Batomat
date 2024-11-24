@@ -22,7 +22,7 @@ const hama = [
     description:
       'Ciri-ciri kutu daun thrips adalah panjangnya 1 mm dan berwarna hitam...',
     icon: Kutu,
-    route: 'KutuDaun', // Halaman detail yang akan dinavigasi
+    route: 'KutuDaun',
   },
 
   {
@@ -30,14 +30,14 @@ const hama = [
     description:
       'Umumnya ulat buah tomat ini menyerang daun, bunga dan buah tanaman tomat...',
     icon: Ulat,
-    route: 'UlatBuah', // Halaman detail yang akan dinavigasi
+    route: 'UlatBuah',
   },
 
   {
     title: 'Kutu Daun Aphis Hijau Pada Tomat',
     description: 'Aphis hijau lebih sering di sebut kutu daun hijau...',
     icon: Aphis,
-    route: 'KutuAphis', // Halaman detail yang akan dinavigasi
+    route: 'KutuAphis',
   },
 
   {
@@ -45,7 +45,7 @@ const hama = [
     description:
       'Serangan hama ini pada tanaman tomat di tandai dengan terpotongnya tanaman...',
     icon: Cacing,
-    route: 'CacingTanah', // Halaman detail yang akan dinavigasi
+    route: 'CacingTanah',
   },
 
   {
@@ -53,7 +53,7 @@ const hama = [
     description:
       'Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan...',
     icon: Lalat,
-    route: 'LalatBuah', // Halaman detail yang akan dinavigasi
+    route: 'LalatBuah',
   },
 
   {
@@ -61,7 +61,7 @@ const hama = [
     description:
       'Hama kutu daun bersayap putih ini merupakan salah satu hama paling berbahaya...',
     icon: Kebul,
-    route: 'KutuKebul', // Halaman detail yang akan dinavigasi
+    route: 'KutuKebul',
   },
 ];
 
@@ -88,8 +88,7 @@ const Hama = ({navigation}) => {
             </View>
             <TouchableOpacity
               style={styles.arrowButton}
-              onPress={() => navigation.navigate(disease.route)} // Navigasi ke halaman detail
-            >
+              onPress={() => navigation.navigate(disease.route)}>
               <Down width={24} height={24} />
             </TouchableOpacity>
           </View>
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
   contentWrapper: {
     flex: 1,
     paddingHorizontal: 24,
-    marginTop: -20,
+    marginTop: 20,
   },
   backButton: {
     position: 'absolute',
@@ -168,7 +167,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: 65,
+    height: 95,
   },
 
   arrowButton: {

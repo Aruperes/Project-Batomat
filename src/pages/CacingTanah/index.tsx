@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: 65,
+    height: 95,
   },
 
   // New styles for Like and Share buttons

@@ -55,7 +55,6 @@ export {
   EditNote,
   AccountPage,
   FavoritePage,
-  Diseases,
   InfoPage,
   ChangePassword,
 };

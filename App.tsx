@@ -154,6 +154,9 @@ const App = () => {
         <Stack.Screen
           name="KutuKebul"
           component={KutuKebul}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="Layu"
           component={Layu}
           options={{headerShown: false}}

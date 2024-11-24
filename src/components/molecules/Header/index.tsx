@@ -27,10 +27,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     fontSize: 24,
     color: '#020202',
-    textShadowColor: '#000000', 
-    textShadowOffset: {width: 0, height: 2}, 
-    textShadowRadius: 2, r
+    textShadowColor: '#000000',
+    textShadowOffset: {width: 0, height: 2},
+    textShadowRadius: 2,
     marginLeft: 38,
-
   },
 });
