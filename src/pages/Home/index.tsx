@@ -168,12 +168,14 @@ const Home = ({navigation}) => {
             style={styles.logo2}
             source={require('../../assets/images/obat.png')}
           />
-          <View style={styles.textContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Obat')}
+            style={styles.textContainer}>
             <Text style={styles.title}>OBAT</Text>
             <Text style={styles.description}>
               lihat disini untuk mengetahui obat untuk mengobati tomatmu
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.card}>
