@@ -9,12 +9,27 @@ import {
   WelcomePage,
   Home,
   Note,
+  Hama,
+  KutuDaun,
+  UlatBuah,
+  KutuAphis,
+  CacingTanah,
+  LalatBuah,
+  KutuKebul,
   EditNote,
   AccountPage,
   FavoritePage,
   Option,
+  InfoPage,
+  ChangePassword,
   Diseases,
   AddingNote,
+  Layu,
+  BercakDaun,
+  LayuBakteri,
+  Mosaik,
+  BuahBusuk,
+  BusukDaun,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -93,6 +108,16 @@ const App = () => {
           options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
+          name="InfoPage"
+          component={InfoPage}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="ChangePassword"
+          component={ChangePassword}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
           name="Diseases"
           component={Diseases}
           options={{headerShown: false}}
@@ -101,6 +126,71 @@ const App = () => {
           name="AddingNote"
           component={AddingNote}
           options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="Hama"
+          component={Hama}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="KutuDaun"
+          component={KutuDaun}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="UlatBuah"
+          component={UlatBuah}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="KutuAphis"
+          component={KutuAphis}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="CacingTanah"
+          component={CacingTanah}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="LalatBuah"
+          component={LalatBuah}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="KutuKebul"
+          component={KutuKebul}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Layu"
+          component={Layu}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="BercakDaun"
+          component={BercakDaun}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="LayuBakteri"
+          component={LayuBakteri}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Mosaik"
+          component={Mosaik}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="BuahBusuk"
+          component={BuahBusuk}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="BusukDaun"
+          component={BusukDaun}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
       <FlashMessage position="top" />

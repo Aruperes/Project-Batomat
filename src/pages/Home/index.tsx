@@ -16,165 +16,178 @@ const Home = ({navigation}) => {
   const [selectedImage, setSelectedImage] = useState(0);
 
   const images = [
-    {source: require('../../assets/images/image.png'), text: 'Tomat Segar'},
     {
-      source: require('../../assets/images/image11.png'),
-      text: 'Perawatan Tomat',
+      source: require('../../assets/images/image.png'),
+      text: 'Lalat Buah',
+      title:
+        'Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan dan sayap transparan',
+    },
+    {
+      source: require('../../assets/images/image1.png'),
+      text: 'Cacing Tanah',
+      title:
+        'Serangan hama ini pada tanaman tomat di tandai dengan terpotongnya tanaman',
     },
     {
       source: require('../../assets/images/image6.png'),
-      text: 'Penyakit pada Tomat',
+      text: 'Ulat buah',
+      title:
+        'Umumnya ulat buah tomat ini menyerang daun, bunga dan buah tanaman tomat.',
     },
-    {source: require('../../assets/images/image4.png'), text: 'Hama Tomat'},
+    {
+      source: require('../../assets/images/image4.png'),
+      text: 'Kutu Daun',
+      title:
+        'Hama kutu daun bersayap putih ini merupakan salah satu hama paling berbahaya',
+    },
   ];
 
   return (
-    <>
-      <ScrollView>
-        <View style={styles.overlay}>
-          <View style={styles.header}>
-            <Image
-              style={styles.logo}
-              source={require('../../assets/images/LogoIm.png')}
-            />
-            <TouchableOpacity
-              onPress={() => navigation.navigate('AccountPage')}>
-              <Image
-                style={styles.logo1}
-                source={require('../../assets/images/profile.png')}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.line} />
+    <View style={styles.overlay}>
+      <View style={styles.header}>
+        <Image
+          style={styles.logo}
+          source={require('../../assets/images/LogoIm.png')}
+        />
+        <TouchableOpacity onPress={() => navigation.navigate('AccountPage')}>
+          <Image
+            style={styles.logo1}
+            source={require('../../assets/images/profile.png')}
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.line} />
 
-          <View style={styles.searchContainer}>
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Search"
-              placeholderTextColor="#a0a0a0"
-            />
-            <Src style={styles.searchIcon} />
-          </View>
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search"
+          placeholderTextColor="#a0a0a0"
+        />
+        <Src style={styles.searchIcon} />
+      </View>
 
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.box1}>
-              <Swiper
-                style={styles.wrapper}
-                autoplay={true}
-                autoplayTimeout={3}>
-                <View style={styles.slide}>
-                  <Text style={styles.text}>Tomat pasti segar!</Text>
-                  <Text style={styles.text2}>
-                    Inilah obat yang membuat buah tomat lebih segar dan sehat
-                  </Text>
-                  <Image
-                    style={styles.image}
-                    source={require('../../assets/images/solanum.png')}
-                  />
-                </View>
-                <View style={styles.slide}>
-                  <Text style={styles.text}>Perawatan yang baik</Text>
-                  <Text style={styles.text2}>
-                    Dengan perawatan yang baik membuat pertumbuhan lebih subur
-                  </Text>
-                  <Image
-                    style={styles.image}
-                    source={require('../../assets/images/nutrition.png')}
-                  />
-                </View>
-                <View style={styles.slide}>
-                  <Text style={styles.text}>Peran penting obat</Text>
-                  <Text style={styles.text2}>
-                    Obat mencegah penyakit yang ada pada tumbuhan
-                  </Text>
-                  <Image
-                    style={styles.image}
-                    source={require('../../assets/images/obatomat.png')}
-                  />
-                </View>
-              </Swiper>
-            </View>
-            <View style={styles.horizontalScrollBackground}>
-              <Text style={styles.sectionTitle}>Lagi musim</Text>
-              <ScrollView
-                horizontal={true}
-                style={styles.scrollContainer}
-                showsHorizontalScrollIndicator={false}>
-                {images.map((item, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => setSelectedImage(index)}
-                    style={[
-                      styles.imageBox,
-                      selectedImage === index && styles.selectedImageBox,
-                    ]}>
-                    <Image
-                      style={[
-                        styles.image2,
-                        selectedImage === index && styles.selectedImage,
-                      ]}
-                      source={item.source}
-                    />
-                  </TouchableOpacity>
-                ))}
-              </ScrollView>
-
-              <Text style={styles.descriptionTitle}>
-                {images[selectedImage].text}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.box1}>
+          <Swiper style={styles.wrapper} autoplay={true} autoplayTimeout={3}>
+            <View style={styles.slide}>
+              <Text style={styles.text}>Tomat pasti segar!</Text>
+              <Text style={styles.text2}>
+                Inilah obat yang membuat buah tomat lebih segar dan sehat
               </Text>
-              <Text style={styles.descriptionText}>
-                Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan
-                dan sayap transparan
-              </Text>
-              <Text style={styles.detailLink}>Detail ➔</Text>
-            </View>
-            <View style={styles.card}>
               <Image
-                style={styles.logo2}
-                source={require('../../assets/images/penyakit.png')}
+                style={styles.image}
+                source={require('../../assets/images/tomat.png')}
               />
+            </View>
+            <View style={styles.slide}>
+              <Text style={styles.text}>Perawatan yang baik</Text>
+              <Text style={styles.text2}>
+                Dengan perawatan yang baik membuat pertumbuhan lebih subur
+              </Text>
+              <Image
+                style={styles.image}
+                source={require('../../assets/images/nutrition.png')}
+              />
+            </View>
+            <View style={styles.slide}>
+              <Text style={styles.text}>Peran penting obat</Text>
+              <Text style={styles.text2}>
+                Obat mencegah penyakit yang ada pada tumbuhan
+              </Text>
+              <Image
+                style={styles.image}
+                source={require('../../assets/images/obatomat.png')}
+              />
+            </View>
+          </Swiper>
+        </View>
+        <View style={styles.horizontalScrollBackground}>
+          <Text style={styles.sectionTitle}>Populer</Text>
+          <ScrollView
+            horizontal={true}
+            style={styles.scrollContainer}
+            showsHorizontalScrollIndicator={false}>
+            {images.map((item, index) => (
               <TouchableOpacity
-                onPress={() => navigation.navigate('Diseases')}
-                style={styles.textContainer}>
-                <Text style={styles.title}>PENYAKIT</Text>
-                <Text style={styles.description}>
-                  lihat disini untuk mengetahui penyakit yang menyerang tomatmu
-                </Text>
+                key={index}
+                onPress={() => setSelectedImage(index)}
+                style={[
+                  styles.imageBox,
+                  selectedImage === index && styles.selectedImageBox,
+                ]}>
+                <Image
+                  style={[
+                    styles.image2,
+                    selectedImage === index && styles.selectedImage,
+                  ]}
+                  source={item.source}
+                />
               </TouchableOpacity>
-            </View>
-
-            <View style={styles.card}>
-              <Image
-                style={styles.logo2}
-                source={require('../../assets/images/hama.png')}
-              />
-              <View style={styles.textContainer}>
-                <Text style={styles.title}>HAMA</Text>
-                <Text style={styles.description}>
-                  lihat disini untuk mengetahui hama yang menyerang tomatmu
-                </Text>
-              </View>
-            </View>
-
-            <View style={styles.card}>
-              <Image
-                style={styles.logo2}
-                source={require('../../assets/images/obat.png')}
-              />
-              <View style={styles.textContainer}>
-                <Text style={styles.title}>OBAT</Text>
-                <Text style={styles.description}>
-                  lihat disini untuk mengetahui obat untuk mengobati tomatmu
-                </Text>
-              </View>
-            </View>
+            ))}
           </ScrollView>
-          <View style={styles.container3}>
-            <MenuButton navigation={navigation} />
+
+          <Text style={styles.descriptionTitle}>
+            {images[selectedImage].text}
+          </Text>
+          <Text style={styles.descriptionText}>
+            {images[selectedImage].title}
+          </Text>
+        </View>
+        <View style={styles.card}>
+          <Image
+            style={styles.logo2}
+            source={require('../../assets/images/penyakit.png')}
+          />
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Diseases')}
+            style={styles.textContainer}>
+            <Text style={styles.title}>PENYAKIT</Text>
+            <Text style={styles.description}>
+              lihat disini untuk mengetahui penyakit yang menyerang tomatmu
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.card}>
+          <Image
+            style={styles.logo2}
+            source={require('../../assets/images/hama.png')}
+          />
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Hama')}
+            style={styles.textContainer}>
+            <Text style={styles.title}>HAMA</Text>
+            <Text style={styles.description}>
+              lihat disini untuk mengetahui hama yang menyerang tomatmu
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.card}>
+          <Image
+            style={styles.logo2}
+            source={require('../../assets/images/obat.png')}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>OBAT</Text>
+            <Text style={styles.description}>
+              lihat disini untuk mengetahui obat untuk mengobati tomatmu
+            </Text>
           </View>
         </View>
+
+        <View style={styles.card}>
+          <Image
+            style={styles.logo2}
+            source={require('../../assets/images/obat.png')}
+          />
+          <View style={styles.textContainer} />
+        </View>
       </ScrollView>
-    </>
+      <View style={styles.container3}>
+        <MenuButton navigation={navigation} />
+      </View>
+    </View>
   );
 };
 
@@ -294,12 +307,6 @@ const styles = StyleSheet.create({
     color: '#76756C',
     marginTop: 5,
   },
-  detailLink: {
-    fontSize: 12,
-    color: '#292D32',
-    marginTop: 10,
-    textAlign: 'right',
-  },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -316,14 +323,14 @@ const styles = StyleSheet.create({
     marginLeft: 29,
   },
   logo2: {
-    width: 60, // ukuran logo lebih besar
+    width: 60,
     height: 60,
-    marginHorizontal: 20, // beri jarak horizontal
+    marginHorizontal: 20,
   },
   textContainer: {
     flex: 1,
-    paddingLeft: 10, // tambahkan padding untuk jarak
-    justifyContent: 'center', // sejajarkan teks vertikal
+    paddingLeft: 10,
+    justifyContent: 'center',
   },
   title: {
     fontSize: 18,
@@ -335,9 +342,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#4E4E4E',
   },
-  container3: {
+  ScrollView: {
     flex: 1,
-    backgroundColor: '#F9F7E4',
+  },
+  container3: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#292D32',
+    paddingVertical: 10,
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderColor: '#ccc',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: 95,
   },
 });
 

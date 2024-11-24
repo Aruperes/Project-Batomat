@@ -26,6 +26,8 @@ import Info from './Info.png';
 import Share from './Share.png';
 import Setting from './Setting.png';
 import Logout from './Logout.png';
+import Eyeon from './eyeon.svg';
+import Eyeoff from './eyeoff.svg';
 
 export {
   Logo,
@@ -56,4 +58,6 @@ export {
   Share,
   Setting,
   Logout,
+  Eyeon,
+  Eyeoff,
 };

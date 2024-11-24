@@ -27,10 +27,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     fontSize: 24,
     color: '#020202',
-    // Text shadow properties
-    textShadowColor: '#000000', // Shadow color (black)
-    textShadowOffset: {width: 0, height: 2}, // Shadow offset (horizontal, vertical)
-    textShadowRadius: 2, // How much the shadow should blur
-    paddingLeft: 19,
+    textShadowColor: '#000000',
+    textShadowOffset: {width: 0, height: 2},
+    textShadowRadius: 2,
+    marginLeft: 38,
   },
 });
