@@ -11,6 +11,8 @@ import Option from './Option';
 import EditNote from './EditNote';
 import AccountPage from './AccountPage';
 import FavoritePage from './FavoritePage';
+import InfoPage from './InfoPage';
+import ChangePassword from './ChangePassword';
 import Diseases from './Diseases';
 export {
   SplashScreen,
@@ -26,5 +28,7 @@ export {
   EditNote,
   AccountPage,
   FavoritePage,
+  InfoPage,
+  ChangePassword,
   Diseases,
 };

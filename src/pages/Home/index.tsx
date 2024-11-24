@@ -16,16 +16,16 @@ const Home = ({navigation}) => {
   const [selectedImage, setSelectedImage] = useState(0);
 
   const images = [
-    {source: require('../../assets/images/image.png'), text: 'Tomat Segar'},
+    {source: require('../../assets/images/image.png'), text: 'Lalat Buah'},
     {
-      source: require('../../assets/images/image11.png'),
-      text: 'Perawatan Tomat',
+      source: require('../../assets/images/image1.png'),
+      text: 'Cacing Tanah',
     },
     {
       source: require('../../assets/images/image6.png'),
-      text: 'Penyakit pada Tomat',
+      text: 'Ulat buah',
     },
-    {source: require('../../assets/images/image4.png'), text: 'Hama Tomat'},
+    {source: require('../../assets/images/image4.png'), text: 'Kutu Daun'},
   ];
 
   return (
@@ -327,9 +327,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#4E4E4E',
   },
-  container3: {
+  ScrollView: {
     flex: 1,
-    backgroundColor: '#F9F7E4',
+  },
+  container3: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#292D32',
+    paddingVertical: 10,
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderColor: '#ccc',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: 95,
   },
 });
 
