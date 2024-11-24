@@ -10,29 +10,62 @@ import React, {useState} from 'react';
 import {Gap} from '../../components/atoms';
 import {MenuButton, Header} from '../../components/molecules';
 import {Heart} from '../../assets/icon';
-import {getFirestore, collection, addDoc} from 'firebase/firestore';
-import {firestore} from '../../config/Firebase';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
+} from 'firebase/firestore';
+import {getAuth} from 'firebase/auth';
+import {firebase} from '../../config/Firebase';
+import {showMessage} from 'react-native-flash-message';
 
 const AddingNote = ({navigation}) => {
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
 
-  const handleAdd = async () => {
-    try {
-      const notesCollection = collection(firestore, 'notes');
+  const handleCreateNote = async () => {
+    // Validate inputs
+    if (!title.trim() || !note.trim()) {
+      showMessage({
+        message: 'Title and note content are required',
+        type: 'warning',
+      });
+      return;
+    }
 
-      await addDoc(notesCollection, {
-        title,
-        note,
-        timestamp: new Date(),
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      showMessage({
+        message: 'Please sign in to create notes',
+        type: 'warning',
+      });
+      return;
+    }
+
+    const db = getFirestore(firebase);
+    try {
+      await addDoc(collection(db, 'notes'), {
+        title: title.trim(),
+        note: note.trim(),
+        userId: currentUser.uid,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
       });
 
-      setTitle('');
-      setNote('');
+      showMessage({
+        message: 'Note created successfully',
+        type: 'success',
+      });
+
       navigation.goBack();
     } catch (error) {
-      console.error('Error adding note:', error);
-      alert(error.message);
+      showMessage({
+        message: error.message,
+        type: 'danger',
+      });
     }
   };
 
@@ -46,7 +79,7 @@ const AddingNote = ({navigation}) => {
         />
         <TouchableOpacity
           activeOpacity={0.5}
-          onPress={handleAdd}
+          onPress={handleCreateNote}
           style={styles.doneButton}>
           <Text style={styles.text}>Done</Text>
         </TouchableOpacity>

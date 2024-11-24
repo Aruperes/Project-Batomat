@@ -1,18 +1,16 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const AddNote = ({navigation}) => {
+const AddNote = ({onPress}) => {
   return (
-    <>
-      <View style={styles.wrapper}>
-        <TouchableOpacity
-          style={styles.contentWrapper}
-          activeOpacity={0.3}
-          onPress={() => navigation.navigate('AddingNote')}>
-          <Text style={styles.text}>Add Note...</Text>
-        </TouchableOpacity>
-      </View>
-    </>
+    <View style={styles.wrapper}>
+      <TouchableOpacity
+        style={styles.contentWrapper}
+        activeOpacity={0.3}
+        onPress={onPress}>
+        <Text style={styles.text}>Add Note...</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
