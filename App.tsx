@@ -13,6 +13,8 @@ import {
   AccountPage,
   FavoritePage,
   Option,
+  InfoPage,
+  ChangePassword,
   Diseases,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
@@ -89,6 +91,16 @@ const App = () => {
         <Stack.Screen
           name="Option"
           component={Option}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="InfoPage"
+          component={InfoPage}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="ChangePassword"
+          component={ChangePassword}
           options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
