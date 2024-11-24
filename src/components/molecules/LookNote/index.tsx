@@ -1,13 +1,61 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
 import React from 'react';
 import {Gap, GapRow} from '../../atoms';
 import {Trash, Favorite} from '../../../assets/icon';
+import {doc, deleteDoc, getFirestore} from 'firebase/firestore';
+import {firebase} from '../../../config/Firebase';
+import {showMessage} from 'react-native-flash-message';
 
-const LookNote = ({item, onPress}) => {
-  // Changed to accept onPress instead of navigation
+const LookNote = ({item, onPress, navigation}) => {
   if (!item || !item.title || !item.note) {
     return null;
   }
+
+  const handleDelete = async () => {
+    Alert.alert(
+      'Delete Note',
+      'Are you sure you want to delete this note?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              const db = getFirestore(firebase);
+              const noteRef = doc(db, 'notes', item.id);
+              await deleteDoc(noteRef);
+
+              showMessage({
+                message: 'Note deleted successfully',
+                type: 'success',
+              });
+
+              // Since we're in a component, we need navigation to be passed as a prop
+              navigation.navigate('Note');
+            } catch (error) {
+              showMessage({
+                message: 'Failed to delete note. Please try again.',
+                type: 'danger',
+              });
+              console.error('Error deleting note:', error);
+            }
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+  };
 
   // Function to truncate text
   const truncateText = (text, maxLength) => {
@@ -23,7 +71,6 @@ const LookNote = ({item, onPress}) => {
         style={styles.contentWrapper}
         activeOpacity={0.5}
         onPress={onPress}>
-        {/* Use the onPress prop here */}
         <View style={styles.textContainer}>
           <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
             {truncateText(item.title, 20)}
@@ -42,12 +89,7 @@ const LookNote = ({item, onPress}) => {
             <Image source={Favorite} style={styles.photo2} />
           </TouchableOpacity>
           <GapRow width={8} />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              // Add delete functionality here
-              console.log('Delete pressed for:', item.id);
-            }}>
+          <TouchableOpacity style={styles.button} onPress={handleDelete}>
             <Image source={Trash} style={styles.photo} />
           </TouchableOpacity>
         </View>
