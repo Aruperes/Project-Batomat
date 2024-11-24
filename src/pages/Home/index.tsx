@@ -148,18 +148,19 @@ const Home = ({navigation}) => {
             </Text>
           </TouchableOpacity>
         </View>
-
         <View style={styles.card}>
           <Image
             style={styles.logo2}
             source={require('../../assets/images/hama.png')}
           />
-          <View style={styles.textContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Hama')}
+            style={styles.textContainer}>
             <Text style={styles.title}>HAMA</Text>
             <Text style={styles.description}>
               lihat disini untuk mengetahui hama yang menyerang tomatmu
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.card}>
