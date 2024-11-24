@@ -102,7 +102,8 @@ const App = () => {
           name="ChangePassword"
           component={ChangePassword}
           options={{headerShown: false, animation: 'none'}}
-          
+        />
+        <Stack.Screen
           name="Diseases"
           component={Diseases}
           options={{headerShown: false}}

@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   contentWrapper: {
     flex: 1,
     paddingHorizontal: 24,
-    marginTop: -20,
+    marginTop: 20,
   },
   backButton: {
     position: 'absolute',
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: 80,
+    height: 95,
   },
 
   arrowButton: {

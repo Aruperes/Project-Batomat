@@ -34,7 +34,6 @@ const ChangePassword = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -49,7 +48,6 @@ const ChangePassword = ({navigation}) => {
         angka
       </Text>
 
-      {/* Kata Sandi Saat Ini */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Kata sandi saat ini"
@@ -65,7 +63,6 @@ const ChangePassword = ({navigation}) => {
         </TouchableOpacity>
       </View>
 
-      {/* Kata Sandi Baru */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Kata sandi baru"
@@ -82,7 +79,6 @@ const ChangePassword = ({navigation}) => {
         </TouchableOpacity>
       </View>
 
-      {/* Konfirmasi Kata Sandi Baru */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Ketik ulang kata sandi baru"
@@ -100,7 +96,7 @@ const ChangePassword = ({navigation}) => {
       </View>
 
       <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
-        <Text style={styles.buttonText}>UBAH KATA SANDI</Text>
+        <Text style={styles.buttonText}>Ubah Sandi</Text>
       </TouchableOpacity>
     </View>
   );
@@ -165,7 +161,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   button: {
-    backgroundColor: '#A99E8B',
+    backgroundColor: '#292D32',
     borderRadius: 10,
     paddingVertical: 15,
     alignItems: 'center',
@@ -176,7 +172,7 @@ const styles = StyleSheet.create({
     height: 55,
   },
   buttonText: {
-    color: '#000000',
+    color: '#F0DFBD',
     fontWeight: 'bold',
     fontSize: 14,
   },

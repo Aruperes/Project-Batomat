@@ -16,16 +16,30 @@ const Home = ({navigation}) => {
   const [selectedImage, setSelectedImage] = useState(0);
 
   const images = [
-    {source: require('../../assets/images/image.png'), text: 'Lalat Buah'},
+    {
+      source: require('../../assets/images/image.png'),
+      text: 'Lalat Buah',
+      title:
+        'Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan dan sayap transparan',
+    },
     {
       source: require('../../assets/images/image1.png'),
       text: 'Cacing Tanah',
+      title:
+        'Serangan hama ini pada tanaman tomat di tandai dengan terpotongnya tanaman',
     },
     {
       source: require('../../assets/images/image6.png'),
       text: 'Ulat buah',
+      title:
+        'Umumnya ulat buah tomat ini menyerang daun, bunga dan buah tanaman tomat.',
     },
-    {source: require('../../assets/images/image4.png'), text: 'Kutu Daun'},
+    {
+      source: require('../../assets/images/image4.png'),
+      text: 'Kutu Daun',
+      title:
+        'Hama kutu daun bersayap putih ini merupakan salah satu hama paling berbahaya',
+    },
   ];
 
   return (
@@ -63,7 +77,7 @@ const Home = ({navigation}) => {
               </Text>
               <Image
                 style={styles.image}
-                source={require('../../assets/images/solanum.png')}
+                source={require('../../assets/images/tomat.png')}
               />
             </View>
             <View style={styles.slide}>
@@ -89,7 +103,7 @@ const Home = ({navigation}) => {
           </Swiper>
         </View>
         <View style={styles.horizontalScrollBackground}>
-          <Text style={styles.sectionTitle}>Lagi musim</Text>
+          <Text style={styles.sectionTitle}>Populer</Text>
           <ScrollView
             horizontal={true}
             style={styles.scrollContainer}
@@ -117,10 +131,8 @@ const Home = ({navigation}) => {
             {images[selectedImage].text}
           </Text>
           <Text style={styles.descriptionText}>
-            Ukuran hama ini sekitar 8 mm dengan warna tubuh hitam kehijauan dan
-            sayap transparan
+            {images[selectedImage].title}
           </Text>
-          <Text style={styles.detailLink}>Detail ➔</Text>
         </View>
         <View style={styles.card}>
           <Image
@@ -161,6 +173,14 @@ const Home = ({navigation}) => {
               lihat disini untuk mengetahui obat untuk mengobati tomatmu
             </Text>
           </View>
+        </View>
+
+        <View style={styles.card}>
+          <Image
+            style={styles.logo2}
+            source={require('../../assets/images/obat.png')}
+          />
+          <View style={styles.textContainer} />
         </View>
       </ScrollView>
       <View style={styles.container3}>
@@ -286,12 +306,6 @@ const styles = StyleSheet.create({
     color: '#76756C',
     marginTop: 5,
   },
-  detailLink: {
-    fontSize: 12,
-    color: '#292D32',
-    marginTop: 10,
-    textAlign: 'right',
-  },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -308,14 +322,14 @@ const styles = StyleSheet.create({
     marginLeft: 29,
   },
   logo2: {
-    width: 60, // ukuran logo lebih besar
+    width: 60,
     height: 60,
-    marginHorizontal: 20, // beri jarak horizontal
+    marginHorizontal: 20,
   },
   textContainer: {
     flex: 1,
-    paddingLeft: 10, // tambahkan padding untuk jarak
-    justifyContent: 'center', // sejajarkan teks vertikal
+    paddingLeft: 10,
+    justifyContent: 'center',
   },
   title: {
     fontSize: 18,
