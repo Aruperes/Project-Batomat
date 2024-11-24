@@ -4,12 +4,14 @@ import React from 'react';
 const AddNote = ({navigation}) => {
   return (
     <>
-      <TouchableOpacity
-        style={styles.contentWrapper}
-        activeOpacity={0.3}
-        onPress={() => navigation.navigate('AddingNote')}>
-        <Text style={styles.text}>Add Note...</Text>
-      </TouchableOpacity>
+      <View style={styles.wrapper}>
+        <TouchableOpacity
+          style={styles.contentWrapper}
+          activeOpacity={0.3}
+          onPress={() => navigation.navigate('AddingNote')}>
+          <Text style={styles.text}>Add Note...</Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };
@@ -17,6 +19,9 @@ const AddNote = ({navigation}) => {
 export default AddNote;
 
 const styles = StyleSheet.create({
+  wrapper: {
+    paddingHorizontal: 10,
+  },
   contentWrapper: {
     backgroundColor: '#C0ADAD',
     height: 90,
