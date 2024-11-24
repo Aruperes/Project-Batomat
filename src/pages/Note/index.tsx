@@ -1,46 +1,123 @@
-// Note.js
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {DateNote, AddNote} from '../../components/atoms';
 import {LookNote, MenuButton} from '../../components/molecules';
-import {getFirestore, collection, onSnapshot} from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  query,
+  where,
+  orderBy,
+} from 'firebase/firestore';
+import {getAuth} from 'firebase/auth';
 import {firebase} from '../../config/Firebase';
 import {FlashList} from '@shopify/flash-list';
+import {showMessage} from 'react-native-flash-message';
 
 const Note = ({navigation}) => {
   const [notes, setNotes] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
 
   useEffect(() => {
+    if (!currentUser) {
+      navigation.navigate('SignIn');
+      return;
+    }
+
+    setIsLoading(true);
     const db = getFirestore(firebase);
     const notesCollection = collection(db, 'notes');
 
-    const unsubscribe = onSnapshot(
+    const userNotesQuery = query(
       notesCollection,
+      where('userId', '==', currentUser.uid),
+      orderBy('updatedAt', 'desc'),
+    );
+
+    const unsubscribe = onSnapshot(
+      userNotesQuery,
       querySnapshot => {
         const newNotes = [];
         querySnapshot.forEach(doc => {
           const data = doc.data();
-          const {note, title} = data;
-          newNotes.push({note, title, id: doc.id});
+          const {note, title, userId, updatedAt} = data;
+          newNotes.push({note, title, id: doc.id, userId, updatedAt});
         });
         setNotes(newNotes);
+        setIsLoading(false);
+        setError(null);
       },
       error => {
         setError(error.message);
+        setIsLoading(false);
+
+        // Check if the error is related to missing index
+        if (error.message.includes('requires an index')) {
+          showMessage({
+            message: 'Database index is being built',
+            description:
+              'Please wait a few minutes and try again. This is a one-time setup.',
+            type: 'info',
+            duration: 5000,
+          });
+        } else {
+          showMessage({
+            message: 'Error fetching notes',
+            description: error.message,
+            type: 'danger',
+          });
+        }
         console.error('Error fetching notes: ', error.message);
       },
     );
 
     return () => unsubscribe();
-  }, []);
+  }, [currentUser]);
 
-  // Create combined data array with notes and AddNote component
-  const renderData = [...notes, {id: 'add-note', isAddNote: true}];
+  const handleAddNote = () => {
+    if (!currentUser) {
+      showMessage({
+        message: 'Please sign in to add notes',
+        type: 'warning',
+      });
+      navigation.navigate('SignIn');
+      return;
+    }
+    navigation.navigate('AddingNote', {userId: currentUser.uid});
+  };
 
   const handleNotePress = item => {
-    navigation.navigate('EditNote', {item}); // Properly pass the item as a parameter
+    if (!currentUser) {
+      showMessage({
+        message: 'Please sign in to edit notes',
+        type: 'warning',
+      });
+      navigation.navigate('SignIn');
+      return;
+    }
+    navigation.navigate('EditNote', {
+      item,
+      userId: currentUser.uid,
+    });
   };
+
+  const renderData = [
+    ...notes,
+    {isAddNote: true, id: 'add-note'}, // Add Note button at the bottom
+  ];
+
+  if (isLoading) {
+    return (
+      <View style={[styles.mainContainer, styles.centerContent]}>
+        <ActivityIndicator size="large" color="#292D32" />
+        <Text style={styles.loadingText}>Loading notes...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -51,22 +128,34 @@ const Note = ({navigation}) => {
         <DateNote date="Previous 30 Days" />
 
         <View style={styles.listContainer}>
-          <FlashList
-            data={renderData}
-            estimatedItemSize={100}
-            keyExtractor={item => item.id}
-            renderItem={({item}) => {
-              if (item.isAddNote) {
-                return <AddNote navigation={navigation} />;
-              }
-              return (
-                <LookNote item={item} onPress={() => handleNotePress(item)} />
-              );
-            }}
-          />
+          {error && error.includes('requires an index') ? (
+            <View style={styles.indexingContainer}>
+              <Text style={styles.indexingText}>
+                Setting up the database for first use...
+              </Text>
+              <Text style={styles.indexingSubText}>
+                This is a one-time process. Please wait a few minutes and try
+                again.
+              </Text>
+            </View>
+          ) : (
+            <FlashList
+              data={renderData}
+              estimatedItemSize={100}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => {
+                if (item.isAddNote) {
+                  return <AddNote onPress={handleAddNote} />;
+                }
+                return (
+                  <LookNote item={item} onPress={() => handleNotePress(item)} />
+                );
+              }}
+            />
+          )}
         </View>
 
-        {error && (
+        {error && !error.includes('requires an index') && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>{error}</Text>
           </View>
@@ -78,6 +167,7 @@ const Note = ({navigation}) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,

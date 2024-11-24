@@ -11,8 +11,11 @@ import React, {useState} from 'react';
 import {Gap} from '../../components/atoms';
 import {MenuButton, Header} from '../../components/molecules';
 import {Heart, Trash2} from '../../assets/icon';
-import {doc, updateDoc, deleteDoc} from 'firebase/firestore';
-import {firestore} from '../../config/Firebase';
+import {doc, updateDoc, deleteDoc, serverTimestamp} from 'firebase/firestore';
+import {firebase} from '../../config/Firebase';
+import {getAuth} from 'firebase/auth';
+import {getFirestore} from 'firebase/firestore';
+import {showMessage} from 'react-native-flash-message';
 
 const EditNote = ({navigation, route}) => {
   const {item} = route.params;
@@ -22,25 +25,53 @@ const EditNote = ({navigation, route}) => {
   const [error, setError] = useState(null);
 
   const handleUpdate = async () => {
-    if (noteTitle && noteTitle.length > 0) {
-      setIsLoading(true);
-      setError(null);
+    if (!noteTitle.trim() || !noteText.trim()) {
+      showMessage({
+        message: 'Title and note content are required',
+        type: 'warning',
+      });
+      return;
+    }
 
-      try {
-        const noteRef = doc(firestore, 'notes', item.id);
-        await updateDoc(noteRef, {
-          title: noteTitle,
-          note: noteText,
-          updatedAt: new Date().toISOString(),
-        });
+    setIsLoading(true);
+    setError(null);
 
-        navigation.navigate('Note');
-      } catch (err) {
-        setError('Failed to update note. Please try again.');
-        console.error('Error updating note:', err);
-      } finally {
-        setIsLoading(false);
-      }
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      showMessage({
+        message: 'Please sign in to update notes',
+        type: 'warning',
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    const db = getFirestore(firebase);
+    const noteRef = doc(db, 'notes', item.id);
+
+    try {
+      await updateDoc(noteRef, {
+        title: noteTitle.trim(),
+        note: noteText.trim(),
+        updatedAt: serverTimestamp(),
+      });
+
+      showMessage({
+        message: 'Note updated successfully',
+        type: 'success',
+      });
+
+      navigation.goBack();
+    } catch (error) {
+      setError(error.message);
+      showMessage({
+        message: error.message,
+        type: 'danger',
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -58,14 +89,21 @@ const EditNote = ({navigation, route}) => {
           style: 'destructive',
           onPress: async () => {
             try {
-              const noteRef = doc(firestore, 'notes', item.id);
+              const db = getFirestore(firebase);
+              const noteRef = doc(db, 'notes', item.id);
               await deleteDoc(noteRef);
+
+              showMessage({
+                message: 'Note deleted successfully',
+                type: 'success',
+              });
+
               navigation.navigate('Note');
             } catch (error) {
-              console.error('Error deleting note:', error);
-              Alert.alert('Error', 'Failed to delete note. Please try again.', [
-                {text: 'OK'},
-              ]);
+              showMessage({
+                message: 'Failed to delete note. Please try again.',
+                type: 'danger',
+              });
             }
           },
         },
@@ -75,64 +113,61 @@ const EditNote = ({navigation, route}) => {
   };
 
   return (
-    <>
+    <View style={styles.mainContainer}>
       <View style={styles.container}>
         <Header
           text="Notes"
           backButton={true}
           onPress={() => navigation.goBack()}
         />
-        {/* <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={handleDelete}
-          style={styles.deleteButton}>
-          <Text style={styles.deleteText}>Delete</Text>
-        </TouchableOpacity> */}
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={handleUpdate}
-          disabled={isLoading}>
+          disabled={isLoading}
+          style={styles.doneButton}>
           <Text style={[styles.text, isLoading && styles.disabledText]}>
             {isLoading ? 'Saving...' : 'Done'}
           </Text>
         </TouchableOpacity>
       </View>
-      <>
-        <View style={styles.container2}>
-          <Gap height={18} />
-          <View style={styles.contentWrapper}>
-            <TextInput
-              style={styles.title}
-              placeholder="Title"
-              value={noteTitle}
-              onChangeText={text => setNoteTitle(text)}
-              editable={!isLoading}
-            />
-            <TextInput
-              style={styles.text2}
-              placeholder="Note"
-              value={noteText}
-              onChangeText={text => setNoteText(text)}
-              multiline={true}
-              editable={!isLoading}
-            />
-            {error && <Text style={styles.errorText}>{error}</Text>}
-            <TouchableOpacity
-              style={styles.photo2}
-              activeOpacity={0.5}
-              onPress={handleDelete}>
-              <Image source={Trash2} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.photo} activeOpacity={0.5}>
-              <Image source={Heart} />
-            </TouchableOpacity>
-          </View>
+
+      <View style={styles.container2}>
+        <Gap height={18} />
+        <View style={styles.contentWrapper}>
+          <TextInput
+            style={styles.title}
+            placeholder="Title"
+            value={noteTitle}
+            onChangeText={setNoteTitle}
+            editable={!isLoading}
+            placeholderTextColor="#666"
+          />
+          <TextInput
+            style={styles.text2}
+            placeholder="Note"
+            value={noteText}
+            onChangeText={setNoteText}
+            multiline={true}
+            editable={!isLoading}
+            placeholderTextColor="#666"
+          />
+          {error && <Text style={styles.errorText}>{error}</Text>}
+          <TouchableOpacity
+            style={styles.photo2}
+            activeOpacity={0.5}
+            onPress={handleDelete}>
+            <Image source={Trash2} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.photo} activeOpacity={0.5}>
+            <Image source={Heart} />
+          </TouchableOpacity>
         </View>
-      </>
+      </View>
+
       <View style={styles.container3}>
         <MenuButton navigation={navigation} />
       </View>
-    </>
+    </View>
   );
 };
 
