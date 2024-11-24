@@ -6,7 +6,7 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import {Header} from '../../components/molecules';
+import {Header, MenuButton} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import Down from '../../assets/icon/Arrow Down Contained 10.svg';
 import Images from '../../assets/icon/image.svg';
@@ -15,9 +15,6 @@ import Layu from '../../assets/icon/layubakteri.svg';
 import Mosaik from '../../assets/icon/mosaiktomat.svg';
 import Buah from '../../assets/icon/buahbusuk.svg';
 import Daun from '../../assets/icon/busukdaun.svg';
-import NoteNav from '../../assets/icon/Note.svg';
-import HomeNav from '../../assets/icon/Home.svg';
-import User from '../../assets/icon/UserProfile.svg';
 
 const diseases = [
   {
@@ -68,7 +65,6 @@ const Diseases = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header text="Penyakit" />
-
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}>
@@ -95,24 +91,8 @@ const Diseases = ({navigation}) => {
         ))}
       </ScrollView>
 
-      <View style={styles.menuButtonWrapper}>
-        <TouchableOpacity
-          style={styles.menuButton}
-          onPress={() => navigation.navigate('Notes')}>
-          <NoteNav width={35} height={35} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.menuButton}
-          onPress={() => navigation.navigate('Home')}>
-          <HomeNav width={35} height={35} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.menuButton}
-          onPress={() => navigation.navigate('Profile')}>
-          <User width={35} height={35} />
-        </TouchableOpacity>
+      <View style={styles.container3}>
+        <MenuButton navigation={navigation} />
       </View>
     </View>
   );
@@ -169,15 +149,13 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginTop: 4,
   },
-  menuButtonWrapper: {
+  container3: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
     backgroundColor: '#292D32',
     paddingVertical: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
     alignItems: 'center',
     borderTopWidth: 1,
     borderColor: '#ccc',

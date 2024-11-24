@@ -7,11 +7,9 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
+import {MenuButton} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import Bercak from '../../assets/images/bercakdaun.png';
-import NoteNav from '../../assets/icon/Note.svg';
-import HomeNav from '../../assets/icon/Home.svg';
-import User from '../../assets/icon/UserProfile.svg';
 import Like from '../../assets/icon/like.svg';
 import Share from '../../assets/icon/share.svg';
 import Star from '../../assets/icon/Star.svg'; // Import Star icon
@@ -88,25 +86,8 @@ const Layu = ({navigation}) => {
         </View>
       </ScrollView>
 
-      {/* Menu Button */}
-      <View style={styles.menuButtonWrapper}>
-        <TouchableOpacity
-          style={styles.menuButton}
-          onPress={() => navigation.navigate('Notes')}>
-          <NoteNav width={35} height={35} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.menuButton}
-          onPress={() => navigation.navigate('Home')}>
-          <HomeNav width={35} height={35} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.menuButton}
-          onPress={() => navigation.navigate('Profile')}>
-          <User width={35} height={35} />
-        </TouchableOpacity>
+      <View style={styles.container3}>
+        <MenuButton navigation={navigation} />
       </View>
     </View>
   );
@@ -229,20 +210,18 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end', // Align to the right
     marginRight: 0, // Moved more right
   },
-  menuButtonWrapper: {
+  container3: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
     backgroundColor: '#292D32',
     paddingVertical: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
     alignItems: 'center',
     borderTopWidth: 1,
     borderColor: '#ccc',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: 80,
+    height: 95,
   },
 });
