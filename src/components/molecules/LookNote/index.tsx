@@ -1,3 +1,4 @@
+// In LookNote.js component
 import {
   StyleSheet,
   Text,
@@ -6,14 +7,50 @@ import {
   Image,
   Alert,
 } from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Gap, GapRow} from '../../atoms';
-import {Trash, Favorite} from '../../../assets/icon';
-import {doc, deleteDoc, getFirestore} from 'firebase/firestore';
+import {Trash, Favorite, NotFavorite} from '../../../assets/icon';
+import {doc, deleteDoc, getFirestore, updateDoc} from 'firebase/firestore';
 import {firebase} from '../../../config/Firebase';
 import {showMessage} from 'react-native-flash-message';
 
 const LookNote = ({item, onPress, navigation}) => {
+  const [isFavorited, setIsFavorited] = useState(item?.isFavorite || false);
+
+  // Update local state when item prop changes
+  useEffect(() => {
+    setIsFavorited(item?.isFavorite || false);
+  }, [item?.isFavorite]);
+
+  const handleFavorite = async () => {
+    try {
+      const db = getFirestore(firebase);
+      const noteRef = doc(db, 'notes', item.id);
+
+      // Update local state immediately for responsive UI
+      setIsFavorited(!isFavorited);
+
+      // Update Firestore
+      await updateDoc(noteRef, {
+        isFavorite: !isFavorited,
+        favoriteTimestamp: !isFavorited ? new Date() : null,
+        updatedAt: new Date(), // Update the timestamp to trigger re-sort
+      });
+
+      showMessage({
+        message: !isFavorited ? 'Added to favorites' : 'Removed from favorites',
+        type: 'success',
+      });
+    } catch (error) {
+      // Revert local state if the update fails
+      setIsFavorited(isFavorited);
+      showMessage({
+        message: 'Failed to update favorite status',
+        type: 'danger',
+      });
+      console.error('Error updating favorite status:', error);
+    }
+  };
   if (!item || !item.title || !item.note) {
     return null;
   }
@@ -41,7 +78,6 @@ const LookNote = ({item, onPress, navigation}) => {
                 type: 'success',
               });
 
-              // Since we're in a component, we need navigation to be passed as a prop
               navigation.navigate('Note');
             } catch (error) {
               showMessage({
@@ -57,7 +93,6 @@ const LookNote = ({item, onPress, navigation}) => {
     );
   };
 
-  // Function to truncate text
   const truncateText = (text, maxLength) => {
     if (text.length <= maxLength) {
       return text;
@@ -80,13 +115,11 @@ const LookNote = ({item, onPress, navigation}) => {
           </Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              // Add favorite functionality here
-              console.log('Favorite pressed for:', item.id);
-            }}>
-            <Image source={Favorite} style={styles.photo2} />
+          <TouchableOpacity style={styles.button} onPress={handleFavorite}>
+            <Image
+              source={isFavorited ? Favorite : NotFavorite}
+              style={styles.photo2}
+            />
           </TouchableOpacity>
           <GapRow width={8} />
           <TouchableOpacity style={styles.button} onPress={handleDelete}>

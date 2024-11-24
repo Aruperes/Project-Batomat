@@ -5,6 +5,9 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Gap} from '../../components/atoms';
@@ -23,12 +26,41 @@ import {showMessage} from 'react-native-flash-message';
 const AddingNote = ({navigation}) => {
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCreateNote = async () => {
+    if (isLoading) {
+      return;
+    }
+
     // Validate inputs
-    if (!title.trim() || !note.trim()) {
+    if (!title.trim()) {
       showMessage({
-        message: 'Title and note content are required',
+        message: 'Title is required',
+        type: 'warning',
+      });
+      return;
+    }
+
+    if (!note.trim()) {
+      showMessage({
+        message: 'Note content is required',
+        type: 'warning',
+      });
+      return;
+    }
+
+    if (title.length > 100) {
+      showMessage({
+        message: 'Title must be less than 100 characters',
+        type: 'warning',
+      });
+      return;
+    }
+
+    if (note.length > 10000) {
+      showMessage({
+        message: 'Note is too long (max 10000 characters)',
         type: 'warning',
       });
       return;
@@ -42,10 +74,13 @@ const AddingNote = ({navigation}) => {
         message: 'Please sign in to create notes',
         type: 'warning',
       });
+      navigation.navigate('SignIn');
       return;
     }
 
+    setIsLoading(true);
     const db = getFirestore(firebase);
+
     try {
       await addDoc(collection(db, 'notes'), {
         title: title.trim(),
@@ -53,6 +88,8 @@ const AddingNote = ({navigation}) => {
         userId: currentUser.uid,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
+        isFavorite: false,
+        favoriteTimestamp: null,
       });
 
       showMessage({
@@ -63,9 +100,12 @@ const AddingNote = ({navigation}) => {
       navigation.goBack();
     } catch (error) {
       showMessage({
-        message: error.message,
+        message: error.message || 'Failed to create note',
         type: 'danger',
       });
+      console.error('Error creating note:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 

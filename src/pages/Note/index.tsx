@@ -57,9 +57,26 @@ const Note = ({navigation}) => {
   };
 
   // Helper function to group notes by date
+  // Modified groupNotesByDate to handle favorites
   const groupNotesByDate = notes => {
+    // First, sort notes by favorite status and then by date
+    const sortedNotes = [...notes].sort((a, b) => {
+      // First sort by favorite status
+      if (a.isFavorite && !b.isFavorite) {
+        return -1;
+      }
+      if (!a.isFavorite && b.isFavorite) {
+        return 1;
+      }
+
+      // If both have same favorite status, sort by date
+      const dateA = a.updatedAt?.seconds || 0;
+      const dateB = b.updatedAt?.seconds || 0;
+      return dateB - dateA;
+    });
+
     const groups = {};
-    notes.forEach(note => {
+    sortedNotes.forEach(note => {
       const dateKey = formatDate(note.updatedAt);
       if (!groups[dateKey]) {
         groups[dateKey] = [];
@@ -79,6 +96,7 @@ const Note = ({navigation}) => {
     const db = getFirestore(firebase);
     const notesCollection = collection(db, 'notes');
 
+    // Modified query to include isFavorite field
     const userNotesQuery = query(
       notesCollection,
       where('userId', '==', currentUser.uid),
@@ -91,8 +109,23 @@ const Note = ({navigation}) => {
         const newNotes = [];
         querySnapshot.forEach(doc => {
           const data = doc.data();
-          const {note, title, userId, updatedAt} = data;
-          newNotes.push({note, title, id: doc.id, userId, updatedAt});
+          const {
+            note,
+            title,
+            userId,
+            updatedAt,
+            isFavorite,
+            favoriteTimestamp,
+          } = data;
+          newNotes.push({
+            note,
+            title,
+            id: doc.id,
+            userId,
+            updatedAt,
+            isFavorite: isFavorite || false,
+            favoriteTimestamp,
+          });
         });
         setNotes(newNotes);
         setIsLoading(false);
