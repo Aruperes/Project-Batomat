@@ -28,6 +28,7 @@ import LayuBakteri from './LayuBakteri';
 import Mosaik from './Mosaik';
 import BuahBusuk from './BuahBusuk';
 import BusukDaun from './BusukDaun';
+import Obat from './Obat';
 
 export {
   SplashScreen,
@@ -60,4 +61,5 @@ export {
   InfoPage,
   ChangePassword,
   AddingNote,
+  Obat,
 };
