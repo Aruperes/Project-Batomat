@@ -1,19 +1,25 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const AddNote = () => {
+const AddNote = ({onPress}) => {
   return (
-    <>
-      <TouchableOpacity style={styles.contentWrapper} activeOpacity={0.3}>
+    <View style={styles.wrapper}>
+      <TouchableOpacity
+        style={styles.contentWrapper}
+        activeOpacity={0.3}
+        onPress={onPress}>
         <Text style={styles.text}>Add Note...</Text>
       </TouchableOpacity>
-    </>
+    </View>
   );
 };
 
 export default AddNote;
 
 const styles = StyleSheet.create({
+  wrapper: {
+    paddingHorizontal: 10,
+  },
   contentWrapper: {
     backgroundColor: '#C0ADAD',
     height: 90,
