@@ -6,7 +6,7 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import {MenuButton, Header} from '../../components/molecules';
+import {Header, MenuButton} from '../../components/molecules';
 import BackButton from '../../assets/icon/BackButton.svg';
 import Down from '../../assets/icon/Arrow Down Contained 10.svg';
 import Images from '../../assets/icon/image.svg';
@@ -22,36 +22,42 @@ const diseases = [
     description:
       'Gejala layu fusarium pada awal serangan dapat ditandai dengan adanya tanaman...',
     icon: Images,
+    route: 'Layu',
   },
   {
     title: 'Bercak Daun',
     description:
       'Bercak Daun disebabkan oleh cendawan Cercospora capsici, pada daun yang ter...',
     icon: Bercak,
+    route: 'BercakDaun',
   },
   {
     title: 'Layu Bakteri',
     description:
       'Gejalanya terlihat jika pucuk tanaman layu atau daun tua menguning. Jika batang...',
     icon: Layu,
+    route: 'LayuBakteri',
   },
   {
     title: 'Mosaik',
     description:
       'Penyakit mosaik ditandai dengan adanya warna seperti mosaik pada daun dan...',
     icon: Mosaik,
+    route: 'Mosaik',
   },
   {
     title: 'Buah Busuk',
     description:
       'Ada dua macam cendawan penyebab busuk buah pada tomat. Yang pertama...',
     icon: Buah,
+    route: 'BuahBusuk',
   },
   {
     title: 'Busuk Daun',
     description:
       'Penyebab penyakit busuk daun adalah cendawan Phytophthora infestans. Gejala...',
     icon: Daun,
+    route: 'BusukDaun',
   },
 ];
 
@@ -59,7 +65,6 @@ const Diseases = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header text="Penyakit" />
-
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}>
@@ -76,14 +81,17 @@ const Diseases = ({navigation}) => {
                 {disease.description}
               </Text>
             </View>
-            <TouchableOpacity style={styles.arrowButton}>
+            <TouchableOpacity
+              style={styles.arrowButton}
+              onPress={() => navigation.navigate(disease.route)} // Navigasi ke halaman detail
+            >
               <Down width={24} height={24} />
             </TouchableOpacity>
           </View>
         ))}
       </ScrollView>
 
-      <View style={styles.menuButtonWrapper}>
+      <View style={styles.container3}>
         <MenuButton navigation={navigation} />
       </View>
     </View>
@@ -101,7 +109,7 @@ const styles = StyleSheet.create({
   contentWrapper: {
     flex: 1,
     paddingHorizontal: 24,
-    marginTop: -20,
+    marginTop: 20,
   },
   backButton: {
     position: 'absolute',
@@ -141,7 +149,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginTop: 4,
   },
-  menuButtonWrapper: {
+  container3: {
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -153,9 +161,12 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: 80,
+    height: 95,
   },
-
+  menuButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   arrowButton: {
     position: 'absolute',
     bottom: 1,
