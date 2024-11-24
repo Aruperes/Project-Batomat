@@ -1,12 +1,48 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  TextInput,
+} from 'react-native';
+import React, {useState} from 'react';
 import {Gap} from '../../components/atoms';
 import {MenuButton, Header} from '../../components/molecules';
 import {Heart} from '../../assets/icon';
+import {doc, updateDoc} from 'firebase/firestore';
+import {firestore} from '../../config/Firebase';
 
-//bikin show error message
-//ganti text2 p font
-const EditNote = ({navigation}) => {
+const EditNote = ({navigation, route}) => {
+  const {item} = route.params;
+  const [noteText, setNoteText] = useState(item.note);
+  const [noteTitle, setNoteTitle] = useState(item.title);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleUpdate = async () => {
+    if (noteTitle && noteTitle.length > 0) {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const noteRef = doc(firestore, 'notes', item.id);
+        await updateDoc(noteRef, {
+          title: noteTitle,
+          note: noteText,
+          updatedAt: new Date().toISOString(),
+        });
+
+        navigation.navigate('Note');
+      } catch (err) {
+        setError('Failed to update note. Please try again.');
+        console.error('Error updating note:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -15,22 +51,35 @@ const EditNote = ({navigation}) => {
           backButton={true}
           onPress={() => navigation.goBack()}
         />
-        <TouchableOpacity activeOpacity={0.5}>
-          <Text style={styles.text}> Done </Text>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={handleUpdate}
+          disabled={isLoading}>
+          <Text style={[styles.text, isLoading && styles.disabledText]}>
+            {isLoading ? 'Saving...' : 'Done'}
+          </Text>
         </TouchableOpacity>
       </View>
       <>
         <View style={styles.container2}>
           <Gap height={18} />
           <View style={styles.contentWrapper}>
-            <Text style={styles.title}>List Obat</Text>
-            <Text style={styles.text2}>
-              {' '}
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a
-              dignissim erat. Vestibulum venenatis arcu et aliquet sollicitudin.
-              Sed vulputate placerat erat, sed pretium justo hendrerit vel.
-              Mauris varius aliquam rhoncus.{' '}
-            </Text>
+            <TextInput
+              style={styles.title}
+              placeholder="Title"
+              value={noteTitle}
+              onChangeText={text => setNoteTitle(text)}
+              editable={!isLoading}
+            />
+            <TextInput
+              style={styles.text2}
+              placeholder="Note"
+              value={noteText}
+              onChangeText={text => setNoteText(text)}
+              multiline={true}
+              editable={!isLoading}
+            />
+            {error && <Text style={styles.errorText}>{error}</Text>}
             <TouchableOpacity style={styles.photo}>
               <Image source={Heart} />
             </TouchableOpacity>
@@ -43,7 +92,6 @@ const EditNote = ({navigation}) => {
     </>
   );
 };
-
 export default EditNote;
 
 const styles = StyleSheet.create({
@@ -57,7 +105,7 @@ const styles = StyleSheet.create({
   },
   photo: {
     paddingLeft: 316,
-    paddingTop: 159,
+    paddingTop: 420,
   },
   text2: {
     paddingLeft: 41,

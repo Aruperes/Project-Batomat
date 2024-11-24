@@ -1,3 +1,4 @@
+// Note.js
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {DateNote, AddNote} from '../../components/atoms';
@@ -37,6 +38,10 @@ const Note = ({navigation}) => {
   // Create combined data array with notes and AddNote component
   const renderData = [...notes, {id: 'add-note', isAddNote: true}];
 
+  const handleNotePress = item => {
+    navigation.navigate('EditNote', {item}); // Properly pass the item as a parameter
+  };
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
@@ -45,7 +50,6 @@ const Note = ({navigation}) => {
       <View style={styles.container2}>
         <DateNote date="Previous 30 Days" />
 
-        {/* FlashList with combined data */}
         <View style={styles.listContainer}>
           <FlashList
             data={renderData}
@@ -55,7 +59,9 @@ const Note = ({navigation}) => {
               if (item.isAddNote) {
                 return <AddNote navigation={navigation} />;
               }
-              return <LookNote item={item} navigation={navigation} />;
+              return (
+                <LookNote item={item} onPress={() => handleNotePress(item)} />
+              );
             }}
           />
         </View>
@@ -72,7 +78,6 @@ const Note = ({navigation}) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,

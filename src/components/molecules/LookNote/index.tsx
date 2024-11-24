@@ -3,7 +3,8 @@ import React from 'react';
 import {Gap, GapRow} from '../../atoms';
 import {Trash, Favorite} from '../../../assets/icon';
 
-const LookNote = ({item, navigation}) => {
+const LookNote = ({item, onPress}) => {
+  // Changed to accept onPress instead of navigation
   if (!item || !item.title || !item.note) {
     return null;
   }
@@ -21,21 +22,32 @@ const LookNote = ({item, navigation}) => {
       <TouchableOpacity
         style={styles.contentWrapper}
         activeOpacity={0.5}
-        onPress={() => navigation.navigate('EditNote', {noteId: item.id})}>
+        onPress={onPress}>
+        {/* Use the onPress prop here */}
         <View style={styles.textContainer}>
           <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
-            {truncateText(item.title, 20)} {/* Limit title to 20 characters */}
+            {truncateText(item.title, 20)}
           </Text>
           <Text style={styles.note} numberOfLines={1} ellipsizeMode="tail">
-            {truncateText(item.note, 30)} {/* Limit note to 30 characters */}
+            {truncateText(item.note, 30)}
           </Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              // Add favorite functionality here
+              console.log('Favorite pressed for:', item.id);
+            }}>
             <Image source={Favorite} style={styles.photo2} />
           </TouchableOpacity>
           <GapRow width={8} />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              // Add delete functionality here
+              console.log('Delete pressed for:', item.id);
+            }}>
             <Image source={Trash} style={styles.photo} />
           </TouchableOpacity>
         </View>
@@ -46,6 +58,9 @@ const LookNote = ({item, navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  wrapper: {
+    paddingHorizontal: 10,
+  },
   contentWrapper: {
     backgroundColor: '#D9D9D9',
     height: 90,
@@ -59,7 +74,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingLeft: 26,
-    paddingRight: 10, // Add padding to prevent text from touching buttons
+    paddingRight: 10,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -68,20 +83,20 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: '50%',
-    transform: [{translateY: -20}], // Center the buttons vertically
+    transform: [{translateY: -20}],
   },
   title: {
     fontFamily: 'Poppins-Medium',
     fontSize: 20,
     color: '#2F2A36',
     marginBottom: 5,
-    width: '80%', // Limit width to prevent overlap with buttons
+    width: '80%',
   },
   note: {
     fontFamily: 'Poppins-Light',
     fontSize: 14,
     color: '#2F2A36',
-    width: '80%', // Limit width to prevent overlap with buttons
+    width: '80%',
   },
   photo: {
     width: 24,
