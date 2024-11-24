@@ -2,7 +2,6 @@ import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {GapRow} from '../../atoms';
 import {Account, Home, Note} from '../../../assets/icon';
-
 const MenuButton = ({navigation}) => {
   return (
     <View style={styles.container}>
@@ -10,7 +9,7 @@ const MenuButton = ({navigation}) => {
         style={styles.button}
         onPress={() => navigation.navigate('Note')}>
         <View>
-          <Image source={Note} style={styles.photo} />
+          <Image source={Note} />
         </View>
       </TouchableOpacity>
       <GapRow width={74} />
@@ -18,15 +17,15 @@ const MenuButton = ({navigation}) => {
         style={styles.button}
         onPress={() => navigation.navigate('Home')}>
         <View>
-          <Image source={Home} style={styles.photo} />
+          <Image source={Home} />
         </View>
       </TouchableOpacity>
       <GapRow width={74} />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Profile')}>
+        onPress={() => navigation.navigate('AccountPage')}>
         <View>
-          <Image source={Account} style={styles.photo} />
+          <Image source={Account} />
         </View>
       </TouchableOpacity>
     </View>
@@ -47,5 +46,6 @@ const styles = StyleSheet.create({
   button: {
     width: 44,
     height: 44,
+    marginBottom: 50,
   },
 });
