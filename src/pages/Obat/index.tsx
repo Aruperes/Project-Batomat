@@ -26,7 +26,7 @@ const products = [
       'Obat pertanian untuk mengendalikan hama ulat pada tanaman tomat',
     price: 'Rp 55.000',
     image: require('../../assets/images/obat2.png'),
-    link: 'https://www.example.com/athenz-33ec',
+    link: 'https://shopee.co.id/INSEKTISIDA-ATHENZ-250ML-EMAMECTIN-33EC-i.280691561.22476101780?sp_atk=b0667d11-a1a5-4730-a380-43a41ad30212&xptdk=b0667d11-a1a5-4730-a380-43a41ad30212',
   },
   {
     title: 'Pupuk Kalsium VITCAL',
@@ -34,7 +34,7 @@ const products = [
       'Untuk mengatasi busuk buah atau daun, dan bisa mencegah kerontokan buah dan daun',
     price: 'Rp 13.500',
     image: require('../../assets/images/obat3.png'),
-    link: 'https://www.example.com/pupuk-vitcal',
+    link: 'https://shopee.co.id/Pupuk-kalsium-VITCAL-kemasan-1kg-i.426865841.24627311220?sp_atk=3d0b5c03-7d78-4bc8-ac1b-81e24341f90b&xptdk=3d0b5c03-7d78-4bc8-ac1b-81e24341f90b',
   },
   {
     title: 'BUAH ETAFON 480SL',
@@ -42,13 +42,12 @@ const products = [
       'Digunakan untuk memberi warna, mempercepat pemasakan dan menguatkan tekstur buah-buahan hasil panen',
     price: 'Rp 47.200',
     image: require('../../assets/images/obat4.png'),
-    link: 'https://www.example.com/etafon-480sl',
+    link: 'https://shopee.co.id/Ethrel-480SL-100mL-Etafon-Pematang-buah-Pisang-dll-i.397487929.7786073886?sp_atk=8a7c51ba-1fdb-442a-9241-215ff54d1c1f&xptdk=8a7c51ba-1fdb-442a-9241-215ff54d1c1f',
   },
 ];
 
 const ProductList = ({navigation}) => {
   const handleOpenLink = url => {
-    // Fungsi untuk membuka tautan
     Linking.openURL(url).catch(err =>
       console.error('Failed to open link:', err),
     );
@@ -56,16 +55,12 @@ const ProductList = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <Header text="Obat" />
-
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}>
         <BackButton width={24} height={24} />
       </TouchableOpacity>
-
-      {/* List of Products */}
       <ScrollView style={styles.contentWrapper}>
         {products.map((product, index) => (
           <View key={index} style={styles.productCard}>
@@ -79,8 +74,7 @@ const ProductList = ({navigation}) => {
             </View>
             <TouchableOpacity
               style={styles.buyButton}
-              onPress={() => handleOpenLink(product.link)} // Panggil handleOpenLink dengan tautan produk
-            >
+              onPress={() => handleOpenLink(product.link)}>
               <Text style={styles.buyButtonText}>Beli Sekarang</Text>
             </TouchableOpacity>
           </View>
