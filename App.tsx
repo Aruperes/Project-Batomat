@@ -23,12 +23,14 @@ import {
   InfoPage,
   ChangePassword,
   Diseases,
+  AddingNote,
   Layu,
   BercakDaun,
   LayuBakteri,
   Mosaik,
   BuahBusuk,
   BusukDaun,
+  Obat,
 } from './src/pages';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -122,8 +124,18 @@ const App = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name="AddingNote"
+          component={AddingNote}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
           name="Hama"
           component={Hama}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Obat"
+          component={Obat}
           options={{headerShown: false}}
         />
         <Stack.Screen

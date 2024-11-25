@@ -7,13 +7,41 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Swiper from 'react-native-swiper';
 import {Src} from '../../assets/icon';
 import {MenuButton} from '../../components/molecules';
+import {getDatabase, ref, get, set} from 'firebase/database';
+import {getAuth} from 'firebase/auth';
 
 const Home = ({navigation}) => {
   const [selectedImage, setSelectedImage] = useState(0);
+  const [profileImage, setProfileImage] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      const db = getDatabase();
+      const userRef = ref(db, 'users/' + user.uid);
+
+      get(userRef)
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+            if (data && data.photo) {
+              setProfileImage(data.photo);
+            }
+          } else {
+            console.log('No data available');
+          }
+        })
+        .catch(error => {
+          console.error('Error retrieving data:', error);
+        });
+    }
+  }, []);
 
   const images = [
     {
@@ -50,10 +78,7 @@ const Home = ({navigation}) => {
           source={require('../../assets/images/LogoIm.png')}
         />
         <TouchableOpacity onPress={() => navigation.navigate('AccountPage')}>
-          <Image
-            style={styles.logo1}
-            source={require('../../assets/images/profile.png')}
-          />
+          <Image style={styles.logo1} source={{uri: profileImage}} />
         </TouchableOpacity>
       </View>
       <View style={styles.line} />
@@ -168,12 +193,14 @@ const Home = ({navigation}) => {
             style={styles.logo2}
             source={require('../../assets/images/obat.png')}
           />
-          <View style={styles.textContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Obat')}
+            style={styles.textContainer}>
             <Text style={styles.title}>OBAT</Text>
             <Text style={styles.description}>
               lihat disini untuk mengetahui obat untuk mengobati tomatmu
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.card}>
@@ -210,6 +237,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     marginHorizontal: 110,
+    borderRadius: 40 / 2,
   },
   line: {
     borderBottomColor: '#C5C5C5',

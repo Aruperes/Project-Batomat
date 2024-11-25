@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,11 +7,69 @@ import {
   Image,
   Alert,
 } from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {getAuth} from 'firebase/auth';
 import {MenuButton} from '../../components/molecules';
 import {FavoritePage, Info, Share, Setting, Logout} from '../../assets/icon';
+import {getDatabase, ref, get, set} from 'firebase/database';
 
 const AccountPage = ({navigation}) => {
-  // Fungsi untuk menampilkan konfirmasi keluar
+  const [userName, setUserName] = useState('Nama Lengkap');
+  const [userEmail, setUserEmail] = useState('username@gmail.com');
+  const [profileImage, setProfileImage] = useState(null);
+  const [profileImageBase64, setProfileImageBase64] = useState(null);
+
+  const handleSelectImage = async () => {
+    const result = await launchImageLibrary({
+      mediaType: 'photo',
+      maxWidth: 300,
+      maxHeight: 300,
+      quality: 0.7,
+      includeBase64: true,
+    });
+
+    if (result.didCancel) {
+      console.log('User cancelled image picker');
+    } else if (result.errorCode) {
+      console.error('Image Picker Error: ', result.errorMessage);
+    } else {
+      const base64 = `data:${result.assets[0].type};base64,${result.assets[0].base64}`;
+      setProfileImage(base64);
+      setProfileImageBase64(result.assets[0].base64);
+
+      // Save the profile image automatically after selection
+      saveProfileImage(result.assets[0].base64);
+    }
+  };
+
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      setUserName(user.displayName || 'Nama Lengkap');
+      setUserEmail(user.email);
+
+      const db = getDatabase();
+      const userRef = ref(db, 'users/' + user.uid);
+
+      get(userRef)
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+            if (data && data.photo) {
+              setProfileImage(data.photo);
+            }
+          } else {
+            console.log('No data available');
+          }
+        })
+        .catch(error => {
+          console.error('Error retrieving data:', error);
+        });
+    }
+  }, []);
+
   const handleLogout = () => {
     Alert.alert('Konfirmasi', 'Apakah Anda yakin ingin keluar?', [
       {
@@ -26,24 +84,49 @@ const AccountPage = ({navigation}) => {
     ]);
   };
 
+  const saveProfileImage = base64Image => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user && base64Image) {
+      const db = getDatabase();
+      const userRef = ref(db, 'users/' + user.uid);
+      set(userRef, {
+        fullName: userName,
+        email: userEmail,
+        photo: `data:image/jpeg;base64,${base64Image}`,
+      })
+        .then(() => {
+          console.log('Profile image saved');
+        })
+        .catch(error => {
+          console.error('Error saving profile image:', error);
+        });
+    }
+  };
+
   return (
     <View style={styles.container}>
-      {/* Header Profil */}
       <View style={styles.headerBackground}>
         <Text style={styles.headerText}>Profile</Text>
       </View>
       <View style={styles.profileContainer}>
-        <View style={styles.profilePicture}>
-          <Image
-            style={styles.logo1}
-            source={require('../../assets/images/profile.png')}
-          />
-        </View>
-        <Text style={styles.name}>Nama Lengkap</Text>
-        <Text style={styles.email}>username@gmail.com</Text>
+        <TouchableOpacity
+          onPress={handleSelectImage}
+          style={styles.profilePicture}>
+          {profileImage ? (
+            <Image source={{uri: profileImage}} style={styles.logo1} />
+          ) : (
+            <Image
+              style={styles.logo1}
+              source={require('../../assets/images/profile.png')}
+            />
+          )}
+        </TouchableOpacity>
+        <Text style={styles.name}>{userName}</Text>
+        <Text style={styles.email}>{userEmail}</Text>
         <View style={styles.line} />
-        {/* Menu Pilihan */}
-        <TouchableOpacity style={styles.button}>
+        <View style={styles.button}>
           <MenuItem
             icon={Info}
             text="Info"
@@ -65,10 +148,9 @@ const AccountPage = ({navigation}) => {
             onPress={() => navigation.navigate('ChangePassword')}
           />
           <MenuItem icon={Logout} text="Keluar" onPress={handleLogout} />
-        </TouchableOpacity>
+        </View>
       </View>
 
-      {/* Menu Button */}
       <View style={styles.menuButtonWrapper}>
         <MenuButton navigation={navigation} />
       </View>
@@ -76,7 +158,6 @@ const AccountPage = ({navigation}) => {
   );
 };
 
-// Komponen MenuItem
 const MenuItem = ({icon, text, onPress}) => {
   return (
     <TouchableOpacity style={styles.menuItem} onPress={onPress}>
@@ -121,12 +202,13 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     backgroundColor: '#C4C4C4',
-    marginBottom: 10,
+    marginBottom: 30,
   },
   logo1: {
     width: 100,
     height: 100,
     marginLeft: -10,
+    borderRadius: 50,
   },
   name: {
     fontSize: 16,

@@ -10,26 +10,56 @@ import {
 import BackButton from '../../assets/icon/BackButton.svg';
 import {Eyeoff, Eyeon} from '../../assets/icon';
 import {MenuButton} from '../../components/molecules';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  updatePassword,
+} from 'firebase/auth';
 
 const ChangePassword = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordNewVisible, setPasswordNewVisible] = useState(false);
   const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
 
-  const handleChangePassword = () => {
-    Alert.alert('Konfirmasi', 'Apakah Anda yakin ingin mengubah kata sandi?', [
-      {
-        text: 'Batal',
-        onPress: () => console.log('Batal'),
-        style: 'cancel',
-      },
-      {
-        text: 'OK',
-        onPress: () => {
-          navigation.navigate('SignIn');
+  const [email, setEmail] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleChangePassword = async () => {
+    if (newPassword !== confirmPassword) {
+      Alert.alert('Error', 'Kata sandi baru tidak cocok.');
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      Alert.alert('Error', 'Kata sandi baru harus minimal 6 karakter.');
+      return;
+    }
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        currentPassword,
+      );
+
+      await updatePassword(userCredential.user, newPassword);
+
+      Alert.alert('Sukses', 'Kata sandi berhasil diubah.', [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('SignIn'),
         },
-      },
-    ]);
+      ]);
+    } catch (error) {
+      console.error(error);
+      Alert.alert(
+        'Error',
+        'Gagal mengubah kata sandi. Periksa email atau kata sandi Anda.',
+      );
+    }
   };
 
   return (
@@ -47,12 +77,22 @@ const ChangePassword = ({navigation}) => {
         Kata sandi anda harus minimal 6 karakter dan harus kombinasi huruf dan
         angka
       </Text>
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Email"
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+        />
+      </View>
 
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Kata sandi saat ini"
           style={styles.input}
           secureTextEntry={!passwordVisible}
+          value={currentPassword}
+          onChangeText={setCurrentPassword}
         />
         <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
           {passwordVisible ? (
@@ -68,6 +108,8 @@ const ChangePassword = ({navigation}) => {
           placeholder="Kata sandi baru"
           style={styles.input}
           secureTextEntry={!passwordNewVisible}
+          value={newPassword}
+          onChangeText={setNewPassword}
         />
         <TouchableOpacity
           onPress={() => setPasswordNewVisible(!passwordNewVisible)}>
@@ -84,6 +126,8 @@ const ChangePassword = ({navigation}) => {
           placeholder="Ketik ulang kata sandi baru"
           style={styles.input}
           secureTextEntry={!passwordConfirmVisible}
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
         />
         <TouchableOpacity
           onPress={() => setPasswordConfirmVisible(!passwordConfirmVisible)}>
